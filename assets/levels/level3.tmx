@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="28" tilewidth="64" tileheight="64" nextobjectid="106">
+ <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64" tilecount="72">
+  <image source="tileset.png" width="512" height="576"/>
+ </tileset>
+ <imagelayer name="backdrop">
+  <image source="level0_background.png"/>
+ </imagelayer>
+ <layer name="tilesheet" width="30" height="28">
+  <properties>
+   <property name="tilesheet" value="tileset.png"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="entities">
+  <object id="1" name="plataforma" type="plataformaHorizontal" x="0" y="1728" width="576" height="64">
+   <properties>
+    <property name="bodyType" value="static"/>
+   </properties>
+  </object>
+  <object id="2" name="plataforma" type="plataformaHorizontal" x="768" y="1600" width="448" height="64">
+   <properties>
+    <property name="bodyType" value="static"/>
+   </properties>
+  </object>
+  <object id="3" name="plataforma" type="plataformaVertical" x="128" y="896" width="64" height="704">
+   <properties>
+    <property name="bodyType" value="static"/>
+   </properties>
+  </object>
+  <object id="4" name="plataforma" type="plataformaHorizontal" x="0" y="1600" width="192" height="64">
+   <properties>
+    <property name="bodyType" value="static"/>
+   </properties>
+  </object>
+  <object id="15" name="rectAgarreIzq" type="agarre" x="446" y="1600" width="2" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="rectAgarreIzq"/>
+    <property name="userDataShape" value="shape_rectAgarreIzq"/>
+   </properties>
+  </object>
+  <object id="16" name="plataforma" type="plataformaHorizontal" x="448" y="1600" width="128" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+   </properties>
+  </object>
+  <object id="19" name="plataforma" type="plataformaHorizontal" x="512" y="1504" width="64" height="96">
+   <properties>
+    <property name="bodyType" value="static"/>
+   </properties>
+  </object>
+  <object id="20" name="rectAgarreIzq" type="agarre" x="510" y="1504" width="2" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="rectAgarreIzq"/>
+    <property name="userDataShape" value="shape_rectAgarreIzq"/>
+   </properties>
+  </object>
+  <object id="21" name="rectAgarreIzq" type="agarre" x="766" y="1406" width="2" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="rectAgarreIzq"/>
+    <property name="userDataShape" value="shape_rectAgarreIzq"/>
+   </properties>
+  </object>
+  <object id="24" name="plataforma" type="plataformaHorizontal" x="1472" y="1728" width="448" height="64">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="velocidad" value="-100"/>
+   </properties>
+  </object>
+  <object id="27" name="rectAgarreIzq" type="agarre" x="766" y="1600" width="2" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="rectAgarreIzq"/>
+    <property name="userDataShape" value="shape_rectAgarreIzq"/>
+   </properties>
+  </object>
+  <object id="29" name="rectAgarreIzq" type="agarre" x="1470" y="1728" width="2" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="rectAgarreIzq"/>
+    <property name="userDataShape" value="shape_rectAgarreIzq"/>
+   </properties>
+  </object>
+  <object id="31" name="rectAgarreIzq" type="agarre" x="1150" y="1344" width="2" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="rectAgarreIzq"/>
+    <property name="userDataShape" value="shape_rectAgarreIzq"/>
+   </properties>
+  </object>
+  <object id="33" name="rectAgarreIzq" type="agarre" x="1470" y="1280" width="2" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="rectAgarreIzq"/>
+    <property name="userDataShape" value="shape_rectAgarreIzq"/>
+   </properties>
+  </object>
+  <object id="36" name="rectAgarreIzq" type="agarre" x="1726" y="1152" width="2" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="rectAgarreIzq"/>
+    <property name="userDataShape" value="shape_rectAgarreIzq"/>
+   </properties>
+  </object>
+  <object id="37" name="rectAgarreDer" type="agarre" x="576" y="1728" width="2" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="rectAgarreDer"/>
+    <property name="userDataShape" value="shape_rectAgarreDer"/>
+   </properties>
+  </object>
+  <object id="38" name="rectAgarreDer" type="agarre" x="1216" y="1600" width="2" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="rectAgarreDer"/>
+    <property name="userDataShape" value="shape_rectAgarreDer"/>
+   </properties>
+  </object>
+  <object id="39" name="rectAgarreDer" type="agarre" x="1280" y="1344" width="2" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="rectAgarreDer"/>
+    <property name="userDataShape" value="shape_rectAgarreDer"/>
+   </properties>
+  </object>
+  <object id="40" name="rectAgarreDer" type="agarre" x="1664" y="1280" width="2" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="rectAgarreDer"/>
+    <property name="userDataShape" value="shape_rectAgarreDer"/>
+   </properties>
+  </object>
+  <object id="41" name="rectAgarreDer" type="agarre" x="960" y="1406" width="2" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="rectAgarreDer"/>
+    <property name="userDataShape" value="shape_rectAgarreDer"/>
+   </properties>
+  </object>
+  <object id="42" name="rectAgarreDer" type="agarre" x="576" y="1501" width="2" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="rectAgarreDer"/>
+    <property name="userDataShape" value="shape_rectAgarreDer"/>
+   </properties>
+  </object>
+  <object id="43" name="plataforma" type="plataformaVertical" x="1856" y="960" width="64" height="640">
+   <properties>
+    <property name="bodyType" value="static"/>
+   </properties>
+  </object>
+  <object id="44" name="checkPoint" type="checkPoint" x="61" y="1689">
+   <properties>
+    <property name="checkPoint" value="0"/>
+   </properties>
+   <polyline points="6,-1e-10 -9,0"/>
+  </object>
+  <object id="45" name="checkPoint" type="checkPointSensor" x="9.1212" y="1664" width="64" height="64">
+   <properties>
+    <property name="checkPointSensor" value="0"/>
+   </properties>
+  </object>
+  <object id="46" name="checkPoint" type="checkPointSensor" x="1728" y="1024" width="64" height="128">
+   <properties>
+    <property name="checkPointSensor" value="1"/>
+   </properties>
+  </object>
+  <object id="47" name="checkPoint" type="checkPoint" x="1792" y="1109">
+   <properties>
+    <property name="checkPoint" value="1"/>
+   </properties>
+   <polyline points="6,-1 -9,0"/>
+  </object>
+  <object id="48" name="pinches" type="plataformaPinches" x="1856" y="1600" width="64" height="128">
+   <properties>
+    <property name="userDataBody" value="pinches"/>
+   </properties>
+  </object>
+  <object id="49" name="pinches" type="plataformaPinches" x="576" y="1728" width="896" height="64">
+   <properties>
+    <property name="userDataBody" value="pinches"/>
+   </properties>
+  </object>
+  <object id="50" name="plataforma" type="plataformaHorizontal" x="768" y="1406" width="192" height="2">
+   <properties>
+    <property name="bodyType" value="kinematic"/>
+    <property name="velocidad" value="-150"/>
+   </properties>
+  </object>
+  <object id="51" name="plataforma" type="plataformaHorizontal" x="1152" y="1344" width="128" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+   </properties>
+  </object>
+  <object id="52" name="plataforma" type="plataformaHorizontal" x="1472" y="1281" width="192" height="2">
+   <properties>
+    <property name="bodyType" value="kinematic"/>
+    <property name="velocidad" value="-150"/>
+   </properties>
+  </object>
+  <object id="53" name="plataforma" type="plataformaHorizontal" x="1728" y="1152" width="128" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+   </properties>
+  </object>
+  <object id="54" name="rectAgarreDer" type="agarre" x="1538" y="1024" width="2" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="rectAgarreDer"/>
+    <property name="userDataShape" value="shape_rectAgarreDer"/>
+   </properties>
+  </object>
+  <object id="55" name="rectAgarreIzq" type="agarre" x="1408" y="1024" width="2" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="rectAgarreIzq"/>
+    <property name="userDataShape" value="shape_rectAgarreIzq"/>
+   </properties>
+  </object>
+  <object id="56" name="plataforma" type="plataformaHorizontal" x="1410" y="1024" width="128" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+   </properties>
+  </object>
+  <object id="57" name="plataforma" type="plataformaHorizontal" x="577" y="897" width="640" height="2">
+   <properties>
+    <property name="bodyType" value="kinematic"/>
+    <property name="velocidad" value="-1100"/>
+   </properties>
+  </object>
+  <object id="59" name="rectAgarreDer" type="agarre" x="1217" y="897" width="2" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="rectAgarreDer"/>
+    <property name="userDataShape" value="shape_rectAgarreDer"/>
+   </properties>
+  </object>
+  <object id="60" name="plataforma" type="plataformaHorizontal" x="192" y="896" width="384" height="64">
+   <properties>
+    <property name="bodyType" value="static"/>
+   </properties>
+  </object>
+  <object id="61" name="pinches" type="plataformaPinches" x="704" y="796" width="64" height="100">
+   <properties>
+    <property name="userDataBody" value="pinches"/>
+   </properties>
+  </object>
+  <object id="63" name="plataforma" type="plataformaVertical" x="704" y="448" width="64" height="348">
+   <properties>
+    <property name="bodyType" value="static"/>
+   </properties>
+  </object>
+  <object id="64" name="plataforma" type="plataformaHorizontal" x="1216" y="576" width="448" height="64">
+   <properties>
+    <property name="bodyType" value="static"/>
+   </properties>
+  </object>
+  <object id="66" name="finLevel" type="sensor" x="128" y="350" width="15" height="128">
+   <polyline points="0,0 0.333333,13.6667"/>
+  </object>
+  <object id="67" name="checkPoint" type="checkPointSensor" x="1227" y="449" width="32" height="128">
+   <properties>
+    <property name="checkPointSensor" value="2"/>
+   </properties>
+  </object>
+  <object id="68" name="checkPoint" type="checkPoint" x="1280" y="528">
+   <properties>
+    <property name="checkPoint" value="2"/>
+   </properties>
+   <polyline points="6,-1 -9,0"/>
+  </object>
+  <object id="69" name="palanca" type="objetoInteractivo" x="1027" y="863" width="7" height="35" rotation="25">
+   <properties>
+    <property name="bodyType" value="kinematic"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="isReady" value="1"/>
+    <property name="linked_id" value="70"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="1"/>
+    <property name="rotaSentidoReloj" value="0"/>
+    <property name="userDataBody" value="body_palanca"/>
+    <property name="userDataShape" value="shape_palanca"/>
+   </properties>
+  </object>
+  <object id="70" name="plataformaConMovimientoVertical" type="objetoInteractivo" x="771" y="668" width="64" height="100">
+   <properties>
+    <property name="bodyType" value="kinematic"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="recorridoY" value="128"/>
+    <property name="sentidoInicial" value="2"/>
+    <property name="subeYBaja" value="0"/>
+    <property name="tocaPlayer" value="1"/>
+    <property name="userDataBody" value="body_objetoInteractivo"/>
+    <property name="userDataShape" value="shape_objetoInteractivo"/>
+    <property name="velocityY" value="200"/>
+   </properties>
+  </object>
+  <object id="71" name="plataforma" type="plataformaHorizontal" x="0" y="384" width="1664" height="64">
+   <properties>
+    <property name="bodyType" value="kinematic"/>
+    <property name="velocidad" value="-150"/>
+   </properties>
+  </object>
+  <object id="74" name="plataforma" type="plataformaHorizontal" x="969" y="672" width="160" height="32">
+   <properties>
+    <property name="bodyType" value="static"/>
+   </properties>
+  </object>
+  <object id="78" name="rectAgarreDer" type="agarre" x="1129" y="672" width="2" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="rectAgarreDer"/>
+    <property name="userDataShape" value="shape_rectAgarreDer"/>
+   </properties>
+  </object>
+  <object id="79" name="rectAgarreIzq" type="agarre" x="967" y="672" width="2" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="rectAgarreIzq"/>
+    <property name="userDataShape" value="shape_rectAgarreIzq"/>
+   </properties>
+  </object>
+  <object id="80" name="rectAgarreIzq" type="agarre" x="1214" y="576" width="2" height="2">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="rectAgarreIzq"/>
+    <property name="userDataShape" value="shape_rectAgarreIzq"/>
+   </properties>
+  </object>
+  <object id="81" name="plataformaConMovimientoVertical" type="objetoInteractivo" x="1662" y="576" width="256" height="1">
+   <properties>
+    <property name="bodyType" value="kinematic"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="recorridoY" value="188"/>
+    <property name="sentidoInicial" value="1"/>
+    <property name="subeYBaja" value="0"/>
+    <property name="tocaPlayer" value="1"/>
+    <property name="userDataBody" value="body_objetoInteractivo"/>
+    <property name="userDataShape" value="shape_objetoInteractivo"/>
+    <property name="velocityY" value="200"/>
+   </properties>
+  </object>
+  <object id="82" name="palanca" type="objetoInteractivo" x="1605" y="543" width="7" height="35" rotation="25">
+   <properties>
+    <property name="bodyType" value="kinematic"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="isReady" value="1"/>
+    <property name="linked_id" value="81"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="1"/>
+    <property name="rotaSentidoReloj" value="0"/>
+    <property name="userDataBody" value="body_palanca"/>
+    <property name="userDataShape" value="shape_palanca"/>
+   </properties>
+  </object>
+  <object id="83" name="plataforma" type="plataformaHorizontal" x="0" y="128" width="1920" height="64">
+   <properties>
+    <property name="bodyType" value="static"/>
+   </properties>
+  </object>
+  <object id="95" name="ruedaSerradaConMovimientoVertical" type="elipse" x="1375" y="352" width="96" height="96" rotation="360">
+   <properties>
+    <property name="bodyType" value="kinematic"/>
+    <property name="material" value="acero"/>
+    <property name="posFinalY" value="340"/>
+    <property name="puedeRotar" value="1"/>
+    <property name="sentidoInicial" value="0"/>
+    <property name="userDataBody" value="bola"/>
+    <property name="userDataShape" value="bolaShape"/>
+    <property name="velocidad" value="100"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="96" name="ruedaSerradaConMovimientoVertical" type="elipse" x="1019" y="352" width="96" height="96" rotation="360">
+   <properties>
+    <property name="bodyType" value="kinematic"/>
+    <property name="material" value="acero"/>
+    <property name="posFinalY" value="340"/>
+    <property name="puedeRotar" value="1"/>
+    <property name="sentidoInicial" value="0"/>
+    <property name="userDataBody" value="bola"/>
+    <property name="userDataShape" value="bolaShape"/>
+    <property name="velocidad" value="100"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="97" name="ruedaSerradaConMovimientoVertical" type="elipse" x="657" y="351" width="96" height="96" rotation="360">
+   <properties>
+    <property name="bodyType" value="kinematic"/>
+    <property name="material" value="acero"/>
+    <property name="posFinalY" value="340"/>
+    <property name="puedeRotar" value="1"/>
+    <property name="sentidoInicial" value="0"/>
+    <property name="userDataBody" value="bola"/>
+    <property name="userDataShape" value="bolaShape"/>
+    <property name="velocidad" value="150"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="102" name="ruedaSerradaConMovimientoVertical" type="elipse" x="1183" y="128" width="128" height="128" rotation="360">
+   <properties>
+    <property name="bodyType" value="kinematic"/>
+    <property name="material" value="acero"/>
+    <property name="posFinalY" value="280"/>
+    <property name="puedeRotar" value="1"/>
+    <property name="sentidoInicial" value="1"/>
+    <property name="userDataBody" value="bola"/>
+    <property name="userDataShape" value="bolaShape"/>
+    <property name="velocidad" value="130"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="103" name="ruedaSerradaConMovimientoVertical" type="elipse" x="334" y="351" width="96" height="96" rotation="360">
+   <properties>
+    <property name="bodyType" value="kinematic"/>
+    <property name="material" value="acero"/>
+    <property name="posFinalY" value="340"/>
+    <property name="puedeRotar" value="1"/>
+    <property name="sentidoInicial" value="0"/>
+    <property name="userDataBody" value="bola"/>
+    <property name="userDataShape" value="bolaShape"/>
+    <property name="velocidad" value="150"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="104" name="ruedaSerradaConMovimientoVertical" type="elipse" x="480" y="135" width="128" height="128" rotation="360">
+   <properties>
+    <property name="bodyType" value="kinematic"/>
+    <property name="material" value="acero"/>
+    <property name="posFinalY" value="280"/>
+    <property name="puedeRotar" value="1"/>
+    <property name="sentidoInicial" value="1"/>
+    <property name="userDataBody" value="bola"/>
+    <property name="userDataShape" value="bolaShape"/>
+    <property name="velocidad" value="130"/>
+   </properties>
+   <ellipse/>
+  </object>
+ </objectgroup>
+</map>

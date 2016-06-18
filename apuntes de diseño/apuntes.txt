@@ -1,0 +1,12 @@
+﻿Parte grafica. Apunte de necesidades.
+
+Personaje:
+	Sprite sheet. Adjunto archivo "wolverine_sprites.png".
+	- De manera de prueba, te muestro el SpriteSheet con el que estoy programando en el juego para ir dejando listo todo el aspecto de programacion sobre para la parte gráfica.
+	- El archivo tiene dimensiones de 462x420.. el recuadro unico de cada animación es de 77x84.
+	- Hay 6 filas y 5 columnas de animacion.
+	- El personaje de este juego aun no tiene cara, pero lo que teniamos hasta ahora este tipit que me diseño un amigo de onda, pero hasta ahi llego. En archivo "playerPrueba.png". Podras ver que tiene contorno en cada parte de su cuerpo.. era para animarlo por huesos. Pero por lo ultimo que charle con vos, eso quedo desestimado.
+	- 
+	
+	
+	

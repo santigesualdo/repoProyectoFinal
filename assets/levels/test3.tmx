@@ -1,0 +1,819 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="16" tileheight="16">
+ <layer name="Capa de Patrones 1" width="40" height="30">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup name="entities">
+  <object name="piso" type="static" x="297.75" y="433">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 -1,45.25 122.5,45.5"/>
+  </object>
+  <object name="piso" type="static" x="17.5" y="427.167">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 10,-5.33333 19.3333,-6.66667"/>
+  </object>
+  <object name="piso" type="static" x="554.5" y="429.167">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 -34,-16 -62.3333,-3.66667"/>
+  </object>
+  <object name="piso" type="static" x="-1.25" y="445.75">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 0.5,32.5 135,-4"/>
+  </object>
+  <object name="caja" type="dynamic" x="206.5" y="191.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="wood"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="caja"/>
+    <property name="userDataShape" value="shape_caja"/>
+   </properties>
+   <polygon points="6,25 0,61 66.3333,62.3333 75,25"/>
+  </object>
+  <object name="piso" type="static" x="360.833" y="412.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 40.3333,-25.3333 39.3333,7"/>
+  </object>
+  <object name="piso" type="static" x="238.5" y="400.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 25,4 -62,5"/>
+  </object>
+  <object name="personajeStart" type="dynamic" x="112.5" y="291.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="glass"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="personaje"/>
+    <property name="userDataShape" value="shape_personaje"/>
+   </properties>
+   <polyline points="6,-1 -9,0"/>
+  </object>
+  <object name="piso" type="static" x="552.833" y="445.833">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 33,-28.6667 35,-22"/>
+  </object>
+  <object name="piso" type="static" x="116.5" y="410.833">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 -36.6667,32.3333 16.6667,30.6667"/>
+  </object>
+  <object name="piso" type="static" x="521.5" y="412.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 23,1 36,17"/>
+  </object>
+  <object name="pared" type="static" x="-1.25" y="252">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="pared"/>
+    <property name="userDataShape" value="shape_pared"/>
+   </properties>
+   <polygon points="4.33333,-250.333 15.6667,-253.083 4.25,227"/>
+  </object>
+  <object name="piso" type="static" x="569.5" y="404.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 5.33333,0.333333 -17.6667,41"/>
+  </object>
+  <object name="piso" type="static" x="299" y="402.75">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 0.25,27.25 16,1.5"/>
+  </object>
+  <object name="plataformaTecho" type="static" x="289.333" y="351.417">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="plataforma"/>
+    <property name="userDataShape" value="shape_plataforma"/>
+   </properties>
+   <polygon points="0,0 4,-10.3333 65.6667,2"/>
+  </object>
+  <object name="agarrePlataforma" type="static" x="339.5" y="302.833">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="1"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="agarrePlat"/>
+    <property name="userDataShape" value="shape_agarrePlat"/>
+   </properties>
+   <polygon points="0,0 -6.33333,7.33333 -3.33333,11.3333"/>
+  </object>
+  <object name="piso" type="static" x="117.5" y="410.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 33,-2 15.6667,30.3333"/>
+  </object>
+  <object name="piso" type="static" x="36.8333" y="420.167">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 81,-9.33333 43.3333,22.6667"/>
+  </object>
+  <object name="piso" type="static" x="399.5" y="384.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 55,3 54,45"/>
+  </object>
+  <object name="piso" type="static" x="631" y="461.75">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 1,16.75 -25.5,-1"/>
+  </object>
+  <object name="piso" type="static" x="487.167" y="434.167">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 3.33333,-8.33333 69.3333,-4"/>
+  </object>
+  <object name="agarrePlataforma" type="static" x="292.667" y="340.417">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="1"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="plataforma"/>
+    <property name="userDataShape" value="shape_plataforma"/>
+   </properties>
+   <polygon points="0,0 -6.33333,7.33333 -3.33333,11.3333"/>
+  </object>
+  <object name="piso" type="static" x="359.5" y="412.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 9,-24 42,-27"/>
+  </object>
+  <object name="piso" type="static" x="593.25" y="478">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 9,-19.5 28.5,0.5"/>
+  </object>
+  <object name="piso" type="static" x="504.833" y="388.167">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 -50,39.6667 -18.6667,45.6667"/>
+  </object>
+  <object name="piso" type="static" x="489.167" y="434.833">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 66.6667,-3.66667 61.6667,11"/>
+  </object>
+  <object name="piso" type="static" x="359.5" y="410.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 7,-23 -7,-22"/>
+  </object>
+  <object name="piso" type="static" x="119" y="463">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 40.5,-39.25 64.5,6"/>
+  </object>
+  <object name="piso" type="static" x="592.75" y="455">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 -163.25,23.5 0.25,24"/>
+  </object>
+  <object name="piso" type="static" x="157.167" y="411.833">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 11.6667,1 -38,52"/>
+  </object>
+  <object name="piso" type="static" x="506.5" y="387.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 13,25 -16,38"/>
+  </object>
+  <object name="piso" type="static" x="556.833" y="446.833">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 34,-5.66667 35.3333,0.666667"/>
+  </object>
+  <object name="piso" type="static" x="593.167" y="453.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 -0.666667,-5 8,4"/>
+  </object>
+  <object name="piso" type="static" x="557.833" y="428.833">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 -13.6667,-17.6667 11,-24.6667"/>
+  </object>
+  <object name="plataformaPiso" type="static" x="339.833" y="302.833">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="plataforma"/>
+    <property name="userDataShape" value="shape_plataforma"/>
+   </properties>
+   <polygon points="0,0 59.3333,3 63,12.6667"/>
+  </object>
+  <object name="pared" type="static" x="640.25" y="477.583">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="pared"/>
+    <property name="userDataShape" value="shape_pared"/>
+   </properties>
+   <polygon points="-14,-2.66667 0.66667,-474.75 4.25,0.25"/>
+  </object>
+  <object name="piso" type="static" x="267.5" y="382.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="-1.33333,20 2.66667,-10 -23,-11.6667"/>
+  </object>
+  <object name="piso" type="static" x="234.5" y="397.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="21.6667,-7.66667 32,7.33333 1.66667,1"/>
+  </object>
+  <object name="piso" type="static" x="401.167" y="418.833">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 1,-31 49,9.33333"/>
+  </object>
+  <object name="piso" type="static" x="263.833" y="408.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="2.5,-2.75 -91.5833,70.25 -2.33333,70.75"/>
+  </object>
+  <object name="piso" type="static" x="-0.16667" y="443.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 17.6667,-15.3333 34.6667,-21.6667"/>
+  </object>
+  <object name="plataformaTecho" type="static" x="336.833" y="314.167">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="plataforma"/>
+    <property name="userDataShape" value="shape_plataforma"/>
+   </properties>
+   <polygon points="0,0 4,-10.3333 65.6667,2"/>
+  </object>
+  <object name="caja" type="dynamic" x="411.5" y="193.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="wood"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="caja"/>
+    <property name="userDataShape" value="shape_caja"/>
+   </properties>
+   <polygon points="0,0 -1,14 14,14 15,1"/>
+  </object>
+  <object name="techo" type="static" x="641.167" y="1.83333">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="userDataBody" value="techo"/>
+    <property name="userDataShape" value="shape_techo"/>
+   </properties>
+   <polygon points="0,0 -0.666667,12.6667 -653.333,13.3333"/>
+  </object>
+  <object name="piso" type="static" x="315.5" y="404.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 20,-5 45,7"/>
+  </object>
+  <object name="piso" type="static" x="425.75" y="478.75">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 62.5,-43 167,-24.25"/>
+  </object>
+  <object name="piso" type="static" x="581.167" y="410.167">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 4.33333,6 -28.3333,35.6667"/>
+  </object>
+  <object name="piso" type="static" x="109.75" y="478">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 9.5,-14 60.5,1"/>
+  </object>
+  <object name="piso" type="static" x="182.25" y="469.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 -62.25,-6 -11,9.25"/>
+  </object>
+  <object name="piso" type="static" x="315.5" y="405.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0.5,-0.5 -16,27 107,73"/>
+  </object>
+  <object name="piso" type="static" x="317.25" y="405.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 170.75,29.25 107.25,73.5"/>
+  </object>
+  <object name="piso" type="static" x="556.5" y="447.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 35.6667,1 36.6667,6"/>
+  </object>
+  <object name="piso" type="static" x="133" y="442.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 -132,36 -24.25,35.75"/>
+  </object>
+  <object name="plataformaPiso" type="static" x="292.333" y="340.083">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="plataforma"/>
+    <property name="userDataShape" value="shape_plataforma"/>
+   </properties>
+   <polygon points="0,0 59.3333,3 63,12.6667"/>
+  </object>
+  <object name="piso" type="static" x="589.833" y="433.833">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 1.33333,6.33333 -34.6667,13"/>
+  </object>
+  <object name="piso" type="static" x="352.5" y="388.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 -14,11 5,19"/>
+  </object>
+  <object name="piso" type="static" x="188.5" y="465.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="-4,3 77,-60.3333 -10.6667,-59"/>
+  </object>
+  <object name="piso" type="static" x="593.25" y="479">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 -0.25,-25 8,-20.75"/>
+  </object>
+  <object name="piso" type="static" x="588.167" y="425.833">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 -33.6667,20.3333 1.33333,6.66667"/>
+  </object>
+  <object name="techo" type="static" x="3.8333" y="1.16667">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="userDataBody" value="techo"/>
+    <property name="userDataShape" value="shape_techo"/>
+   </properties>
+   <polygon points="0,0 -1.33333,17.3333 -4,0.666667 -0.666667,14 638,0"/>
+  </object>
+  <object name="piso" type="static" x="177.5" y="405.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 -17,18 6,62"/>
+  </object>
+  <object name="plataformaPiso" type="static" x="406.833" y="334.833">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="plataforma"/>
+    <property name="userDataShape" value="shape_plataforma"/>
+   </properties>
+   <polygon points="0,0 59.3333,3 63,12.6667"/>
+  </object>
+  <object name="piso" type="static" x="36.8333" y="420.833">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 -37,24.3333 43.3333,22.3333"/>
+  </object>
+  <object name="plataformaTecho" type="static" x="403.833" y="346.167">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="plataforma"/>
+    <property name="userDataShape" value="shape_plataforma"/>
+   </properties>
+   <polygon points="0,0 4,-10.3333 65.6667,2"/>
+  </object>
+  <object name="piso" type="static" x="551.833" y="445.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 23.3333,-40 29.6667,-35.6667"/>
+  </object>
+  <object name="piso" type="static" x="237.5" y="392.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="-0.666667,4.66667 6,-22 20.3333,-4.66667"/>
+  </object>
+  <object name="piso" type="static" x="150.5" y="408.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 7,3.66667 -16.3333,32.3333"/>
+  </object>
+  <object name="piso" type="static" x="452.5" y="428.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 3,-41 53,-41"/>
+  </object>
+  <object name="piso" type="static" x="176.5" y="405.5">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 3,-13 18,-12 46,-9 60,-5"/>
+  </object>
+  <object name="agarrePlataforma" type="static" x="406.167" y="334.833">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="1"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="plataforma"/>
+    <property name="userDataShape" value="shape_plataforma"/>
+   </properties>
+   <polygon points="0,0 -6.33333,7.33333 -3.33333,11.3333"/>
+  </object>
+  <object name="piso" type="static" x="607" y="463">
+   <properties>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="steel"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="piso"/>
+    <property name="userDataShape" value="shape_piso"/>
+   </properties>
+   <polygon points="0,0 14,14.25 23,15"/>
+  </object>
+ </objectgroup>
+ <imagelayer name="TerrenoImagen" x="1" y="239">
+  <image source="../images/mapa_tutorial_prueba.png"/>
+ </imagelayer>
+</map>

@@ -1,0 +1,5 @@
+Cosas a decidir sobre:
+
+	- Mantener el weaponManager o sacarlo. 
+		Si se mantiene:
+			- Que pasa si se hace click del medio (para abrir el weaponManager) mientras se esta utilizando algun arma.
