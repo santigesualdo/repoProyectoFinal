@@ -35,3 +35,4 @@ Cambios en entorno:
 par darle comienzo a nape ( mirar PlayState.hx)
 - Todos los update de FlxObject y FlxSprite ahora seria "override public function update(elapsed:dt)", tampoco nada grave.
 - Ahora el personaje FlxSpine, funciona como un FlxSprite, antes funcionaba como DisplayObject de Openfl, que era un quilombo.
+- Ahora los los niveles se cargan a travez de TiledLevel.hx (asi no tocamos mas PlayState para agregar cosas de tiled.
