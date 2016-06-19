@@ -29,3 +29,9 @@ Ultimos cambios santi:
 - player con un sprite de Spine (openfl ya no es parte de todo esto).
 - Se cambio la manera de cargar los levels y la sacamos del playState. Pasa a estar en "TiledLevel" donde carga todo por defecto. PlayState ahora esta mas limpio.
 - Codigo que no se usaba, recortado (aun no esta todo recortado).
+
+Cambios en entorno:
+- FlxNapeState - remplazado por FlxNapeSpace. (nada grave) Ahora los estados son siempre FlxState y se llama a una funcion estatica FlxNapeSpace.Init()
+par darle comienzo a nape ( mirar PlayState.hx)
+- Todos los update de FlxObject y FlxSprite ahora seria "override public function update(elapsed:dt)", tampoco nada grave.
+- Ahora el personaje FlxSpine, funciona como un FlxSprite, antes funcionaba como DisplayObject de Openfl, que era un quilombo.
