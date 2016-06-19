@@ -26,7 +26,6 @@ class RuedaSerradaConMovimientoHorizontal extends RuedaSerrada
 		
 		this.sentidoInicial = sentidoInicial;
 			
-		this.b.
 		//Si es una rueda con movimiento
 		if (posFinalX != -1){
 			if(sentidoInicial == 0){b.velocity.x = velocidad; }//Izq a Der
@@ -38,7 +37,9 @@ class RuedaSerradaConMovimientoHorizontal extends RuedaSerrada
 	
 	override public function comportamiento():Void {
 		
-		if (!rotacionSentidoReloj) {b.rotate(centerOfRotation, -rotateVelocityRadians);}
+		if (!rotacionSentidoReloj) {
+			b.rotate(centerOfRotation, -rotateVelocityRadians);
+		}
 		
 		if (posFinalX != -1){
 			

@@ -221,7 +221,7 @@
     <property name="userDataShape" value="shape_rectAgarreDer"/>
    </properties>
   </object>
-  <object id="42" name="rectAgarreDer" type="agarre" x="576" y="1501" width="2" height="2">
+  <object id="42" name="rectAgarreDer" type="agarre" x="576.727" y="1504.18" width="2" height="2">
    <properties>
     <property name="bodyType" value="static"/>
     <property name="esRompible" value="0"/>

@@ -361,13 +361,17 @@ class TiledLevel extends TiledMap
 		else if (o.name == "ruedaSerradaConMovimientoHorizontal") {
 			
 			var sentidoInicial:Int = Std.parseInt(cast(o.properties.get("sentidoInicial"), String));
-			var posFinalX:Float =  Std.parseFloat(cast(o.properties.get("posFinalX"),String)); 
+			var posFinalX:Float =  Std.parseFloat(cast(o.properties.get("posFinalX"), String)); 
+			bodyCircular.userData.velocidad =  Std.parseFloat(cast(o.properties.get("velocidad"), String)); 
+			bodyCircular.userData.rotation = Std.parseInt(cast(o.properties.get("puedeRotar"), String));
 			state.add(new RuedaSerradaConMovimientoHorizontal(bodyCircular, posFinalX, sentidoInicial));
 		}	
 		else if(o.name == "ruedaSerradaConMovimientoVertical") {
 			
 			var sentidoInicial:Int = Std.parseInt(cast(o.properties.get("sentidoInicial"), String));
-			var posFinalY:Float =  Std.parseFloat(cast(o.properties.get("posFinalY"),String)); 
+			var posFinalY:Float =  Std.parseFloat(cast(o.properties.get("posFinalY"), String)); 
+			bodyCircular.userData.velocidad =  Std.parseFloat(cast(o.properties.get("velocidad"), String));
+			bodyCircular.userData.rotation = Std.parseInt(cast(o.properties.get("puedeRotar"), String));
 			state.add(new RuedaSerradaConMovimientoVertical(bodyCircular, posFinalY, sentidoInicial));
 		}	
 	}

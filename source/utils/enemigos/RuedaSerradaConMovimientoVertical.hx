@@ -37,7 +37,9 @@ class RuedaSerradaConMovimientoVertical extends RuedaSerrada
 	
 	override public function comportamiento():Void {
 		
-		if (!rotacionSentidoReloj) {b.rotate(centerOfRotation, -rotateVelocityRadians);}
+		if (!rotacionSentidoReloj) {
+			b.rotate(centerOfRotation, -rotateVelocityRadians);
+		}
 		
 		if (posFinalY != -1){
 			
