@@ -24,6 +24,7 @@ import utils.AnimationSpine;
 import utils.Callbacks;
 import utils.Globales;
 import utils.PlayerSpine;
+import utils.SpinePlayer;
 
 /**
  * ...
@@ -43,7 +44,7 @@ class PlayerDesignState extends FlxState
 	
 	var body:Body;
 
-	var playerSpine:PlayerSpine;
+	var playerSpine:SpinePlayer;
 	
 	
 	override public function create() {
@@ -52,49 +53,28 @@ class PlayerDesignState extends FlxState
 		//add(new AnimationSpine(100, 400, "assets/player/", "spineboy",0.25));
 		//add(new AnimationSpine(350, 400, "assets/player2/", "spineboy2", 0.6));
 		
-		crearBody(350, 450);
-		playerSpine = new PlayerSpine(body, "assets/playerMagnet/", "playerMagnet", 1, "estadoSALTANDO");
+		playerSpine = new SpinePlayer(350,400, "playerMagnet", "assets/playerMagnet/",1);
 		add(playerSpine);
 
-	}
-	
-	function crearBody(x:Float, y:Float):Void {
-		body = new Body(BodyType.DYNAMIC, new Vec2(x,y));
-		body.userData.nombre = "playerBodyInferior";
-		body.allowRotation = false;
-		
-		var circleRadio:Float = 20;
-		
-		//sInferior= new Polygon(Polygon.rect(0, 0, 40, 80), Material.wood() , null);
-		var sInferior:Circle= new Circle(circleRadio * 0.5, null , Material.wood());
-		sInferior.userData.nombre = "playerShapeBodyInferior";
-		sInferior.material = new Material(0, 0.57, 0.74, 7.5, 0.001);//Material.steel();
-		body.shapes.add(sInferior);
-		
-		body.cbTypes.add(Callbacks.bodyInferiorCallback);
-		//Globales.globalPlayerBodyIntermedioPos = bodyInferior.position;
-		body.space = FlxNapeSpace.space;	
-		
-		
 	}
 
 	override public function update(elapsed:Float):Void {
 		super.update(elapsed);
 		
 		
-		if (FlxG.keys.justReleased.NUMPADONE) {
-			playerSpine.setAnimation("estadoSALTANDO",true);
-		}else if (FlxG.keys.justReleased.NUMPADTWO) {
-			playerSpine.setAnimation("estadoCORRIENDO",true);
-		}else if (FlxG.keys.justReleased.NUMPADTHREE) {
+		if (FlxG.keys.justReleased.ONE) {
 			playerSpine.setAnimation("estadoQUIETO",true);
-		}else if (FlxG.keys.justReleased.NUMPADFOUR) {
+		}else if (FlxG.keys.justReleased.TWO) {
+			playerSpine.setAnimation("estadoCORRIENDO",true);
+		}else if (FlxG.keys.justReleased.THREE) {
 			playerSpine.setAnimation("estadoMOVIENDOENELAIRE",true);
-		}
+		}else if (FlxG.keys.justReleased.FOUR) {
+			playerSpine.setAnimation("estadoSALTANDO",true);
+		}else if (FlxG.keys.justReleased.FIVE) {
+			playerSpine.setAnimation("estadoSUBIENDOPLATAFORMA",true);
+		}		
 
 	}
-	
-	
-	
+
 	
 }

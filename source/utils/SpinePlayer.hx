@@ -19,6 +19,7 @@ class SpinePlayer extends FlxSpine
 {
 	
 	static var sd:SkeletonData = null;
+	var currentAnimName:String = "";
 	
 	public function new(x:Float = 0, y:Float = 0, projectName:String, assetsPath:String, animationScale:Float = 0.25) 
 	{
@@ -32,29 +33,38 @@ class SpinePlayer extends FlxSpine
 		stateData.setMixByName("jump", "jump", 0.2);
 		
 		setAnimation("estadoSALTANDO", true);
+		
+		
+	}
+	
+	public function getAnimName():String {
+		return currentAnimName;
 	}
 	
 	public function setAnimation(name:String, loop:Bool) {
 	
-		/* Aca utilizamos nombres de animacion de Spine y lo adaptamos con la maquina de estados */
 		
+		/* Aca utilizamos nombres de animacion de Spine y lo adaptamos con la maquina de estados */
 		switch(name) {
 			case "estadoQUIETO": 
 				state.setAnimationByName(0, "quieto", loop);
+				currentAnimName = "estadoQUIETO";		
 			case "estadoCORRIENDO": 	
 				state.setAnimationByName(0, "corriendo", loop);
+				currentAnimName = "estadoCORRIENDO";		
 			case "estadoMOVIENDOENELAIRE":
 				state.setAnimationByName(0, "falling", loop);
+				currentAnimName = "estadoMOVIENDOENELAIRE";
 			case "estadoSALTANDO": 
 				state.setAnimationByName(0, "jump", loop);
+				currentAnimName = "estadoSALTANDO";
+			case "estadoSUBIENDOPLATAFORMA": 
+				state.setAnimationByName(0, "subiendoplataforma", loop);		
+				currentAnimName = "estadoSUBIENDOPLATAFORMA";
 			default: 
 		}
 		
 		
-	}
-	
-	public function setAnimationState(as:AnimationState) 
-	{
-		this.state = as;
+		
 	}
 }

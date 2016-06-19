@@ -27,7 +27,3 @@ Ultimos cambios santi:
 - player con un sprite de Spine (openfl ya no es parte de todo esto).
 - Se cambio la manera de cargar los levels y la sacamos del playState. Pasa a estar en "TiledLevel" donde carga todo por defecto. PlayState ahora esta mas limpio.
 - Codigo que no se usaba, recortado (aun no esta todo recortado).
-
-
-
-

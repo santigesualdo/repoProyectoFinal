@@ -21,6 +21,8 @@ import nape.phys.BodyList;
 import nape.phys.BodyType;
 import nape.phys.Material;
 import nape.shape.Circle;
+import nape.shape.Polygon;
+import nape.shape.Shape;
 import nape.space.Space;
 
 import states.PlayState;
@@ -40,7 +42,7 @@ class PlayerNape extends FlxObject
 		// este se usa para chocar contra el piso (circular)
 		var bodyInferior:Body;	
 		
-		var sInferior:Circle;
+		var sInferior:Shape;
 		//var sInferior:Polygon;
 		
 		var currentSpace:Space;
@@ -178,6 +180,9 @@ class PlayerNape extends FlxObject
 			if (flipX != null) {
 				AnimacionMiraDerecha(flipX);
 			}
+			if (name == "estadoSUBIENDOPLATAFORMA") {
+				spinePlayer.setAnimation(name,false);	
+			}
 			spinePlayer.setAnimation(name,true);
 		}
 		
@@ -211,16 +216,16 @@ class PlayerNape extends FlxObject
 		bodyInferior.userData.nombre = "playerBodyInferior";
 		bodyInferior.allowRotation = false;
 	
-		sInferior= new Circle(width * 0.5, null , Material.wood());
-		sInferior.userData.nombre = "playerShapeBodyInferior";
-		sInferior.material = new Material(0, 0.57, 0.74, 7.5, 0.001);
-		bodyInferior.shapes.add(sInferior);
-
-		//CAMBIO POSTERIOR
-		/*sInferior = new Polygon(Polygon.rect(0, 0, 20, 60));
+		/*sInferior= new Circle(width * 0.5, null , Material.wood());
 		sInferior.userData.nombre = "playerShapeBodyInferior";
 		sInferior.material = new Material(0, 0.57, 0.74, 7.5, 0.001);
 		bodyInferior.shapes.add(sInferior);*/
+
+		//CAMBIO POSTERIOR
+		sInferior = new Polygon(Polygon.rect(0, 0, 20, 60));
+		sInferior.userData.nombre = "playerShapeBodyInferior";
+		sInferior.material = new Material(0, 0.57, 0.74, 7.5, 0.001);
+		bodyInferior.shapes.add(sInferior);
 		//CAMBIO POSTERIOR
 		
 		bodyInferior.cbTypes.add(Callbacks.bodyInferiorCallback);
@@ -234,45 +239,53 @@ class PlayerNape extends FlxObject
 			CbEvent.BEGIN, InteractionType.SENSOR, Callbacks.bodyInferiorCallback, Callbacks.agarreCallback,
 			function OnPersonajeConAgarre(e:InteractionCallback):Void {
 				
-				var bodyPersonaje:Body = e.int1.castBody;
 				var bodyPlataforma:Body = e.int2.castBody;		
 				
 				FlxG.log.add("Toca agarre");
 				
 				if (!agarre) {	
-					 if (bodyPersonaje.bounds.y < (bodyPlataforma.bounds.y + bodyPlataforma.bounds.height * 0.1)) {
+					 if (bodyInferior.bounds.y < (bodyPlataforma.bounds.y + bodyPlataforma.bounds.height * 0.1)) {
 						 if (bodyPlataforma.userData.nombre != null) {
-							 if (bodyPlataforma.userData.nombre == "rectAgarreIzq" && bodyPersonaje.velocity.x>0) {
+							 var puedeseguir:Bool = Math.abs(bodyInferior.velocity.x) != 0 ? true : false;
+							 if (puedeseguir) {
+								 if (bodyInferior.velocity.x>0) {
+									tocaPlataformaIzq = true;
+								 }else {
+									tocaPlataformaIzq = false; 
+								 }								 
+							 }else {
+								return; 
+							 }
+							 
+							 if (bodyPlataforma.userData.nombre == "rectAgarreIzq" && Math.abs(bodyInferior.velocity.x)!=0) {
 								//AGARRE IZQUIERDO DE PERSONAJE		
-								tocaPlataformaIzq = true;
 								agarre = true;
 								CambiarEstado(estadoAGARRADO);
-								lastVelX = bodyPersonaje.velocity.x;
+								lastVelX = bodyInferior.velocity.x;
 							
-								agarrePos = new Vec2(bodyPlataforma.bounds.x-bodyPersonaje.bounds.width*0.5, bodyPlataforma.bounds.y + bodyPlataforma.bounds.height*0.5);
-								bodyPersonaje.position.set(agarrePos);
+								agarrePos = new Vec2(bodyPlataforma.bounds.x-bodyInferior.bounds.width, bodyPlataforma.bounds.y + bodyPlataforma.bounds.height*0.5);
+								bodyInferior.position.set(agarrePos);
 							
-								topeX = bodyPersonaje.bounds.x + bodyPersonaje.bounds.width*2;
-								topeY = bodyPlataforma.bounds.y - bodyPersonaje.bounds.height*1.0001; //- bodyInferior.bounds.height;
+								topeX = bodyInferior.bounds.x + bodyInferior.bounds.width*2;
+								topeY = bodyPlataforma.bounds.y - bodyInferior.bounds.height*1.0001; //- bodyInferior.bounds.height;
 							
-								bodyPersonaje.velocity.x = bodyPersonaje.velocity.y = 0; 
+								bodyInferior.velocity.x = bodyInferior.velocity.y = 0; 
 								
-							 }else if (bodyPlataforma.userData.nombre == "rectAgarreDer" && bodyPersonaje.velocity.x<0) {
+							 }else if (bodyPlataforma.userData.nombre == "rectAgarreDer" && Math.abs(bodyInferior.velocity.x)!=0) {
 								// AGARRE DERECHO DE PERSONAJE
-								tocaPlataformaIzq = false;
 								agarre = true;
 								CambiarEstado(estadoAGARRADO);
-								lastVelX = bodyPersonaje.velocity.x;
+								lastVelX = bodyInferior.velocity.x;
 								
-								agarrePos = new Vec2(bodyPlataforma.bounds.x + bodyPersonaje.bounds.width * 0.5, bodyPlataforma.bounds.y  );
+								agarrePos = new Vec2(bodyPlataforma.bounds.x , bodyPlataforma.bounds.y  );
 								
-								topeX = bodyPersonaje.bounds.x - bodyPersonaje.bounds.width;
+								topeX = bodyInferior.bounds.x - bodyInferior.bounds.width;
 								
-								bodyPersonaje.position.set(agarrePos);
+								bodyInferior.position.set(agarrePos);
 								
-								topeY = bodyPlataforma.bounds.y - bodyPersonaje.bounds.height*1.0001;// * 1.03; //- bodyInferior.bounds.height;
+								topeY = bodyPlataforma.bounds.y - bodyInferior.bounds.height*1.0001;// * 1.03; //- bodyInferior.bounds.height;
 								
-								bodyPersonaje.velocity.x = bodyPersonaje.velocity.y = 0;
+								bodyInferior.velocity.x = bodyInferior.velocity.y = 0;
 							 }			 
 							 
 						 }
@@ -440,8 +453,8 @@ class PlayerNape extends FlxObject
 		this.y = bodyInferior.position.y;
 		
 		if (spinePlayer != null) {
-			spinePlayer.x = this.x ; 
-			spinePlayer.y = this.y +bodyInferior.bounds.height *0.5;			
+			spinePlayer.x = this.x +bodyInferior.bounds.width*0.5; 
+			spinePlayer.y = this.y + bodyInferior.bounds.height;			
 		}
 		
 		if (sprite!= null) {
@@ -488,7 +501,7 @@ class PlayerNape extends FlxObject
 			"\nVELY: " + Std.int(bodyInferior.velocity.y) +
 			"\ntierraFirme: " + tierraFirme +
 			"\nSubiendoPlataforma: " + subiendoPlataforma +
-			"\nNORMALCOLISION: (" + normalUltimaColision.x + ","  + normalUltimaColision.y + ")"+
+			"\nNORMALCOLISION: (" + normalUltimaColision.x + ","  + normalUltimaColision.y + ")" +
 			"\nESTADO: " + estado.toUpperCase();
 		}
 	
@@ -794,7 +807,15 @@ class PlayerNape extends FlxObject
 					bodyInferior.allowMovement = false;
 				}
 				
-				if ((FlxG.keys.pressed.W || FlxG.keys.pressed.UP) && (FlxG.keys.pressed.RIGHT || FlxG.keys.pressed.D)  ) {
+				trepar = true;
+				if (spinePlayer.getAnimName() != "estadoSUBIENDOPLATAFORMA") {
+					ChangeAnimation("estadoSUBIENDOPLATAFORMA", false);
+					AnimacionMiraDerecha(!tocaPlataformaIzq);					
+				}
+
+				//agarrePos.x = 0;
+				
+				/*if ((FlxG.keys.pressed.W || FlxG.keys.pressed.UP) && (FlxG.keys.pressed.RIGHT || FlxG.keys.pressed.D)  ) {
 					trepar = true;
 				}else if ((FlxG.keys.justPressed.S || FlxG.keys.justPressed.DOWN)) {
 					agarrePos.x = 0;
@@ -810,17 +831,17 @@ class PlayerNape extends FlxObject
 					trepar = true;
 				}else if ((FlxG.keys.justPressed.S || FlxG.keys.justPressed.DOWN)) {
 					agarrePos.x = 0;
-				}	
+				}	*/
 				
-			}else {
+			}/*else {
 				// Presiono para soltarse del agarre.
 				bodyInferior.allowMovement = true;
 				subiendoPlataforma = false;
 				CambiarEstado(estadoSALTANDO);
-			}
+			}*/
 		}
 		if (trepar) { 
-			subirPlataforma(); 
+			subirPlataforma();
 		}
 	}
 	
