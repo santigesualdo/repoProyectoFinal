@@ -25,6 +25,8 @@ import nape.shape.Polygon;
 import states.PlayState;
 import utils.enemigos.BombaMagnet;
 import utils.enemigos.RuedaSerrada;
+import utils.enemigos.RuedaSerradaConMovimientoHorizontal;
+import utils.enemigos.RuedaSerradaConMovimientoVertical;
 import utils.enemigos.TiraBomba;
 import utils.objetos.CheckPoint;
 import utils.objetos.CheckPointSensor;
@@ -356,20 +358,18 @@ class TiledLevel extends TiledMap
 			bodyCircular.userData.destroyOnTouch = cast(o.properties.get("destroyOnTouch"), String);
 			state.add(new BombaMagnet(o.x,o.y,bodyCircular));
 		}	
-		//CAMBIO
-		/*else if (o.name == "ruedaSerradaConMovimientoHorizontal") {
+		else if (o.name == "ruedaSerradaConMovimientoHorizontal") {
 			
-			var sentidoInicial:Int = Std.parseInt(cast(o.custom.get("sentidoInicial"), String));
-			var posFinalX:Float =  Std.parseFloat(cast(o.custom.get("posFinalX"),String)); 
-			add(new RuedaSerradaConMovimientoHorizontal(bodyCircular, posFinalX, sentidoInicial));
+			var sentidoInicial:Int = Std.parseInt(cast(o.properties.get("sentidoInicial"), String));
+			var posFinalX:Float =  Std.parseFloat(cast(o.properties.get("posFinalX"),String)); 
+			state.add(new RuedaSerradaConMovimientoHorizontal(bodyCircular, posFinalX, sentidoInicial));
 		}	
 		else if(o.name == "ruedaSerradaConMovimientoVertical") {
 			
-			var sentidoInicial:Int = Std.parseInt(cast(o.custom.get("sentidoInicial"), String));
-			var posFinalY:Float =  Std.parseFloat(cast(o.custom.get("posFinalY"),String)); 
-			add(new RuedaSerradaConMovimientoVertical(bodyCircular, posFinalY, sentidoInicial));
-		}	*/
-		//CAMBIO
+			var sentidoInicial:Int = Std.parseInt(cast(o.properties.get("sentidoInicial"), String));
+			var posFinalY:Float =  Std.parseFloat(cast(o.properties.get("posFinalY"),String)); 
+			state.add(new RuedaSerradaConMovimientoVertical(bodyCircular, posFinalY, sentidoInicial));
+		}	
 	}
 	
 	function crearObjectoRectangular(state:PlayState, o:TiledObject, g:TiledObjectLayer, group:FlxGroup):Void {

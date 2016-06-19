@@ -17,19 +17,20 @@ class RuedaSerradaConMovimientoHorizontal extends RuedaSerrada
 	{
 		super(bodyCircular);
 		
-		this.posInicialX = bodyCircular.position.x + bodyCircular.bounds.width / 2;
+		this.posInicialX = b.position.x + b.bounds.width / 2;
 		this.posFinalX = posFinalX;
 		
 		b.position.x = posInicialX;
-		b.position.y = bodyCircular.position.y + bodyCircular.bounds.height / 2;
+		b.position.y = b.position.y + b.bounds.height / 2;
 		b.setShapeMaterials(Material.steel());
 		
 		this.sentidoInicial = sentidoInicial;
 			
+		this.b.
 		//Si es una rueda con movimiento
 		if (posFinalX != -1){
-			if(sentidoInicial == 0){this.b.velocity.x = velocidad; }//Izq a Der
-			else if(sentidoInicial == 1){this.b.velocity.x = -velocidad;}//Der a Izq
+			if(sentidoInicial == 0){b.velocity.x = velocidad; }//Izq a Der
+			else if(sentidoInicial == 1){b.velocity.x = -velocidad;}//Der a Izq
 		}
 		
 		this.activar();

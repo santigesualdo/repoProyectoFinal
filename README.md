@@ -8,7 +8,9 @@ Migre todo a las ultimas librerias. Es decir, este proyecto compila con:
 - Bajar Haxe 3.3.0.
 - Instalar en C:\HaxeToolKit2 
 - Ultimo lime (haxelib install lime) (el que mas tiempo dura)
+- Setup de lime. (haxelib run lime setup) (tambien lleva tiempo)
 - Ultimo openfl (haxelib install openfl)
+- Setup de openfl (haxelib run openfl setup)
 - Ultimo flixel (haxelib install flixel)
 - Ultimo flixel-addons (haxelib install flixel-addons)
 - Ultimo nape (haxelib install nape)
