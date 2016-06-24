@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="28" tilewidth="64" tileheight="64" nextobjectid="106">
- <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64" tilecount="72">
-  <image source="tileset.png" width="512" height="576"/>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="28" tilewidth="64" tileheight="64" nextobjectid="109">
+ <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
+  <image source="tileset.png" width="448" height="448"/>
+ </tileset>
+ <tileset firstgid="50" name="imageCollection" tilewidth="411" tileheight="396">
+  <tile id="0">
+   <image width="385" height="360" source="deco.png"/>
+  </tile>
+  <tile id="1">
+   <image width="411" height="396" source="deco2.png"/>
+  </tile>
  </tileset>
  <imagelayer name="backdrop">
   <image source="level0_background.png"/>
@@ -10,37 +18,26 @@
   <properties>
    <property name="tilesheet" value="tileset.png"/>
   </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T+3sARQAAAA3DSAAAQ==
+  </data>
  </layer>
+ <objectgroup name="images">
+  <object id="107" gid="50" x="832" y="1536">
+   <properties>
+    <property name="depthX" value="0.9"/>
+    <property name="depthY" value="0.9"/>
+    <property name="opacity" value="0.7"/>
+   </properties>
+  </object>
+  <object id="108" gid="51" x="576" y="1408">
+   <properties>
+    <property name="depthX" value="0.9"/>
+    <property name="depthY" value="1"/>
+    <property name="opacity" value="0.3"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup name="entities">
   <object id="1" name="plataforma" type="plataformaHorizontal" x="0" y="1728" width="576" height="64">
    <properties>
@@ -52,12 +49,12 @@
     <property name="bodyType" value="static"/>
    </properties>
   </object>
-  <object id="3" name="plataforma" type="plataformaVertical" x="128" y="896" width="64" height="704">
+  <object id="3" name="plataforma" type="plataformaVertical" x="128" y="896" width="64" height="640">
    <properties>
     <property name="bodyType" value="static"/>
    </properties>
   </object>
-  <object id="4" name="plataforma" type="plataformaHorizontal" x="0" y="1600" width="192" height="64">
+  <object id="4" name="plataforma" type="plataformaHorizontal" x="0" y="1536" width="192" height="64">
    <properties>
     <property name="bodyType" value="static"/>
    </properties>
@@ -237,13 +234,13 @@
     <property name="bodyType" value="static"/>
    </properties>
   </object>
-  <object id="44" name="checkPoint" type="checkPoint" x="61" y="1689">
+  <object id="44" name="checkPoint" type="checkPoint" x="110" y="1647">
    <properties>
     <property name="checkPoint" value="0"/>
    </properties>
    <polyline points="6,-1e-10 -9,0"/>
   </object>
-  <object id="45" name="checkPoint" type="checkPointSensor" x="9.1212" y="1664" width="64" height="64">
+  <object id="45" name="checkPoint" type="checkPointSensor" x="0" y="1664" width="64" height="64">
    <properties>
     <property name="checkPointSensor" value="0"/>
    </properties>

@@ -72,8 +72,8 @@ class PlataformaConMovientoVertical extends PlataformaConMovimiento
 				Callbacks.bodyInferiorCallback,
 				cb,
 				function playerBPlataformaVertical(e:InteractionCallback) {
+					
 					var playerBody:Body = e.int1.castBody;
-					//var platBody:Body = e.int2.castBody;
 					var player:PlayerNape = cast(playerBody.userData.object, PlayerNape);
 					
 					player.setPlayerOnPlataform();					
@@ -87,11 +87,13 @@ class PlataformaConMovientoVertical extends PlataformaConMovimiento
 				Callbacks.bodyInferiorCallback,
 				cb,
 				function playerOnPlataformaVertical(e:InteractionCallback) {
+					
 					var playerBody:Body = e.int1.castBody;
 					var platBody:Body = e.int2.castBody;
 					var player:PlayerNape = cast(playerBody.userData.object, PlayerNape);
 					
-					player.setFixedVelocity(platBody.velocity.y);					
+					player.setFixedVelocity(platBody.velocity.y);	
+					player.setFixedPositionY(platBody.position.y - playerBody.bounds.height);
 				}
 			);
 			
@@ -147,7 +149,6 @@ class PlataformaConMovientoVertical extends PlataformaConMovimiento
 				b.velocity.y = 0;
 			
 		}
-		
 		
 		checkEjeY();
 	}

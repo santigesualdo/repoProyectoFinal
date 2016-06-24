@@ -38,7 +38,7 @@ import utils.objetos.Pinches;
 import utils.objetos.PlataformaConMovientoVertical;
 import utils.objetos.PlataformaConMovimientoHorizontal;
 import utils.objetos.PlataformaDiagonal;
-import utils.objetos.PlataformaHorizontal;
+import utils.objetos.Plataforma;
 import utils.objetos.TextoTutorial;
 
 /**
@@ -57,7 +57,7 @@ class TiledLevel extends TiledMap
 	public var objectsLayer:FlxGroup;
 	public var backgroundLayer:FlxGroup;
 	public var backDropPath:String;
-	private var collidableTileLayers:Array<FlxTilemap>;
+	private var collidableTileLayers:Array<FlxTilemap>;	
 	
 	// Sprites of images layers
 	public var imagesLayer:FlxGroup;
@@ -65,7 +65,6 @@ class TiledLevel extends TiledMap
 	public function new(tiledLevel:Dynamic, state:PlayState)
 	{
 		super(tiledLevel);
-		
 		imagesLayer = new FlxGroup();
 		foregroundTiles = new FlxGroup();
 		objectsLayer = new FlxGroup();
@@ -76,55 +75,51 @@ class TiledLevel extends TiledMap
 		
 		loadImages();
 		
+		var tileSize = this.tileWidth;
+		var mapH = this.height;
+		var mapW = this.width;
+		
 		// Load Tile Maps
 		for (layer in layers)
 		{
 			if (layer.type != TiledLayerType.TILE) continue;
 			var tileLayer:TiledTileLayer = cast layer;
 			
-			var tileSheetName:String = tileLayer.properties.get("tilesheet");
+			var layerData:Array<Int> = tileLayer.tileArray;
+			var tilesheetName:String = layer.properties.get("tilesheet");
+            var tilesheetPath:String = "assets/levels/" + tilesheetName;
 			
-			if (tileSheetName == null)
-				throw "'tileset' property not defined for the '" + tileLayer.name + "' layer. Please add the property to the layer.";
-				
-			var tileSet:TiledTileSet = null;
-			for (ts in tilesets)
-			{
-				if (ts.name+".png" == tileSheetName)
-				{
-					tileSet = ts;
-					break;
-				}
-			}
-			
-			if (tileSet == null)
-				throw "Tileset '" + tileSheetName + " not found. Did you misspell the 'tilesheet' property in " + tileLayer.name + "' layer?";
-				
-			var imagePath 		= new Path(tileSet.imageSource);
-			var processedPath 	= c_PATH_LEVEL_TILESHEETS + imagePath.file + "." + imagePath.ext;
-			
-			var tilemap:FlxTilemap = new FlxTilemap();
-			tilemap.loadMapFromCSV(tileLayer.csvData, processedPath, tileSet.tileWidth, tileSet.tileHeight);
-			
-			//level.loadMap(layerData, levelObj.getTilesetImgPath(), tiledmap.tileWidth, tiledmap.tileWidth, FlxTilemap.OFF, tileGID);
-			
-			//tilemap.loadMapFromArray(tileLayer.tileArray, width, height, processedPath,
-				//tileSet.tileWidth, tileSet.tileHeight, OFF, tileSet.firstGID, 1, 1);
+			// Finally, create the FlxTilemap and get ready to render the map.
+            var level:FlxTilemap = new FlxTilemap();
+
+            // If we're passing an array of data, the level needs to know
+            // how many columns of data to read before it moves to a new row,
+            // as noted in the API page:
+            // http://api.haxeflixel.com/flixel/tile/FlxTilemap.html#loadMap
+            /*level.widthInTiles = mapW;
+            level.heightInTiles = mapH;*/
+
+            // Note: The tilesheet indices are continuous! This means,
+            // if there is more than one tilesheet, the 2nd tilesheet's
+            // starting index right after the 1st tilesheet's last index.
+            // e.g.
+            // - tilesheet 1 has 100 tiles (index = 1-100)
+            // - tilesheet 2 has 100 tiles (index = 101-200 instead of 1-100)
+            //
+            // Note2: that the gid "0" is reserved for empty tiles
+            var tileGID:Int = getStartGid(this, tilesheetName);
+
+            // Render the map.
+            // Note: the StartingIndex is based on the tilesheet's
+            // startingGID rather than the default 1.
+            level.loadMapFromArray(tileLayer.tileArray, mapW, mapH, tilesheetPath, tileSize, tileSize, null, tileGID);
+            //add(level);
 			
 			loadObjects(state);
-				
-			if (tileLayer.properties.contains("nocollide"))
-			{
-				backgroundLayer.add(tilemap);
-			}
-			else
-			{
-				if (collidableTileLayers == null)
-					collidableTileLayers = new Array<FlxTilemap>();
-				
-				foregroundTiles.add(tilemap);
-				collidableTileLayers.push(tilemap);
-			}
+			
+			foregroundTiles.add(level);
+			
+			
 		}
 	}
 	
@@ -164,7 +159,7 @@ class TiledLevel extends TiledMap
 		var tileImagesSource:TiledImageTile = tilesImageCollection.getImageSourceByGid(object.gid);
 		
 		//decorative sprites
-		var levelsDir:String = "assets/tiled/";
+		var levelsDir:String = "assets/levels/";
 		
 		var decoSprite:FlxSprite = new FlxSprite(0, 0, levelsDir + tileImagesSource.source);
 		if (decoSprite.width != object.width
@@ -457,18 +452,15 @@ class TiledLevel extends TiledMap
 			state.add(new TextoTutorial(o.x, o.y, rectangularBody));
 		}
 		if (o.name == "plataforma" ) {
+			
 			if (o.properties.contains("velocidad")) {
 				var velocidad:Float = Std.parseFloat(cast(o.properties.get("velocidad"), String));
-				//CAMBIO
 				if (rectangularBody.isKinematic()){rectangularBody.surfaceVel.x = velocidad; }
-				//CAMBIO
 			}
-			state.add(new PlataformaHorizontal(o.x, o.y, rectangularBody));
-		}else if (o.name == "plataformaVertical") {
-			rectangularBody.space = FlxNapeSpace.space;	
-		}else if (o.name == "plataformaDiagonal") {
-			state.add(new PlataformaDiagonal(o.x, o.y, rectangularBody));						
-		} else if (o.name == "plataformaConMovimientoVertical") {
+			
+			state.add(new Plataforma(o.x, o.y, rectangularBody, o.type)); 
+			
+		}else if (o.name == "plataformaConMovimientoVertical") {
 			var sube:String = o.properties.get("subeYBaja");
 			var velocityY:String = o.properties.get("velocityY");
 			rectangularBody.userData.velocityY = velocityY;

@@ -5,22 +5,22 @@ filter: Nearest,Nearest
 repeat: none
 eyes
   rotate: false
-  xy: 447, 44
-  size: 34, 27
+  xy: 382, 17
+  size: 29, 21
   orig: 34, 27
-  offset: 0, 0
+  offset: 4, 4
   index: -1
 eyes-closed
-  rotate: true
-  xy: 483, 37
+  rotate: false
+  xy: 447, 44
   size: 34, 27
   orig: 34, 27
   offset: 0, 0
   index: -1
 head
   rotate: true
-  xy: 2, 5
-  size: 121, 132
+  xy: 2, 12
+  size: 114, 132
   orig: 121, 132
   offset: 0, 0
   index: -1
@@ -67,8 +67,8 @@ left-upper-leg
   offset: 0, 0
   index: -1
 neck
-  rotate: false
-  xy: 382, 10
+  rotate: true
+  xy: 413, 9
   size: 34, 28
   orig: 34, 28
   offset: 0, 0

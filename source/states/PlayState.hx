@@ -50,8 +50,8 @@ import utils.objetos.Palanca;
 import utils.objetos.Pinches;
 import utils.objetos.PlataformaConMovientoVertical;
 import utils.objetos.PlataformaConMovimientoHorizontal;
-import utils.objetos.PlataformaDiagonal;
-import utils.objetos.PlataformaHorizontal;
+//import utils.objetos.PlataformaDiagonal;
+import utils.objetos.Plataforma;
 import utils.objetos.TextoTutorial;
 
 import nape.phys.Body;

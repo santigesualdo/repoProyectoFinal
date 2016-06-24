@@ -10,15 +10,13 @@ import nape.phys.Body;
  * ...
  * @author s
  */
-class PlataformaHorizontal extends ObjetoBase
+class Plataforma extends ObjetoBase
 {
 	
-	public function new(x:Int, y:Int, rectangularBody:Body) 
+	public function new(x:Int, y:Int, rectangularBody:Body, tipo:String) 
 	{
 		super(x, y);
 	
-		
-		
 		b = rectangularBody;
 		//b.cbTypes.add( Callbacks.pisoCallback );	
 		b.cbTypes.add( Callbacks.plataformaCallback);	

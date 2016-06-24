@@ -15,6 +15,8 @@ import nape.callbacks.InteractionType;
 import nape.callbacks.PreCallback;
 import nape.callbacks.PreFlag;
 import nape.callbacks.PreListener;
+import nape.dynamics.Arbiter;
+import nape.dynamics.CollisionArbiter;
 import nape.geom.Vec2;
 import nape.phys.Body;
 import nape.phys.BodyList;
@@ -52,11 +54,16 @@ class PlayerNape extends FlxObject
 		var colisionCostadoPlataforma:Bool;
 		var frenando:Bool;
 		var tierraFirme:Bool;
+		var colisionaParedDerecha:Bool;
+		var colisionaParedIzquierda:Bool;
+		var plataformaVertical:Bool;
+		var idPlataformaPiso:Int;
 		
 		var agarre:Bool;
 		var trepar:Bool;
 	
-		var tocaPlataformaIzq:Bool;	
+		var plataformaAgarrePermitido:Bool;	
+		var tocaPlataformaIzq:Bool;
 		var topeY:Float;
 		var topeX:Float;
 		var agarrePos:Vec2;
@@ -74,7 +81,7 @@ class PlayerNape extends FlxObject
 		
 		var text :FlxText = null;
 		var textObjInteractivo:FlxText = null;
-		var lastVelX:Float;
+		//var lastVelX:Float;
 		var textoColision:String;
 		
 		var lastState:Int = 0;
@@ -111,15 +118,17 @@ class PlayerNape extends FlxObject
 		var miraIzquierda:Bool;
 		var maxVelocityCaida:Float = 800 ;		
 		
-		var fixedY:Float;
-		var normalUltimaColision:Vec2 = new Vec2(0,0);
+		var fixedY:Float = -1;
+		var fixedPositionY:Float = 0;
+		var normalColision:Vec2 = new Vec2(0, 0);
+		var normalColision2:Vec2 = new Vec2(0, 0);
 
 	public function new(_x:Float, _y:Float, space : Space ) {
 		
 		super(_x,_y,35,35);
 			
 		text = new FlxText(200, this.x, this.y, "No Name Game");
-		text.setFormat(AssetPaths.font_kreon, 18, FlxColor.BLACK, "left");
+		text.setFormat(AssetPaths.font_kreon, 18, FlxColor.YELLOW, "left");
 		//text.addFormat(new FlxTextFormat(0xE6E600, false, false, 0xFF8000));	
 		Globales.currentState.add(text);	
 				
@@ -137,22 +146,24 @@ class PlayerNape extends FlxObject
 		createBodyInferior(pos);
 		
 		frenando = false;
-		
 		tierraFirme = false;
+		colisionaParedIzquierda = false;
+		colisionaParedDerecha = false;
+		subiendoPlataforma = false;
+		colisionaConObjetoInteractivo = false;
+		plataformaAgarrePermitido = false;
+		tocaPlataformaIzq = false;
+		plataformaVertical = false;
+		idPlataformaPiso = -1;
 						
 		declararCallbacks();
 		
 		pos.dispose();
 		
 		bodyInferior.userData.object = this;
-
-		subiendoPlataforma = false;
-		
-		colisionaConObjetoInteractivo = false;
 		
 		crearAnimacionSpine();
 		//crearAnimacion();
-		
 	}
 	
 	function crearAnimacion():Void	{
@@ -178,7 +189,7 @@ class PlayerNape extends FlxObject
 		
 		if (spinePlayer != null) {
 			if (flipX != null) {
-				AnimacionMiraDerecha(flipX);
+				AnimacionMiraIzquierda(flipX);
 			}
 			if (name == "estadoSUBIENDOPLATAFORMA") {
 				spinePlayer.setAnimation(name,false);	
@@ -188,7 +199,7 @@ class PlayerNape extends FlxObject
 		
 		if (sprite!= null) {
 			if (flipX != null) {
-				AnimacionMiraDerecha(flipX);
+				AnimacionMiraIzquierda(flipX);
 			}
 			sprite.animation.play(name,true);
 		}
@@ -196,7 +207,7 @@ class PlayerNape extends FlxObject
 		
 	}
 	
-	function AnimacionMiraDerecha(_flipX:Bool) {
+	function AnimacionMiraIzquierda(_flipX:Bool) {
 
 		if (spinePlayer != null) {
 			spinePlayer.flipX = _flipX;
@@ -239,56 +250,78 @@ class PlayerNape extends FlxObject
 			CbEvent.BEGIN, InteractionType.SENSOR, Callbacks.bodyInferiorCallback, Callbacks.agarreCallback,
 			function OnPersonajeConAgarre(e:InteractionCallback):Void {
 				
-				var bodyPlataforma:Body = e.int2.castBody;		
+				var bodyAgarre:Body = e.int2.castBody;		
 				
 				FlxG.log.add("Toca agarre");
 				
 				if (!agarre) {	
-					 if (bodyInferior.bounds.y < (bodyPlataforma.bounds.y + bodyPlataforma.bounds.height * 0.1)) {
-						 if (bodyPlataforma.userData.nombre != null) {
-							 var puedeseguir:Bool = Math.abs(bodyInferior.velocity.x) != 0 ? true : false;
+					
+					FlxG.log.add("Toca agarre");
+					 //if (bodyInferior.bounds.y < (bodyAgarre.bounds.y + bodyAgarre.bounds.height * 0.1)) {
+					 //if ((bodyInferior.bounds.y + bodyInferior.bounds.height * 0.1) < bodyAgarre.bounds.y){
+					 // if((bodyInferior.bounds.y + bodyInferior.bounds.height * 0.95) > bodyAgarre.bounds.y){	 
+						 if (bodyAgarre.userData.nombre != null) {
+							 
+							 /*var puedeseguir:Bool = Math.abs(bodyInferior.velocity.x) != 0 ? true : false;
+							 
 							 if (puedeseguir) {
-								 if (bodyInferior.velocity.x>0) {
+								 if (bodyInferior.velocity.x > 0) {
 									tocaPlataformaIzq = true;
 								 }else {
 									tocaPlataformaIzq = false; 
 								 }								 
 							 }else {
 								return; 
+							 }*/
+							 
+							 if (((bodyInferior.bounds.x + bodyInferior.bounds.width) >= bodyAgarre.bounds.x) && !spinePlayer.flipX){
+								 if ((bodyInferior.bounds.x + bodyInferior.bounds.width) <= (bodyAgarre.bounds.x + bodyAgarre.bounds.width + 2)){
+									 if (bodyInferior.bounds.x < bodyAgarre.bounds.x){
+										 
+										//plataformaAgarrePermitido = true;
+										if (/*plataformaAgarrePermitido && tocaPlataformaIzq &&*/ (bodyAgarre.userData.nombre == "rectAgarreIzq")) {//AGARRE IZQUIERDO DE PERSONAJE	
+									
+											//lastVelX = bodyInferior.velocity.x;
+											agarrePos = new Vec2(bodyAgarre.bounds.x-bodyInferior.bounds.width, bodyAgarre.bounds.y/* + bodyAgarre.bounds.height*0.5*/);
+											bodyInferior.position.set(agarrePos);
+										
+											topeX = bodyInferior.bounds.x + bodyInferior.bounds.width*2.5;
+											topeY = bodyAgarre.bounds.y - bodyInferior.bounds.height*1.001; //- bodyInferior.bounds.height;
+										
+											bodyInferior.velocity.x = bodyInferior.velocity.y = 0; 
+											agarre = true;
+											//tierraFirme = false;
+											tocaPlataformaIzq = true;
+											CambiarEstado(estadoAGARRADO);	
+										 }
+									 }
+								 }
 							 }
-							 
-							 if (bodyPlataforma.userData.nombre == "rectAgarreIzq" && Math.abs(bodyInferior.velocity.x)!=0) {
-								//AGARRE IZQUIERDO DE PERSONAJE		
-								agarre = true;
-								CambiarEstado(estadoAGARRADO);
-								lastVelX = bodyInferior.velocity.x;
-							
-								agarrePos = new Vec2(bodyPlataforma.bounds.x-bodyInferior.bounds.width, bodyPlataforma.bounds.y + bodyPlataforma.bounds.height*0.5);
-								bodyInferior.position.set(agarrePos);
-							
-								topeX = bodyInferior.bounds.x + bodyInferior.bounds.width*2;
-								topeY = bodyPlataforma.bounds.y - bodyInferior.bounds.height*1.0001; //- bodyInferior.bounds.height;
-							
-								bodyInferior.velocity.x = bodyInferior.velocity.y = 0; 
-								
-							 }else if (bodyPlataforma.userData.nombre == "rectAgarreDer" && Math.abs(bodyInferior.velocity.x)!=0) {
-								// AGARRE DERECHO DE PERSONAJE
-								agarre = true;
-								CambiarEstado(estadoAGARRADO);
-								lastVelX = bodyInferior.velocity.x;
-								
-								agarrePos = new Vec2(bodyPlataforma.bounds.x , bodyPlataforma.bounds.y  );
-								
-								topeX = bodyInferior.bounds.x - bodyInferior.bounds.width;
-								
-								bodyInferior.position.set(agarrePos);
-								
-								topeY = bodyPlataforma.bounds.y - bodyInferior.bounds.height*1.0001;// * 1.03; //- bodyInferior.bounds.height;
-								
-								bodyInferior.velocity.x = bodyInferior.velocity.y = 0;
-							 }			 
-							 
-						 }
+							 else if ((bodyInferior.bounds.x <= (bodyAgarre.bounds.x + bodyAgarre.bounds.width))  && spinePlayer.flipX){
+								  if(bodyInferior.bounds.x >= bodyAgarre.bounds.x - 2){
+									if ((bodyInferior.bounds.x + bodyInferior.bounds.width) > bodyAgarre.bounds.x){
+										
+										//plataformaAgarrePermitido = true;
+										if (/*plataformaAgarrePermitido && !tocaPlataformaIzq &&*/ (bodyAgarre.userData.nombre == "rectAgarreDer")) {// AGARRE DERECHO DE PERSONAJE
+											
+											//lastVelX = bodyInferior.velocity.x;			
+											agarrePos = new Vec2(bodyAgarre.bounds.x , bodyAgarre.bounds.y);
+											bodyInferior.position.set(agarrePos);
+											
+											topeX = bodyInferior.bounds.x - bodyInferior.bounds.width *1.5;
+											topeY = bodyAgarre.bounds.y - bodyInferior.bounds.height*1.001;// * 1.03; //- bodyInferior.bounds.height;
+											
+											bodyInferior.velocity.x = bodyInferior.velocity.y = 0;
+											agarre = true;
+											//tierraFirme = false;
+											tocaPlataformaIzq = false;
+											CambiarEstado(estadoAGARRADO);
+										 }
+									 }
+								 }
+							 }
+						// }
+					  //}
 					}
 				}
 			}
@@ -297,7 +330,8 @@ class PlayerNape extends FlxObject
 		PersonajeConAgarreEnd = new InteractionListener(
 			CbEvent.END, InteractionType.SENSOR, Callbacks.bodyInferiorCallback, Callbacks.agarreCallback,
 			function OnPersonajeConAgarreEnd(e:InteractionCallback):Void {
-				agarre = false;
+
+				//tocaPlataformaIzq = false;
 			}		
 		);	
 	
@@ -305,38 +339,131 @@ class PlayerNape extends FlxObject
 			CbEvent.BEGIN, InteractionType.COLLISION, Callbacks.bodyInferiorCallback, Callbacks.plataformaCallback,
 			function OnPersonajeConPlataformaCollision(e:InteractionCallback):Void {
 			
-				/*normal de la interaccion actual*/
-				normalUltimaColision = e.arbiters.at(0).collisionArbiter.referenceEdge1.localNormal;
+				if (!agarre && !trepar){
+
+					//normal de la interaccion actual del jugador
+					if (bodyInferior.arbiters.length >= 1){
+						
+						var arb:CollisionArbiter = bodyInferior.arbiters.at(0).collisionArbiter;
+						
+						if (arb != null){
+							
+							normalColision = arb.referenceEdge1.localNormal;
+							
+							if(normalColision.y == -1){
+								idPlataformaPiso = arb.body1.id;
+							}
+						}
+					}
+
+					var bodys:BodyList = new BodyList();
+					bodyInferior.interactingBodies(InteractionType.COLLISION, 2, bodys);
+					
+					if(bodys.length == 1){//Si el jugador colisiona con una plataforma que es el piso
+						if (normalColision.y == -1){
+							tierraFirme = true;
+						}
+						else if(normalColision.y != -1){
+							tierraFirme = false;
+						}
+					}
+					else if (bodys.length == 2){//Si el jugador colisiona con dos plataformas a la vez, y una es piso
+						
+						//segunda normal de la interaccion actual del jugador
+						if (bodyInferior.arbiters.length >= 2){
+							
+							var arb2:CollisionArbiter = bodyInferior.arbiters.at(1).collisionArbiter;
+						
+							if (arb2 != null){
+								
+								normalColision2 = arb2.referenceEdge1.localNormal;
+								
+								if(normalColision2.y == -1){
+									idPlataformaPiso = arb2.body1.id;
+								}
+							}
+						}
+						
+						if (((Math.abs(normalColision.x) == 1) || (Math.abs(normalColision2.x) == 1)) && (bodyInferior.velocity.y == 0)){
+							tierraFirme = true;
+						}
+						else if ((normalColision.y == -1) || (normalColision2.y == -1)){//La normal de colision es del piso
+							tierraFirme = true;
+						}
+						
+						
+						if(Math.abs(normalColision.x) == 1){
+							if (normalColision.x == -1){
+								colisionaParedIzquierda = true; 
+							}
+							else if (normalColision.x == 1){
+								colisionaParedDerecha = true;
+							}
+						}
+						else if(Math.abs(normalColision2.x) == 1){
+							if (normalColision2.x == -1){
+								colisionaParedIzquierda = true; 
+							}
+							else if (normalColision2.x == 1){
+								colisionaParedDerecha = true;
+							}
+						}
+					}
+				}	
+			}
+		);
+		
+		PersonajeConPlataformaEnd= new InteractionListener(
+			CbEvent.END, InteractionType.COLLISION, Callbacks.bodyInferiorCallback, Callbacks.plataformaCallback,
+			function OnPersonajeConPlataformaCollisionEnd(e:InteractionCallback):Void {
+				
+				if (!agarre && !trepar){
+					
+					var bodyPlataforma:Body = e.int2.castBody;
+					
+					if(bodyPlataforma.id == idPlataformaPiso){
+						tierraFirme = false;
+					}
+
+					/*var bodys:BodyList = new BodyList();
+					bodyInferior.interactingBodies(InteractionType.COLLISION, 2, bodys);
+					
+					if((bodys.length == 1) && ((normalColision.y == -1) || (normalColision2.y == -1))){//Si el jugador colisionaba con una sola plataforma que es piso
+						tierraFirme = false;
+					}
+					else if ((bodys.length == 2) && ((normalColision.y != -1) || (normalColision2.y != -1))){//Si el jugador colisionaba con dos plataformas, y ninguna era el piso
+						tierraFirme = false;
+					}*/		
+				}		
+				
+				colisionaParedIzquierda = colisionaParedDerecha = false;
+			}
+		);
+		
+		/*PersonajeConPlataforma = new InteractionListener(
+			CbEvent.BEGIN, InteractionType.COLLISION, Callbacks.bodyInferiorCallback, Callbacks.plataformaCallback,
+			function OnPersonajeConPlataformaCollision(e:InteractionCallback):Void {
+			
+				//normal de la interaccion actual
+				normalColision = e.arbiters.at(0).collisionArbiter.referenceEdge1.localNormal;
 				//var normalTemp:Vec2 = e.arbiters.at(0).collisionArbiter.referenceEdge1.localNormal;
 				
 				var bodys:BodyList = new BodyList();
 				bodyInferior.interactingBodies(InteractionType.COLLISION, 2, bodys);
 				
 				if(bodys.length == 1){//Si el jugador colisiona con una plataforma, se actualiza la normal de colision
-					if(normalUltimaColision.y == -1){
+					if(normalColision.y == -1){
 						tierraFirme = true;
 					}
 				}
 				else if (bodys.length == 2){//Si el jugador colisiona con dos plataformas a la vez
-					if ((Math.abs(normalUltimaColision.x) == 1) && (bodyInferior.velocity.y == 0)){//Se actualiza la normal de colision solo si la anterior normal no fue el piso
+					if ((Math.abs(normalColision.x) == 1) && (bodyInferior.velocity.y == 0)){//Se actualiza la normal de colision solo si la anterior normal no fue el piso
 						tierraFirme = true;
 					}
-					else if (normalUltimaColision.y == -1){//Se actualiza la normal de colision solo si la anterior normal no fue el piso
+					else if (normalColision.y == -1){//Se actualiza la normal de colision solo si la anterior normal no fue el piso
 						tierraFirme = true;
 					}
 				}
-				/*if(bodys.length == 1){//Si el jugador colisiona con una plataforma, se actualiza la normal de colision
-					normalUltimaColision = normalTemp;
-				}
-				else if (bodys.length == 2){//Si el jugador colisiona con dos plataformas a la vez
-					if(normalUltimaColision.y != -1){//Se actualiza la normal de colision solo si la anterior normal no fue el piso
-						normalUltimaColision = normalTemp;
-					}
-				}
-				
-				if(normalUltimaColision.y <= -1){//Si la normal de colision es (0,-1) se esta en tierra firme
-					tierraFirme = true;
-				}*/
 			}		
 		);
 		
@@ -351,19 +478,15 @@ class PlayerNape extends FlxObject
 					tierraFirme = false;
 				}
 				else if (bodys.length == 2){
-					if ((Math.abs(normalUltimaColision.x) == 1) && (bodyInferior.velocity.y != 0)){
-
-
+					if ((Math.abs(normalColision.x) == 1) && (bodyInferior.velocity.y != 0)){
 						tierraFirme = false;
 					}
-					else if ((normalUltimaColision.y == -1) && (bodyInferior.velocity.y != 0)){
+					else if ((normalColision.y == -1) && (bodyInferior.velocity.y != 0)){
 						tierraFirme = false;
 					}
 				}
-
-
 			}		
-		);
+		);*/
 		
 		PersonajePrePiso = new PreListener(
 		InteractionType.COLLISION, Callbacks.bodyInferiorCallback, Callbacks.plataformaCallback,
@@ -483,9 +606,12 @@ class PlayerNape extends FlxObject
 			"\nVELY: " + Std.int(bodyInferior.velocity.y) +
 			"\ntierraFirme: " + tierraFirme +
 			"\nSubiendoPlataforma: " + subiendoPlataforma +
-			"\nNORMALCOLISION: (" + normalUltimaColision.x + ","  + normalUltimaColision.y + ")" +
+			"\nNORMALCOLISION: (" + normalColision.x + ","  + normalColision.y + ")" +
+			"\nNORMALCOLISION2: (" + normalColision2.x + ","  + normalColision2.y + ")" + 
+			"\ncolisionIzquierda: " + colisionaParedIzquierda +
+			"\ncolisionDerecha: " + colisionaParedDerecha +
+			"\nmirandoIzquierda: " + spinePlayer.flipX +
 			"\nESTADO: " + estado.toUpperCase();
-			
 			
 			if (textoColisionAcum < textoColisionTime) {
 				textoColisionAcum += FlxG.elapsed;
@@ -501,7 +627,11 @@ class PlayerNape extends FlxObject
 			"\nVELY: " + Std.int(bodyInferior.velocity.y) +
 			"\ntierraFirme: " + tierraFirme +
 			"\nSubiendoPlataforma: " + subiendoPlataforma +
-			"\nNORMALCOLISION: (" + normalUltimaColision.x + ","  + normalUltimaColision.y + ")" +
+			"\nNORMALCOLISION: (" + normalColision.x + ","  + normalColision.y + ")" +
+			"\nNORMALCOLISION2: (" + normalColision2.x + ","  + normalColision2.y + ")" +
+			"\ncolisionIzquierda: " + colisionaParedIzquierda +
+			"\ncolisionDerecha: " + colisionaParedDerecha +
+			"\nmirandoIzquierda: " + spinePlayer.flipX +
 			"\nESTADO: " + estado.toUpperCase();
 		}
 	
@@ -534,7 +664,7 @@ class PlayerNape extends FlxObject
 			case estadoSALTANDOYCORRIENDO: estado = "estadoSALTANDOYCORRIENDO";
 			case estadoAGARRADO: estado = "estadoAGARRADO";
 			case estadoFRENANDO: estado = "estadoFRENANDO";
-			case estadoONPLATAFORMAVERTICAL: estado = "estadoOnPlataformaVertical";
+			case estadoONPLATAFORMAVERTICAL: estado = "estadoONPLATAFORMAVERTICAL";
 			default: estado = "estadoDESCONOCIDO - error"; return;
 		}
 	
@@ -563,6 +693,182 @@ class PlayerNape extends FlxObject
 			activarObjetoInteractivo();
 		}
 	}
+		
+	function movimientos():Void {
+		
+		switch(currentState) {
+			
+			case estadoQUIETO: 
+				if (tierraFirme) {
+					
+					if (plataformaVertical  && (fixedY != 0)){
+						
+						//FlxNapeSpace.space.gravity.y = 3000;
+						//bodyInferior.position.y = fixedPositionY;
+						//bodyInferior.velocity.y = fixedY;
+					}
+					else{FlxNapeSpace.space.gravity.y = 900;}
+					
+					if ((FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT) && !colisionaParedDerecha) {
+						ChangeAnimation("estadoCORRIENDO", true);
+						CambiarEstado(estadoCORRIENDO);
+					}else if ((FlxG.keys.pressed.D || FlxG.keys.pressed.RIGHT) && !colisionaParedIzquierda)	{
+						ChangeAnimation("estadoCORRIENDO", false);
+						CambiarEstado(estadoCORRIENDO);
+					}else if (FlxG.keys.justPressed.W || FlxG.keys.justPressed.UP)	{
+						Saltar();
+					}
+				}	
+				else{
+					
+					ChangeAnimation("estadoSALTANDO");
+					CambiarEstado(estadoSALTANDO);	
+				}
+					
+			case estadoCORRIENDO: 
+					if (tierraFirme) {
+						
+						if (plataformaVertical  && (fixedY != 0)){
+						
+							//FlxNapeSpace.space.gravity.y = 3000;
+							//bodyInferior.position.y = fixedPositionY;
+							//bodyInferior.velocity.y = fixedY;
+						}
+						else{FlxNapeSpace.space.gravity.y = 900;}
+						
+						if ((FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT) && !colisionaParedDerecha) {
+							AnimacionMiraIzquierda(true);
+							bodyInferior.velocity.x = -maxVelX;
+						}else if ((FlxG.keys.pressed.D || FlxG.keys.pressed.RIGHT) && !colisionaParedIzquierda)	{
+							AnimacionMiraIzquierda(false);
+							bodyInferior.velocity.x = maxVelX;					
+						}
+						else{
+							bodyInferior.velocity.x = 0;
+							ChangeAnimation("estadoQUIETO", null);
+							CambiarEstado(estadoQUIETO);		
+						}
+						
+						if (FlxG.keys.justPressed.W || FlxG.keys.justPressed.UP)	{
+							Saltar();
+							ChangeAnimation("estadoSALTANDO", null);
+							CambiarEstado(estadoMOVIENDOENELAIRE);
+						}					
+						/*if (FlxG.keys.pressed.S || FlxG.keys.pressed.DOWN)	{
+							ChangeAnimation("estadoQUIETO", false);
+							CambiarEstado(estadoFRENANDO);							
+						}*/	
+					}else {
+						//ChangeAnimation("estadoMOVIENDOENELAIRE", null);
+						
+						//CambiarEstado(estadoSALTANDOYCORRIENDO);
+						Globales.gravityY = 900;
+						CambiarEstado(estadoMOVIENDOENELAIRE);
+					}
+
+			case estadoSALTANDO: 
+					if (tierraFirme) {
+						
+						ChangeAnimation("estadoQUIETO", null);
+						CambiarEstado(estadoQUIETO);
+						//return;
+					}
+					else{
+						if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT) {
+							AnimacionMiraIzquierda(true);
+							//ChangeAnimation("estadoMOVIENDOENELAIRE", true);
+							CambiarEstado(estadoMOVIENDOENELAIRE);
+						}else if (FlxG.keys.pressed.D || FlxG.keys.pressed.RIGHT) {
+							AnimacionMiraIzquierda(false);
+							//ChangeAnimation("estadoMOVIENDOENELAIRE", false);
+							CambiarEstado(estadoMOVIENDOENELAIRE);
+						}	
+					}
+					
+			case estadoMOVIENDOENELAIRE:
+					if (tierraFirme) {
+							
+						ChangeAnimation("estadoQUIETO", null);
+						CambiarEstado(estadoQUIETO);
+					}
+					else{
+						if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT) {
+							AnimacionMiraIzquierda(true);
+							//ChangeAnimation("estadoMOVIENDOENELAIRE", true);
+							if (bodyInferior.velocity.x > -maxVelX) {
+								bodyInferior.applyImpulse(new Vec2(-70, 0));
+							}
+						}else if (FlxG.keys.pressed.D || FlxG.keys.pressed.RIGHT)	{
+							AnimacionMiraIzquierda(false);
+							//ChangeAnimation("estadoMOVIENDOENELAIRE", false);
+							if (bodyInferior.velocity.x < maxVelX) {
+								bodyInferior.applyImpulse(new Vec2(70, 0));
+							}
+						}		
+						else{bodyInferior.velocity.x = 0; }
+					}
+					
+			/*case estadoSALTANDOYCORRIENDO: 
+					if (tierraFirme) {
+						ChangeAnimation("estadoQUIETO", false);
+						CambiarEstado(estadoQUIETO);
+					}
+					else{
+						if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT) {
+							//AnimacionMiraIzquierda(true);
+							ChangeAnimation("estadoMOVIENDOENELAIRE", true);
+							CambiarEstado(estadoMOVIENDOENELAIRE);								
+						}else if (FlxG.keys.pressed.D || FlxG.keys.pressed.RIGHT) {
+							//AnimacionMiraIzquierda(false);
+							ChangeAnimation("estadoMOVIENDOENELAIRE", false);
+							CambiarEstado(estadoMOVIENDOENELAIRE);								
+						}
+					}
+					
+			case estadoFRENANDO:
+					if (bodyInferior.velocity.x < 0.5 && bodyInferior.velocity.x > -0.5) {
+						ChangeAnimation("estadoQUIETO", null);
+						CambiarEstado(estadoQUIETO);		
+					}else {
+						bodyInferior.velocity.x = bodyInferior.velocity.x * 0.2;	
+					}	*/
+					
+			case estadoAGARRADO: /* Cuando termina de subir plataforma cambia a estado QUIETO?*/
+					manejoAgarres();						
+							
+			/*case estadoONPLATAFORMAVERTICAL:
+					
+				if (tierraFirme){
+						
+					bodyInferior.velocity.y = fixedY;
+						
+					if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT) {
+						
+						ChangeAnimation("estadoCORRIENDO", true);
+						//bodyInferior.velocity.x = -maxVelX;	
+						CambiarEstado(estadoCORRIENDO);
+								
+					}else if (FlxG.keys.pressed.D || FlxG.keys.pressed.RIGHT) {
+						ChangeAnimation("estadoCORRIENDO", false);
+						//bodyInferior.velocity.x = maxVelX;
+						CambiarEstado(estadoCORRIENDO);
+					}
+					else{
+						ChangeAnimation("estadoQUIETO", null);
+						bodyInferior.velocity.x = 0;
+					}
+						
+					if (FlxG.keys.justPressed.W || FlxG.keys.justPressed.UP) {
+						bodyInferior.velocity.y = 0;
+						Saltar();
+						ChangeAnimation("estadoSALTANDO", false);
+						CambiarEstado(estadoSALTANDO);
+					}	
+				}*/
+
+			default: 
+		}
+	}
 	
 	function subirPlataforma():Void {
 
@@ -575,7 +881,6 @@ class PlayerNape extends FlxObject
 		//FlxG.log.add("tope y : " + topeY );*/
 		
 		bodyInferior.allowMovement = true;
-		
 		subiendoPlataforma = true;
 		
 		FlxNapeSpace.space.listeners.remove(PersonajeConAgarre);
@@ -601,13 +906,14 @@ class PlayerNape extends FlxObject
 				}else {
 					FlxG.log.add("llega a tope x");
 					subiendoPlataforma = false;
-					trepar = false;
+					agarre = trepar = false;
 					bodyInferior.velocity.x = bodyInferior.velocity.x * .05;
 					
 					FlxNapeSpace.space.listeners.add(PersonajeConAgarre);
 					ChangeAnimation("estadoQUIETO",null);
 					CambiarEstado(estadoQUIETO);
 					FlxNapeSpace.space.gravity = new Vec2(Globales.gravityX, Globales.gravityY);
+					tierraFirme = true;
 				}
 			}else {
 				FlxG.log.add("Izquierda: " + tocaPlataformaIzq);
@@ -616,187 +922,20 @@ class PlayerNape extends FlxObject
 					bodyInferior.applyImpulse(new Vec2(-vel, 0));
 				}else {
 					subiendoPlataforma = false;
-					trepar = false;
+					agarre = trepar = false;
 					bodyInferior.velocity.x = bodyInferior.velocity.x * .05;
 					FlxNapeSpace.space.listeners.add(PersonajeConAgarre);
 					ChangeAnimation("estadoQUIETO",null);
 					CambiarEstado(estadoQUIETO);
 					FlxNapeSpace.space.gravity = new Vec2(Globales.gravityX, Globales.gravityY);
+					tierraFirme = true;
 				}
 			}	
-		}
-	
-	}
-		
-	function movimientos():Void {
-		
-		switch(currentState) {
-			
-			case estadoQUIETO: 
-					if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT) {
-						ChangeAnimation("estadoCORRIENDO", true);
-						CambiarEstado(estadoCORRIENDO);
-					}else if (FlxG.keys.pressed.D || FlxG.keys.pressed.RIGHT)	{
-						ChangeAnimation("estadoCORRIENDO", false);
-						CambiarEstado(estadoCORRIENDO);
-					}else if (FlxG.keys.justPressed.W || FlxG.keys.justPressed.UP)	{
-						Saltar();
-					}
-					
-					if (!tierraFirme) {
-						ChangeAnimation("estadoSALTANDO");
-						CambiarEstado(estadoSALTANDO);	
-						return;
-					}
-					
-			case estadoCORRIENDO: 
-					if (tierraFirme) {
-						if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT) {
-							AnimacionMiraDerecha(true);
-							bodyInferior.velocity.x = -maxVelX;
-						}else if (FlxG.keys.pressed.D || FlxG.keys.pressed.RIGHT)	{
-							AnimacionMiraDerecha(false);
-							bodyInferior.velocity.x = maxVelX;					
-						}
-						else{
-							bodyInferior.velocity.x = 0;
-							ChangeAnimation("estadoQUIETO", null);
-							CambiarEstado(estadoQUIETO);		
-						}
-						
-						if (FlxG.keys.justPressed.W || FlxG.keys.justPressed.UP)	{
-							Saltar();
-							ChangeAnimation("estadoSALTANDO", null);
-							CambiarEstado(estadoSALTANDOYCORRIENDO);
-						}					
-						if (FlxG.keys.pressed.S || FlxG.keys.pressed.DOWN)	{
-							ChangeAnimation("estadoQUIETO", false);
-							CambiarEstado(estadoFRENANDO);							
-						}	
-					}else {
-						ChangeAnimation("estadoMOVIENDOENELAIRE", null);
-						//CAMBIO
-						//CambiarEstado(estadoSALTANDOYCORRIENDO);
-						CambiarEstado(estadoMOVIENDOENELAIRE);
-						//CAMBIO
-					}
-
-			case estadoSALTANDO: 
-					if (tierraFirme) {
-						ChangeAnimation("estadoQUIETO", null);
-						CambiarEstado(estadoQUIETO);
-						return;
-					}
-					
-					if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT) {
-						AnimacionMiraDerecha(true);
-						CambiarEstado(estadoMOVIENDOENELAIRE);
-					}else if (FlxG.keys.pressed.D || FlxG.keys.pressed.RIGHT)	{
-						AnimacionMiraDerecha(false);
-						CambiarEstado(estadoMOVIENDOENELAIRE);
-					}	
-					
-			case estadoMOVIENDOENELAIRE:
-					if (tierraFirme) {
-						ChangeAnimation("estadoQUIETO", null);
-						CambiarEstado(estadoQUIETO);
-						return;
-					}
-					
-					if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT) {
-						AnimacionMiraDerecha(true);
-						if (bodyInferior.velocity.x > -maxVelX) {
-							bodyInferior.applyImpulse(new Vec2(-70, 0));
-						}
-					}else if (FlxG.keys.pressed.D || FlxG.keys.pressed.RIGHT)	{
-						AnimacionMiraDerecha(false);
-						if (bodyInferior.velocity.x < maxVelX) {
-							bodyInferior.applyImpulse(new Vec2(70, 0));
-						}
-					}		
-					//CAMBIO
-					else{bodyInferior.velocity.x = 0; }
-					//CAMBIO	
-					
-			case estadoSALTANDOYCORRIENDO: 
-					if (tierraFirme) {
-						ChangeAnimation("estadoQUIETO", false);
-						CambiarEstado(estadoQUIETO);
-						return;
-					}
-					
-					if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT) {
-						AnimacionMiraDerecha(true);
-						//ChangeAnimation("estadoSALTANDO", true);
-						CambiarEstado(estadoMOVIENDOENELAIRE);								
-					}else if (FlxG.keys.pressed.D || FlxG.keys.pressed.RIGHT) {
-						AnimacionMiraDerecha(false);
-						//ChangeAnimation("estadoSALTANDO", false);
-						CambiarEstado(estadoMOVIENDOENELAIRE);								
-					}
-					
-			case estadoFRENANDO:
-					if (bodyInferior.velocity.x < 0.5 && bodyInferior.velocity.x > -0.5) {
-						ChangeAnimation("estadoQUIETO", null);
-						CambiarEstado(estadoQUIETO);		
-					}else {
-						bodyInferior.velocity.x = bodyInferior.velocity.x * 0.2;	
-					}	
-					
-			case estadoAGARRADO: 
-					manejoAgarres();						
-					/* Cuando termina de subir plataforma cambia a estado CORRIENDO*/		
-			case estadoONPLATAFORMAVERTICAL:
-					
-				//CAMBIO 31-05
-				if (tierraFirme){/*Si esta encima de la plataforma*/
-						
-					bodyInferior.velocity.y = fixedY;
-					
-					if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT) {
-							ChangeAnimation("estadoCORRIENDO", true);
-							bodyInferior.velocity.x = -maxVelX;							
-					}else if (FlxG.keys.pressed.D || FlxG.keys.pressed.RIGHT) {
-							ChangeAnimation("estadoCORRIENDO", false);	
-							bodyInferior.velocity.x = maxVelX;											
-					}
-					else{bodyInferior.velocity.x = 0;}
-					
-					if (FlxG.keys.justPressed.W || FlxG.keys.justPressed.UP) {
-						bodyInferior.velocity.y = 0;
-						Saltar(1.5);
-						ChangeAnimation("estadoSALTANDO", false);
-						CambiarEstado(estadoSALTANDOYCORRIENDO);
-					}		
-				}
-				else if (colisionCostadoPlataforma && (bodyInferior.velocity.y == 0)){/*Si no esta encima de la plataforma, pero la toca de costado y esta sobre otra plataforma*/
-					
-					if (FlxG.keys.pressed.A || FlxG.keys.pressed.LEFT) {
-							ChangeAnimation("estadoCORRIENDO", true);
-							CambiarEstado(estadoCORRIENDO);
-							//bodyInferior.velocity.x = -maxVelX;							
-					}else if (FlxG.keys.pressed.D || FlxG.keys.pressed.RIGHT) {
-							ChangeAnimation("estadoCORRIENDO", false);	
-							CambiarEstado(estadoCORRIENDO);
-							//bodyInferior.velocity.x = maxVelX;											
-					}
-					else{bodyInferior.velocity.x = 0;}
-					
-					if (FlxG.keys.justPressed.W || FlxG.keys.justPressed.UP) {
-						bodyInferior.velocity.y = 0;
-						Saltar(1.5);
-						ChangeAnimation("estadoSALTANDO", false);
-						CambiarEstado(estadoSALTANDOYCORRIENDO);
-					}		
-				}
-				//else if (colisionCostadoPlataforma){CambiarEstado(estadoMOVIENDOENELAIRE);}
-				//CAMBIO 31-05
-			default: 
-
 		}
 	}
 	
 	function manejoAgarres() :Void	{
+		
 		if (agarre) {
 			
 			FlxNapeSpace.space.gravity = new Vec2(0, 0);
@@ -808,9 +947,10 @@ class PlayerNape extends FlxObject
 				}
 				
 				trepar = true;
+				
 				if (spinePlayer.getAnimName() != "estadoSUBIENDOPLATAFORMA") {
 					ChangeAnimation("estadoSUBIENDOPLATAFORMA", false);
-					AnimacionMiraDerecha(!tocaPlataformaIzq);					
+					AnimacionMiraIzquierda(!tocaPlataformaIzq);					
 				}
 
 				//agarrePos.x = 0;
@@ -874,14 +1014,22 @@ class PlayerNape extends FlxObject
 	
 	public function setFixedVelocity(v:Float):Void {
 		
-		if (currentState != estadoSALTANDO) {
+		//if (currentState != estadoSALTANDO) {
 			fixedY = v;	
-		}
+		//}
+	}
+	
+	public function setFixedPositionY(pos:Float):Void {
+		
+		//if (currentState != estadoSALTANDO) {
+			fixedPositionY = pos;	
+		//}
 	}
 	
 	public function setPlayerOnPlataform():Void {
-		CambiarEstado(estadoONPLATAFORMAVERTICAL);
-		ChangeAnimation("estadoQUIETO", null);
+		//CambiarEstado(estadoONPLATAFORMAVERTICAL);
+		//ChangeAnimation("estadoQUIETO", null);
+		plataformaVertical = true;
 	}
 	
 	public function setPlayerOffPlataform():Void {
@@ -889,7 +1037,8 @@ class PlayerNape extends FlxObject
 			CambiarEstado(estadoMOVIENDOENELAIRE);	
 		}*/
 		
-		CambiarEstado(estadoQUIETO);	
+		//CambiarEstado(estadoQUIETO);	
+		plataformaVertical = false;
 	}
 	
 	public function playerPesoNormal():Void {

@@ -1,38 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="75" height="20" tilewidth="64" tileheight="64" backgroundcolor="#ffffff" nextobjectid="501">
- <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64" tilecount="72">
-  <image source="tileset.png" width="512" height="576"/>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="75" height="20" tilewidth="64" tileheight="64" backgroundcolor="#ffffff" nextobjectid="504">
+ <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64">
+  <image source="tileset.png" width="448" height="448"/>
+ </tileset>
+ <tileset firstgid="50" name="imageCollection" tilewidth="411" tileheight="396">
+  <tile id="0">
+   <image width="385" height="360" source="deco.png"/>
+  </tile>
+  <tile id="1">
+   <image width="411" height="396" source="deco2.png"/>
+  </tile>
  </tileset>
  <layer name="tilesheet" width="75" height="20">
   <properties>
    <property name="tilesheet" value="tileset.png"/>
   </properties>
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,10,10,10,10,10,10,10,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
+  <data encoding="base64" compression="zlib">
+   eJztzzsKgDAQBNDgD4x6/+u6ZQiBVMYi78EUwzY7KQEAAAAAs1sia2SL7I1+/PfaJ3p7y17fzkiOXJG70Z+BO0bo7S17fZvNC2IuAVM=
+  </data>
  </layer>
- <imagelayer name="backdrop">
+ <imagelayer name="backdrop" visible="0">
   <image source="level0_background.png"/>
  </imagelayer>
+ <objectgroup name="images">
+  <object id="501" gid="50" x="320" y="1152">
+   <properties>
+    <property name="depthX" value="0.9"/>
+    <property name="depthY" value="0.9"/>
+    <property name="opacity" value="0.7"/>
+   </properties>
+  </object>
+  <object id="502" gid="51" x="64" y="1024">
+   <properties>
+    <property name="depthX" value="0.9"/>
+    <property name="depthY" value="1"/>
+    <property name="opacity" value="0.3"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup name="entities">
   <object id="1" name="checkPoint" type="checkPoint" x="71.03" y="1154.18" rotation="-302.71">
    <properties>
@@ -69,7 +74,7 @@
     <property name="userDataShape" value="shape_palanca"/>
    </properties>
   </object>
-  <object id="172" name="rectAgarreIzq" type="agarre" x="958" y="1152" width="2" height="2">
+  <object id="172" name="rectAgarreIzq" type="agarre" x="955" y="1152" width="5" height="2">
    <properties>
     <property name="bodyType" value="static"/>
     <property name="esRompible" value="0"/>
@@ -168,12 +173,12 @@
     <property name="userDataShape" value="shape_objetoInteractivo"/>
    </properties>
   </object>
-  <object id="248" name="plataforma" type="plataformaHorizontal" x="2304" y="512" width="192" height="2">
+  <object id="248" name="plataforma" type="plataformaHorizontal" x="2304" y="510" width="192" height="2">
    <properties>
     <property name="bodyType" value="static"/>
    </properties>
   </object>
-  <object id="249" name="rectAgarreIzq" type="agarre" x="2302" y="512" width="2" height="2">
+  <object id="249" name="rectAgarreIzq" type="agarre" x="2302" y="510" width="2" height="2">
    <properties>
     <property name="bodyType" value="static"/>
     <property name="esRompible" value="0"/>
@@ -184,16 +189,14 @@
     <property name="userDataShape" value="shape_rectAgarreIzq"/>
    </properties>
   </object>
-  <object id="257" name="plataformaVertical" type="plataformaVertical" x="2432" y="512" width="64" height="704">
+  <object id="257" name="plataforma" type="plataformaVertical" x="2432" y="512" width="64" height="704">
    <properties>
     <property name="bodyType" value="static"/>
-    <property name="userDataBody" value="pared"/>
    </properties>
   </object>
-  <object id="259" name="plataformaVertical" type="plataformaVertical" x="4608" y="0" width="64" height="448">
+  <object id="259" name="plataforma" type="plataformaVertical" x="4608" y="0" width="64" height="448">
    <properties>
     <property name="bodyType" value="static"/>
-    <property name="userDataBody" value="pared"/>
    </properties>
   </object>
   <object id="262" name="plataforma" type="plataformaHorizontal" x="2432" y="1152" width="1792" height="64">
@@ -582,10 +585,9 @@
     <property name="bodyType" value="static"/>
    </properties>
   </object>
-  <object id="415" name="plataformaVertical" type="plataformaVertical" x="4192.06" y="448" width="32" height="447.273">
+  <object id="415" name="plataforma" type="plataformaVertical" x="4192.06" y="448" width="32" height="447.273">
    <properties>
     <property name="bodyType" value="static"/>
-    <property name="userDataBody" value="pared"/>
    </properties>
   </object>
   <object id="423" name="plataforma" type="plataformaHorizontal" x="4544" y="1152" width="253.918" height="2">
@@ -641,10 +643,9 @@
     <property name="linked_id" value="430"/>
    </properties>
   </object>
-  <object id="429" name="plataformaVertical" type="plataformaVertical" x="4608" y="448" width="192" height="512">
+  <object id="429" name="plataforma" type="plataformaVertical" x="4608" y="448" width="192" height="512">
    <properties>
     <property name="bodyType" value="static"/>
-    <property name="userDataBody" value="pared"/>
    </properties>
   </object>
   <object id="430" name="tiraBomba" type="enemigoTiraBomba" x="4224" y="696.848" width="384" height="20">
@@ -806,7 +807,7 @@
     <property name="checkPointSensor" value="0"/>
    </properties>
   </object>
-  <object id="462" name="rectAgarreDer" type="agarre" x="2496" y="512" width="2" height="2">
+  <object id="462" name="rectAgarreDer" type="agarre" x="2496" y="510" width="2" height="2">
    <properties>
     <property name="bodyType" value="static"/>
     <property name="esRompible" value="0"/>
@@ -866,16 +867,14 @@
     <property name="userDataShape" value="shape_rectAgarreIzq"/>
    </properties>
   </object>
-  <object id="468" name="plataformaVertical" type="plataformaVertical" x="0" y="0" width="10" height="1088">
+  <object id="468" name="plataforma" type="plataformaVertical" x="0" y="0" width="10" height="1088">
    <properties>
     <property name="bodyType" value="static"/>
-    <property name="userDataBody" value="pared"/>
    </properties>
   </object>
-  <object id="469" name="plataformaVertical" type="plataformaVertical" x="0" y="0" width="2" height="704">
+  <object id="469" name="plataforma" type="plataformaVertical" x="0" y="0" width="2" height="704">
    <properties>
     <property name="bodyType" value="static"/>
-    <property name="userDataBody" value="pared"/>
    </properties>
   </object>
   <object id="473" name="finLevel" type="sensor" x="4775.33" y="1116.67">
@@ -897,7 +896,7 @@
     <property name="tiempoEnSec" value="3"/>
    </properties>
   </object>
-  <object id="487" name="palanca" type="objetoInteractivo" x="2454" y="479" width="7" height="35" rotation="25">
+  <object id="487" name="palanca" type="objetoInteractivo" x="2454" y="477" width="7" height="35" rotation="25">
    <properties>
     <property name="bodyType" value="kinematic"/>
     <property name="esRompible" value="0"/>
@@ -911,7 +910,7 @@
     <property name="userDataShape" value="shape_palanca"/>
    </properties>
   </object>
-  <object id="488" name="checkPoint" type="checkPointSensor" x="2357.45" y="67.3939" width="32" height="448">
+  <object id="488" name="checkPoint" type="checkPointSensor" x="2357.45" y="65.3939" width="32" height="448">
    <properties>
     <property name="checkPointSensor" value="1"/>
    </properties>

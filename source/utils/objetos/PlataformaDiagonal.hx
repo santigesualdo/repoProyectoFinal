@@ -26,8 +26,7 @@ class PlataformaDiagonal extends ObjetoBase
 		
 		if (b.userData.rotation != null) {			
 			var centerOfRotation:Vec2 = b.shapes.at(0).localCOM;			
-			
-			
+		
 			angleInRadians= Std.parseFloat(b.userData.rotation) * Math.PI / 180;
 			b.rotate(centerOfRotation, angleInRadians);
 		}	
