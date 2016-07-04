@@ -54,6 +54,9 @@ class CheckPointSensor extends FlxObject
 			var playerBody:Body = e.int1.castBody;
 			var sensor:Body = e.int2.castBody;			
 			
+			/*var player:PlayerNape = cast(playerBody.userData.object, PlayerNape);
+			player.playAnimation();*/
+			
 			var p: PlayState = cast(Globales.currentState, PlayState);
 			p.checkPointSensorTouched(Std.parseInt(id));		
 			
@@ -71,6 +74,8 @@ class CheckPointSensor extends FlxObject
 		});
 		
 		FlxNapeSpace.space.listeners.add(ic);
+		
+		set_visible(false);
 		
 	}
 		

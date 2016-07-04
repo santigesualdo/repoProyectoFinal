@@ -114,7 +114,7 @@ class NapeSpr_Body extends FlxNapeSprite
 	public function new( x:Float, y:Float, graphic_bitmap:BitmapDataIso, graphic: Dynamic, body_type:BodyType, _material:Material , name:String, allowRotation:Bool ):Void
 	{
 		super(x, y, graphic);
-		
+				
 		var cog_body = IsoBody.run(graphic_bitmap, graphic_bitmap.bounds);
 		
 		var _body  = cog_body.copy();
@@ -133,8 +133,8 @@ class NapeSpr_Body extends FlxNapeSprite
 		antialiasing = true;
 		addPremadeBody(_body);
 		
-		origin.x = 0;
-		origin.y = 0;
+		/*origin.x = 0;
+		origin.y = 0;*/
 		
 	}
 	

@@ -52,7 +52,8 @@ class TiraBomba extends ObjetoBase
 		
 		puedeDisparar = true;
 		
-		b.userData.object = this;		
+		b.userData.object = this;	
+		
 		
 	}
 	
@@ -85,7 +86,9 @@ class TiraBomba extends ObjetoBase
 		for ( bo in group.members) {
 			var bomba: BombaMagnet = cast(bo, BombaMagnet);
 			
-			if (bomba.y > FlxG.camera.height) {
+			
+			if (bomba.y > FlxG.worldBounds.height) {
+				FlxG.log.add("Cantidad miembros: " + group.members.length);
 				group.members.remove(bomba);
 				bomba.destroy();
 			}	

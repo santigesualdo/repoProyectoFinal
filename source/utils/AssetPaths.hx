@@ -33,9 +33,9 @@ class AssetPaths {
 	 public static var PLAYER_ANIM:String =  "assets/images/playerSpriteSheet.png";
 	 //public static var PLAYER_ANIM2:String =  "assets/images/spritesheet_medio_34x2.png";*/
 	 
-	 /*// Magnet arma 1
-	 public static var MAGNET_1:String = "assets/images/magnet.png";
-	 
+	// Magnet arma 1
+	 public static var bomba_magnet:String = "assets/images/bullet_test.png";
+	  /*
 	 // Trail button weapon
 	 public static var TRAIL_PATH:String =  "assets/images/Botones/trailArea.png";*/
 
@@ -71,6 +71,12 @@ class AssetPaths {
 	 
 	 // Fuentes
 	 public static var font_kreon:String = "assets/fonts/Kreon.ttf";
+	 static public var playerParticlesPath:String = "assets/levels/particle_base.png";
+	 static public var palanca_path:String = "assets/levels/palanca.png";
+	 static public var plataforma_vertical_path:String = "assets/levels/plataforma_vertical.png";
+	 static public var plataforma_horizontal_path:String = "assets/levels/plataforma_horizontal.png";
+	 static public var anim_item_eated:String = "assets/levels/animation_start_eated.png";
+	 static public var estrella_spritesheet:String = "assets/levels/estrella_spritesheet.png";
 	 
 	
 }

@@ -2,6 +2,9 @@ package utils.objetos;
 
 import flixel.addons.nape.FlxNapeSpace;
 import flixel.FlxG;
+import flixel.math.FlxAngle;
+import flixel.math.FlxMath;
+import flixel.math.FlxPoint;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import nape.geom.Vec2;
@@ -18,7 +21,7 @@ class Palanca extends ObjetoBase
 	var maxAngleInRadians:Float;
 	var centerOfRotation:Vec2;
 	var yOffset:Float;
-	var rotateVelocityRadians:Float = 0.02;
+	var rotateVelocityRadians:Float = 0.03;
 	
 	public function new(x:Float, y: Float, _b:Body) :Void
 	{
@@ -33,8 +36,11 @@ class Palanca extends ObjetoBase
 			rota = true;		
 
 		if (b.userData.rotaSentidoReloj!=null)
-			rotacionSentidoReloj = b.userData.rotaSentidoReloj;			
-		
+			rotacionSentidoReloj = b.userData.rotaSentidoReloj;		
+			
+		loadGraphic(AssetPaths.palanca_path, false, 7, 35);
+		centerOrigin();
+
 		/* Si tiene cargado rotation en el user data, tomamos el dato desde la clase */
 		/* Y */
 		if (b.userData.rotation != null) {			
@@ -43,9 +49,12 @@ class Palanca extends ObjetoBase
 			
 			centerOfRotation = new Vec2(b.position.x + b.bounds.width * 0.5 , b.position.y + b.bounds.height * 0.9);		
 			
-			var angleInRadians: Float = Std.parseFloat(b.userData.rotation) * Math.PI / 180;
+			var rotacionEnTiled:Float = Std.parseFloat(b.userData.rotation);
+			var angleInRadians: Float =  rotacionEnTiled * Math.PI / 180;
+			var angleInDegrees:Float = angleInRadians * FlxAngle.TO_DEG;
 			maxAngleInRadians = -angleInRadians;
 			b.rotate(centerOfRotation, angleInRadians);
+			set_angle(angleInDegrees);
 		}	
 		
 		/* Si en el user data tiene Linked ID significa que activa comportamiento de otra clase */
@@ -66,6 +75,19 @@ class Palanca extends ObjetoBase
 		
 		tipo = "Palanca";
 		setNormalText(20);
+		
+		rotar = true;
+		
+	}
+	
+	override public function update(dt:Float):Void {
+		
+		
+		super.update(dt);
+		
+		//this.x = b.position.x;
+		this.y = b.position.y;
+		
 	}
 	
 	override public function comportamiento():Void {
@@ -73,7 +95,7 @@ class Palanca extends ObjetoBase
 		
 		if (!rotacionSentidoReloj) {
 			if (b.rotation > maxAngleInRadians) {
-				b.rotate(centerOfRotation, -rotateVelocityRadians);			
+				b.rotate(centerOfRotation, -rotateVelocityRadians);		
 			}else {
 				activarEfecto();
 			}			

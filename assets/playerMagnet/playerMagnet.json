@@ -43,56 +43,56 @@
 "skins": {
 	"default": {
 		"eyes": {
-			"eyes": { "x": 28.94, "y": -32.92, "rotation": -86.9, "width": 34, "height": 27 },
-			"eyes-closed": { "x": 28.77, "y": -32.86, "rotation": -86.9, "width": 34, "height": 27 }
+			"eyes": { "x": 28.94, "y": -32.92, "rotation": -86.9, "width": 31, "height": 23 },
+			"eyes-closed": { "x": 28.77, "y": -32.86, "rotation": -86.9, "width": 36, "height": 29 }
 		},
 		"head": {
-			"head": { "x": 53.94, "y": -5.75, "rotation": -86.9, "width": 121, "height": 132 }
+			"head": { "x": 53.94, "y": -5.75, "rotation": -86.9, "width": 116, "height": 134 }
 		},
 		"left arm": {
-			"left-arm": { "x": 15.11, "y": -0.44, "rotation": 33.84, "width": 35, "height": 29 }
+			"left-arm": { "x": 15.11, "y": -0.44, "rotation": 33.84, "width": 42, "height": 32 }
 		},
 		"left foot": {
-			"left-foot": { "x": 24.35, "y": 8.88, "rotation": 3.32, "width": 65, "height": 30 }
+			"left-foot": { "x": 24.35, "y": 8.88, "rotation": 3.32, "width": 67, "height": 32 }
 		},
 		"left hand": {
-			"left-hand": { "x": 0.75, "y": 1.86, "rotation": 31.14, "width": 35, "height": 38 }
+			"left-hand": { "x": 0.75, "y": 1.86, "rotation": 31.14, "width": 37, "height": 40 }
 		},
 		"left lower leg": {
-			"left-lower-leg": { "x": 24.55, "y": -1.92, "rotation": 105.75, "width": 49, "height": 64 }
+			"left-lower-leg": { "x": 24.55, "y": -1.92, "rotation": 105.75, "width": 51, "height": 67 }
 		},
 		"left shoulder": {
-			"left-shoulder": { "x": 23.74, "y": 0.11, "rotation": 62.01, "width": 34, "height": 53 }
+			"left-shoulder": { "x": 23.74, "y": 0.11, "rotation": 62.01, "width": 40, "height": 57 }
 		},
 		"left upper leg": {
-			"left-upper-leg": { "x": 26.12, "y": -1.85, "rotation": 89.09, "width": 33, "height": 67 }
+			"left-upper-leg": { "x": 26.12, "y": -1.85, "rotation": 89.09, "width": 35, "height": 69 }
 		},
 		"neck": {
-			"neck": { "x": 9.42, "y": -3.66, "rotation": -100.15, "width": 34, "height": 28 }
+			"neck": { "x": 9.42, "y": -3.66, "rotation": -100.15, "width": 36, "height": 35 }
 		},
 		"pelvis": {
-			"pelvis": { "x": -4.83, "y": 10.62, "width": 63, "height": 47 }
+			"pelvis": { "x": -4.83, "y": 10.62, "width": 65, "height": 49 }
 		},
 		"right arm": {
-			"right-arm": { "x": 18.34, "y": -2.64, "rotation": 94.32, "width": 21, "height": 45 }
+			"right-arm": { "x": 18.34, "y": -2.64, "rotation": 94.32, "width": 23, "height": 47 }
 		},
 		"right foot": {
-			"right-foot": { "x": 19.02, "y": 8.47, "rotation": 1.52, "width": 67, "height": 30 }
+			"right-foot": { "x": 19.02, "y": 8.47, "rotation": 1.52, "width": 69, "height": 32 }
 		},
 		"right hand": {
-			"right-hand": { "x": 6.82, "y": 1.25, "rotation": 91.96, "width": 32, "height": 32 }
+			"right-hand": { "x": 6.82, "y": 1.25, "rotation": 91.96, "width": 34, "height": 34 }
 		},
 		"right lower leg": {
-			"right-lower-leg": { "x": 23.28, "y": -2.59, "rotation": 111.83, "width": 51, "height": 64 }
+			"right-lower-leg": { "x": 23.28, "y": -2.59, "rotation": 111.83, "width": 57, "height": 66 }
 		},
 		"right shoulder": {
-			"right-shoulder": { "x": 25.86, "y": 0.03, "rotation": 134.44, "width": 52, "height": 51 }
+			"right-shoulder": { "x": 25.86, "y": 0.03, "rotation": 134.44, "width": 56, "height": 53 }
 		},
 		"right upper leg": {
-			"right-upper-leg": { "x": 23.03, "y": 0.25, "rotation": 101.13, "width": 44, "height": 70 }
+			"right-upper-leg": { "x": 23.03, "y": 0.25, "rotation": 101.13, "width": 49, "height": 80 }
 		},
 		"torso": {
-			"torso": { "x": 44.57, "y": -7.08, "rotation": -94.95, "width": 68, "height": 92 }
+			"torso": { "x": 44.57, "y": -7.08, "rotation": -94.95, "width": 70, "height": 94 }
 		}
 	}
 },

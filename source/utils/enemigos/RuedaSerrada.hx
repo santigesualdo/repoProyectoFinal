@@ -29,7 +29,7 @@ class RuedaSerrada extends ObjetoBase
 	
 	var maxAngleInRadians:Float;
 	var centerOfRotation:Vec2;
-	var rotateVelocityRadians:Float = 0.5;
+	var rotateVelocityRadians:Float = 0.25;
 	
 	var velocidad:Float;
 	//var destruirOnTouch:Bool;

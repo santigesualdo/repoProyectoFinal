@@ -46,10 +46,13 @@ class ObjetoBase extends FlxSprite
 	var tcolor:UInt = FlxColor.BLACK;
 	var tallignment: String = "center";
 	
+	var rotar:Bool;
+	
 	public function new(x:Float, y:Float) :Void
 	{
 		super(x, y, null);
 		activo = false;		
+		rotar = false;
 	}
 	
 	public function activar():Void 
@@ -62,19 +65,32 @@ class ObjetoBase extends FlxSprite
 		activo = false;
 	}
 	
+	public function toggle():Void {
+		activo = !activo;
+	}
+	
 	override public function update(elapsed:Float):Void {
 		
 		if (this.exists) {
 			super.update(elapsed);
 			
 			if (b != null) {
-				this.x = b.position.x - this._halfSize.x ;
-				this.y = b.position.y - this._halfSize.y;
+				if (tipo == "magnetOnOff" ) {
+					//FlxG.log.add("updating magnet on off");
+				}else {
+					this.x = b.position.x - this._halfSize.x ;
+					this.y = b.position.y - this._halfSize.y;
+					if (rotar) {
+						this.set_angle((b.rotation * 180 / Math.PI) % 360);
+					}					
+				}
 			}
 			
 			if (activo) {
 				comportamiento();
 			}	
+			
+
 		}	
 		
 	}
@@ -107,7 +123,7 @@ class ObjetoBase extends FlxSprite
 	/* Setea formato de texto predeterminado para el Objeto base */
 	public function setNormalText(_size:Int):Void {
 	
-		tsize = _size;
+		/*tsize = _size;
 		
 		if (tipo != null) {
 			
@@ -120,7 +136,7 @@ class ObjetoBase extends FlxSprite
 			texto.setFormat(AssetPaths.font_kreon, tsize, tcolor, tallignment);
 		}
 
-		
+		*/
 	}
 	
 	/* En caso de que la plataforma se mueva updatea */

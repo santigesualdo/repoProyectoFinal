@@ -32,6 +32,8 @@ class PlataformaConMovimientoHorizontal extends PlataformaConMovimiento
 		this.b.cbTypes.add(Callbacks.plataformaCallback);
 		this.b.userData.object = this;	
 		
+		loadGraphic(AssetPaths.plataforma_horizontal_path, false, 320, 32);
+		
 		vaYViene = va_viene;
 		
 		var sentido:Int = b.userData.sentido;
@@ -54,6 +56,8 @@ class PlataformaConMovimientoHorizontal extends PlataformaConMovimiento
 	
 		tipo = "PlataformaMovHor";
 		setNormalText(18);		
+		
+		
 		
 	}
 	

@@ -43,7 +43,7 @@ class TextoTutorial extends ObjetoBase
 		Callbacks.bodyInferiorCallback, cb,
 		function OnTextoTutorialTouched(e:InteractionCallback):Void {
 			if (textTimer == null) {
-				textTimer = new TextTimer(new Vec2(FlxG.camera.scroll.x+300, FlxG.camera.scroll.y+300), text, maxTime, 20, FlxColor.GREEN);			
+				textTimer = new TextTimer(new Vec2(FlxG.camera.scroll.x+300, FlxG.camera.scroll.y+300), text, maxTime, 15, FlxColor.WHITE);			
 				Globales.currentState.add(textTimer);				
 			}			
 		});
@@ -51,6 +51,7 @@ class TextoTutorial extends ObjetoBase
 		FlxNapeSpace.space.listeners.add(ic);
 		
 		b.space = FlxNapeSpace.space;
+		this.set_visible(false);
 		
 	}
 	

@@ -65,7 +65,7 @@ class ButtonLevel extends FlxSprite
 	}
 	
 	function onClick(sprite:FlxSprite):Void	{ 
-		FlxG.log.add("nada");	
+		// FlxG.log.add("nada");	
 	}
 	
 	function onMouseOver(sprite:FlxSprite):Void {

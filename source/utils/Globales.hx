@@ -28,6 +28,9 @@ class Globales
 	public static var globalPlayerBodyIntermedioPos:Vec2 = null;
 	public static var globalTimeScale:Float = 1;
 	
+	public static var verNape:Bool = false;
+	public static var verTexto:Bool = false;
+	
 	public static var checkPointGroup:FlxGroup = new FlxGroup();
 	public static var checkPointSensorGroup:FlxGroup = new FlxGroup();
 	 

@@ -4,6 +4,7 @@ package utils.objetos;
 import flixel.addons.nape.FlxNapeSpace;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import flixel.FlxSprite;
 import nape.phys.Body;
 
 /**
@@ -22,8 +23,10 @@ class Plataforma extends ObjetoBase
 		b.cbTypes.add( Callbacks.plataformaCallback);	
 		b.space = FlxNapeSpace.space;		
 				
-		this.tipo = tipo;
+		tipo = "Plataforma";
 		setNormalText(18);
+		
+		set_visible(false);
 		
 	}
 		

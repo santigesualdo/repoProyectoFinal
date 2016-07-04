@@ -139,6 +139,8 @@ class BombaMagnet extends ObjetoBase
 		
 		super(b.position.x - radius * 0.5, b.position.y - radius * 0.5);	
 		
+		this.loadGraphic(AssetPaths.bomba_magnet, false, 20, 20);
+		
 		var sentidoY:Int=1 ;
 		/*
 		if (gravedad < 0) {
@@ -157,6 +159,8 @@ class BombaMagnet extends ObjetoBase
 			default:
 		}
 				
+		
+		Globales.bodyList_typeMagnet.add(b);
 		tipo = "Bomba";
 		setNormalText(15);
 

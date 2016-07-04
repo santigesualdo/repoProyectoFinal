@@ -31,19 +31,20 @@ import utils.enemigos.TiraBomba;
 import utils.objetos.CheckPoint;
 import utils.objetos.CheckPointSensor;
 import utils.objetos.Escombro;
+import utils.objetos.Estrella;
 import utils.objetos.FinLevel;
+import utils.objetos.MagnetOnOff;
 import utils.objetos.OllaPeso;
 import utils.objetos.Palanca;
 import utils.objetos.Pinches;
+import utils.objetos.Plataforma;
 import utils.objetos.PlataformaConMovientoVertical;
 import utils.objetos.PlataformaConMovimientoHorizontal;
 import utils.objetos.PlataformaDiagonal;
-import utils.objetos.Plataforma;
+import utils.objetos.SwitchOnOff;
 import utils.objetos.TextoTutorial;
 
-/**
- * @author Samuel Batista
- */
+
 class TiledLevel extends TiledMap
 {
 	// For each "Tile Layer" in the map, you must define a "tileset" property which contains the name of a tile sheet image 
@@ -204,13 +205,13 @@ class TiledLevel extends TiledMap
 		switch(o.objectType)
 			{	
 				case TiledObject.POLYGON:
-					crearObjetoPoligonal(state,o,g,group);
+					crearObjetoPoligonal(state,o,g,objectsLayer);
 				case TiledObject.POLYLINE:
-					crearObjetoPolilinea(state,o,g,group);							
+					crearObjetoPolilinea(state,o,g,objectsLayer);							
 				case TiledObject.RECTANGLE:
-					crearObjectoRectangular(state,o,g,group);
+					crearObjectoRectangular(state,o,g,objectsLayer);
 				case TiledObject.ELLIPSE:
-					crearObjetoElipse(state,o,g,group);
+					crearObjetoElipse(state,o,g,objectsLayer);
 			}
 			
 		
@@ -264,8 +265,8 @@ class TiledLevel extends TiledMap
 				continue;
 			}
 			
-			var sprite = new FlxSprite(image.x, image.y, c_PATH_LEVEL_TILESHEETS + image.imagePath);
-			imagesLayer.add(sprite);
+			/*var sprite = new FlxSprite(image.x, image.y, c_PATH_LEVEL_TILESHEETS + image.imagePath);
+			imagesLayer.add(sprite);*/
 		}
 	}
 		
@@ -281,7 +282,7 @@ class TiledLevel extends TiledMap
 		}
 		
 		if (o.name == "finLevel") {
-			state.add(new FinLevel(new FlxPoint(o.x, o.y)));			
+			group.add(new FinLevel(new FlxPoint(o.x, o.y)));			
 		}
 	}
 	
@@ -351,7 +352,7 @@ class TiledLevel extends TiledMap
 				bodyCircular.userData.sentidoFuerza = Std.parseInt(cast(o.properties.get("sentidoFuerza"), String));	
 			}
 			bodyCircular.userData.destroyOnTouch = cast(o.properties.get("destroyOnTouch"), String);
-			state.add(new BombaMagnet(o.x,o.y,bodyCircular));
+			group.add(new BombaMagnet(o.x,o.y,bodyCircular));
 		}	
 		else if (o.name == "ruedaSerradaConMovimientoHorizontal") {
 			
@@ -359,7 +360,7 @@ class TiledLevel extends TiledMap
 			var posFinalX:Float =  Std.parseFloat(cast(o.properties.get("posFinalX"), String)); 
 			bodyCircular.userData.velocidad =  Std.parseFloat(cast(o.properties.get("velocidad"), String)); 
 			bodyCircular.userData.rotation = Std.parseInt(cast(o.properties.get("puedeRotar"), String));
-			state.add(new RuedaSerradaConMovimientoHorizontal(bodyCircular, posFinalX, sentidoInicial));
+			group.add(new RuedaSerradaConMovimientoHorizontal(bodyCircular, posFinalX, sentidoInicial));
 		}	
 		else if(o.name == "ruedaSerradaConMovimientoVertical") {
 			
@@ -367,7 +368,7 @@ class TiledLevel extends TiledMap
 			var posFinalY:Float =  Std.parseFloat(cast(o.properties.get("posFinalY"), String)); 
 			bodyCircular.userData.velocidad =  Std.parseFloat(cast(o.properties.get("velocidad"), String));
 			bodyCircular.userData.rotation = Std.parseInt(cast(o.properties.get("puedeRotar"), String));
-			state.add(new RuedaSerradaConMovimientoVertical(bodyCircular, posFinalY, sentidoInicial));
+			group.add(new RuedaSerradaConMovimientoVertical(bodyCircular, posFinalY, sentidoInicial));
 		}	
 	}
 	
@@ -382,16 +383,18 @@ class TiledLevel extends TiledMap
 		 *	Dos el punto donde spawnea el player. 
 		 * 
 		 * */
+		
+		var linked_id:String = "";
+		if (o.properties.contains("linked_id")) {
+			linked_id = o.properties.get("linked_id");
+		}
 		if ( o.properties.contains("checkPointSensor")) {
 			//Solo llenamos el grupo CheckpointSensor una vez
 			var width:Float = o.width;
 			var height:Float = o.height;
 			var id: String = o.properties.get("checkPointSensor");
 			/*Array de ID de objeto base, con esto el checkpoint activa comportanmiento cuando se toca */ 
-			var linked_id:String = "";
-			if (o.properties.contains("linked_id")) {
-				linked_id = o.properties.get("linked_id");
-			}
+
 			var check:CheckPointSensor = new CheckPointSensor(id, o.x, o.y, width, height, linked_id);
 			Globales.checkPointSensorGroup.add(check);
 			return;
@@ -449,7 +452,7 @@ class TiledLevel extends TiledMap
 			rectangularBody.userData.texto = o.properties.get("texto");
 			rectangularBody.userData.time = o.properties.get("tiempoEnSec");
 			rectangularBody.shapes.at(0).sensorEnabled = true;
-			state.add(new TextoTutorial(o.x, o.y, rectangularBody));
+			group.add(new TextoTutorial(o.x, o.y, rectangularBody));
 		}
 		if (o.name == "plataforma" ) {
 			
@@ -457,8 +460,7 @@ class TiledLevel extends TiledMap
 				var velocidad:Float = Std.parseFloat(cast(o.properties.get("velocidad"), String));
 				if (rectangularBody.isKinematic()){rectangularBody.surfaceVel.x = velocidad; }
 			}
-			
-			state.add(new Plataforma(o.x, o.y, rectangularBody, o.type)); 
+			group.add(new Plataforma(o.x, o.y, rectangularBody, o.type)); 
 			
 		}else if (o.name == "plataformaConMovimientoVertical") {
 			var sube:String = o.properties.get("subeYBaja");
@@ -472,18 +474,18 @@ class TiledLevel extends TiledMap
 				rectangularBody.userData.tocaPlayer = tocaPlayer;
 			};
 			var sentidoInicial:Int = Std.parseInt(cast(o.properties.get("sentidoInicial"), String));
-			state.add(new PlataformaConMovientoVertical(o.x, o.y, rectangularBody, subeYbaja, sentidoInicial));
+			group.add(new PlataformaConMovientoVertical(o.x, o.y, rectangularBody, subeYbaja, sentidoInicial));
 		}else if (o.name == "plataformaConMovimientoHorizontal") {
 			var sube:String = o.properties.get("subeYBaja");
 			var subeYbaja:Bool =  sube == "1";
 			rectangularBody.userData.sentido = Std.parseInt(o.properties.get("sentido"));
-			state.add(new PlataformaConMovimientoHorizontal(o.x, o.y, rectangularBody, subeYbaja));	
+			group.add(new PlataformaConMovimientoHorizontal(o.x, o.y, rectangularBody, subeYbaja));	
 		}else if (o.name == "palanca") {
 			if (o.properties.contains("isReady")) {
 				var isReady:Int = Std.parseInt(o.properties.get("isReady"));
 				rectangularBody.userData.isReady = isReady == 1;	
 			}			
-			state.add(new Palanca(o.x, o.y, rectangularBody));
+			group.add(new Palanca(o.x, o.y, rectangularBody));
 		}else if (o.name == "tiraBomba") {
 			var sentidoX:Int = 0;
 			if (o.properties.contains("sentidoX")) {
@@ -493,7 +495,7 @@ class TiledLevel extends TiledMap
 			if (o.properties.contains("sentidoBombas")) {
 				sentidoBombas= Std.parseInt(cast(o.properties.get("sentidoBombas"),String));
 			}
-			state.add(new TiraBomba(o.x, o.y, rectangularBody, sentidoBombas, sentidoX));
+			group.add(new TiraBomba(o.x, o.y, rectangularBody, sentidoBombas, sentidoX));
 		}else if (o.name == "rectAgarreIzq") {
 			rectangularBody.shapes.at(0).sensorEnabled = true;
 			rectangularBody.cbTypes.add(Callbacks.agarreCallback);
@@ -516,9 +518,9 @@ class TiledLevel extends TiledMap
 			rectangularBody.angularVel = -3;
 			Globales.bodyList_typeMagnet.add(rectangularBody);
 		}else if (o.name == "pinches") {
-			state.add(new Pinches(o.x, o.y, rectangularBody));
+			group.add(new Pinches(o.x, o.y, rectangularBody));
 		}else if (o.name == "escombro") {
-			state.add(new Escombro(o.x, o.y, rectangularBody));
+			group.add(new Escombro(o.x, o.y, rectangularBody));
 		}else if (o.name == "linea") {
 			/* Declaramos la linea, que va a tener colgando al objeto linkeado */
 			if (o.properties.contains("linked_id")) {
@@ -538,7 +540,18 @@ class TiledLevel extends TiledMap
 				rectangularBody.userData.maxTouchs = Std.parseInt(cast(o.properties.get("maxTouchs"),String));	
 			}
 			
-			state.add(new OllaPeso(o.x, o.y, rectangularBody));
+			group.add(new OllaPeso(o.x, o.y, rectangularBody));
+		}else if (o.name == "magnetOnOff") {
+			if (o.properties.contains("type")) {
+				rectangularBody.userData.type = Std.parseInt(o.properties.get("type"));
+			}
+			group.add(new MagnetOnOff(o.x, o.y, rectangularBody));
+		}else if (o.name == "switchOnOff") {
+			group.add(new SwitchOnOff(o.x, o.y, rectangularBody));
+		}else if (o.name == "estrella") {
+			var _x : Int = Std.int(o.x - rectangularBody.bounds.width * 0.5);
+			var _y : Int = Std.int(o.y - rectangularBody.bounds.height * 0.5);
+			group.add(new Estrella(_x,_y, rectangularBody));
 		}
 		
 		if (o.name == "rectAgarreIzq" || o.name == "rectAgarreDer") {

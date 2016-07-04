@@ -60,6 +60,8 @@ class PlataformaConMovientoVertical extends PlataformaConMovimiento
 			recorridoY = Std.parseFloat(  b.userData.recorridoY);
 		}
 		
+		loadGraphic(AssetPaths.plataforma_vertical_path, false, 32, 320);
+		
 		if (b.userData.tocaPlayer != null) {
 		/* Esta plataforma es posible recorrido del Player*/
 		
@@ -131,7 +133,8 @@ class PlataformaConMovientoVertical extends PlataformaConMovimiento
 		b.space = FlxNapeSpace.space;	
 		
 		tipo = "PlataformaMovVertical";
-		setNormalText(18);		
+		/*setNormalText(18);		
+		set_visible(false);*/
 	}
 	
 	override public function comportamiento():Void 	{			

@@ -1,5 +1,8 @@
 package ;
+import flash.events.KeyboardEvent;
 import flixel.addons.nape.FlxNapeSpace;
+import flixel.animation.FlxAnimation;
+import flixel.effects.particles.FlxEmitter;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -69,8 +72,9 @@ class PlayerNape extends FlxObject
 		var agarrePos:Vec2;
 		
 		var sprite:FlxSprite = null;
-		var spinePlayer:SpinePlayer=null;
-	
+		var spinePlayer:SpinePlayer = null; 
+		var _emitter:FlxEmitter = null;		
+		var animationItemEated:FlxSprite = null;
 		
 		var bodyInferiorCallback:CbType = new CbType();
 		var subiendoPlataforma:Bool ;
@@ -127,10 +131,11 @@ class PlayerNape extends FlxObject
 		
 		super(_x,_y,35,35);
 			
-		text = new FlxText(200, this.x, this.y, "No Name Game");
+		text = new FlxText(FlxG.width, this.x, this.y, "No Name Game");
 		text.setFormat(AssetPaths.font_kreon, 18, FlxColor.YELLOW, "left");
 		//text.addFormat(new FlxTextFormat(0xE6E600, false, false, 0xFF8000));	
 		Globales.currentState.add(text);	
+		text.visible = Globales.verTexto;
 				
 		textoColisionAcum = 0;
 		textoColisionOn = false;
@@ -162,8 +167,42 @@ class PlayerNape extends FlxObject
 		
 		bodyInferior.userData.object = this;
 		
+		crearParticleEmitter();
+		
 		crearAnimacionSpine();
 		//crearAnimacion();
+		
+	}
+	
+	/*public function playAnimation():Void {
+	
+		animationItemEated = new FlxSprite(x, y);
+		animationItemEated.loadGraphic(AssetPaths.anim_item_eated, true, 150, 85, true);
+		animationItemEated.animation.add("anim", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], 60, false);
+		
+		Globales.currentState.add(animationItemEated);
+		animationItemEated.animation.play("anim", false);
+		
+	}*/
+	
+	function crearParticleEmitter():Void
+	{
+		_emitter= new FlxEmitter(this.x,this.y, 5);
+		
+		// All we need to do to start using it is give it some particles. makeParticles() makes this easy!
+		
+		_emitter.loadParticles(AssetPaths.playerParticlesPath, 5);
+		
+		// Now let's add the emitter to the state.
+		_emitter.alpha.set(1, 1, 0, 0);
+		
+		
+		Globales.currentState.add(_emitter);
+		
+		// Now lets set our emitter free.
+		// Params: Explode, Emit rate (in seconds), Quantity (if ignored, means launch continuously)
+		
+		_emitter.start(false, 0.05);
 	}
 	
 	function crearAnimacion():Void	{
@@ -246,17 +285,17 @@ class PlayerNape extends FlxObject
 		
 	function declararCallbacks():Void {
 			
-		 PersonajeConAgarre = new InteractionListener(
+		PersonajeConAgarre = new InteractionListener(
 			CbEvent.BEGIN, InteractionType.SENSOR, Callbacks.bodyInferiorCallback, Callbacks.agarreCallback,
 			function OnPersonajeConAgarre(e:InteractionCallback):Void {
 				
 				var bodyAgarre:Body = e.int2.castBody;		
 				
-				FlxG.log.add("Toca agarre");
+				// FlxG.log.add("Toca agarre");
 				
 				if (!agarre) {	
 					
-					FlxG.log.add("Toca agarre");
+					// FlxG.log.add("Toca agarre");
 					 //if (bodyInferior.bounds.y < (bodyAgarre.bounds.y + bodyAgarre.bounds.height * 0.1)) {
 					 //if ((bodyInferior.bounds.y + bodyInferior.bounds.height * 0.1) < bodyAgarre.bounds.y){
 					 // if((bodyInferior.bounds.y + bodyInferior.bounds.height * 0.95) > bodyAgarre.bounds.y){	 
@@ -512,8 +551,8 @@ class PlayerNape extends FlxObject
 					var estaListo:Bool = bodyObjeto.userData.isReady;
 					if (estaListo) {
 						if (textObjInteractivo == null) {
-							textObjInteractivo = new FlxText(this.x, this.y - FlxG.height * 0.30, 150, "Presiona E para activar objeto", 16, false);
-							textObjInteractivo.setFormat(AssetPaths.font_kreon, textObjInteractivo.size, FlxColor.GREEN, "center");
+							textObjInteractivo = new FlxText(this.x, this.y - FlxG.height * 0.30, 150, "Presiona E para activar objeto", 15, false);
+							textObjInteractivo.setFormat(AssetPaths.font_kreon, textObjInteractivo.size, FlxColor.WHITE, "center");
 						}else {
 							textObjInteractivo.setPosition(this.x, this.y - FlxG.height * 0.30);
 						}
@@ -548,7 +587,7 @@ class PlayerNape extends FlxObject
 	}
 	
 	function isPlayerFallingHard(lastVelocity:Float):Bool {
-		FlxG.log.add("Velocity y : " + bodyInferior.velocity.y );
+		// FlxG.log.add("Velocity y : " + bodyInferior.velocity.y );
 		if (lastVelocity > maxVelocityCaida) {
 			playerDead("Caida mortal");
 			return true;
@@ -585,9 +624,19 @@ class PlayerNape extends FlxObject
 			sprite.y = this.y +bodyInferior.bounds.height *0.5;			
 		}
 		
-		if (FlxG.keys.justReleased.H) {
-			spinePlayer.visible = !spinePlayer.visible;
-		}
+		if (_emitter!= null) {
+			_emitter.x = this.x+bodyInferior.bounds.width*0.5 ; 
+			_emitter.y = this.y+ bodyInferior.bounds.height*0.5 ;
+		}	
+		
+		/*if (animationItemEated != null) {
+			if (animationItemEated.animation.curAnim.finished) {
+				Globales.currentState.remove(animationItemEated);
+				animationItemEated = null;
+			}
+		}*/
+		
+
 		
 		eventos();
 		
@@ -600,6 +649,7 @@ class PlayerNape extends FlxObject
 		
 		if (textoColisionOn) {
 			text.text = 
+			"( TECLA V para desactivar texto.)"  +
 			"\nPLAYER: "  +
 			"\n" + cast(this.getMidpoint().x, Int) +"," + cast(this.getMidpoint().y, Int) + 			
 			"\nVELX: " + Std.int(bodyInferior.velocity.x) +
@@ -621,6 +671,7 @@ class PlayerNape extends FlxObject
 			}			
 		}else {
 			text.text = 
+			"( TECLA V para desactivar texto.)"  +
 			"\nPLAYER: "  +
 			"\n" + cast(this.getMidpoint().x, Int) +"," + cast(this.getMidpoint().y, Int) + 	
 			"\nVELX: " + Std.int(bodyInferior.velocity.x) +
@@ -682,11 +733,14 @@ class PlayerNape extends FlxObject
 			ss.setPos(new FlxPoint(FlxG.camera.scroll.x + 300, FlxG.camera.scroll.y + 300));
 			//Globales.currentState.openSubState(new PlaySubState("Pausa", new FlxPoint(getMidpoint().x - width * 0.5, getMidpoint().y - height)));
 		}
+				
+		if (FlxG.keys.justReleased.H) {
+			spinePlayer.visible = !spinePlayer.visible;
+		}
 		
-		if (FlxG.keys.justPressed.T) {
-			if (spinePlayer != null) {
-				spinePlayer.visible = !spinePlayer.visible;
-			}
+		if (FlxG.keys.justReleased.V) {
+			Globales.verTexto = !Globales.verTexto;
+			text.visible = Globales.verTexto;
 		}
 		
 		if (FlxG.keys.justPressed.E && colisionaConObjetoInteractivo) {
@@ -877,16 +931,16 @@ class PlayerNape extends FlxObject
 		var vel:Int = 120;
 		var velImpulse:Float = 200;
 				
-		/*//FlxG.log.add("body inf : " + bodyInferior.bounds.y);
-		//FlxG.log.add("tope y : " + topeY );*/
+		/*//// FlxG.log.add("body inf : " + bodyInferior.bounds.y);
+		//// FlxG.log.add("tope y : " + topeY );*/
 		
 		bodyInferior.allowMovement = true;
 		subiendoPlataforma = true;
 		
 		FlxNapeSpace.space.listeners.remove(PersonajeConAgarre);
 		
-		//FlxG.log.add("TopeY" + topeY);
-		//FlxG.log.add("Player Y" + bodyInferior.bounds.y);
+		//// FlxG.log.add("TopeY" + topeY);
+		//// FlxG.log.add("Player Y" + bodyInferior.bounds.y);
 		
 		if  (bodyInferior.bounds.y > topeY ) {
 			bodyInferior.applyImpulse(new Vec2(0, -vel));
@@ -896,15 +950,15 @@ class PlayerNape extends FlxObject
 			//bodyInferior.applyImpulse(new Vec2(0, -10));
 			// ya subio en Y ahora que se acomode en X
 			
-			//FlxG.log.add("bodyInferior x: " + bodyInferior.bounds.x);*/
+			//// FlxG.log.add("bodyInferior x: " + bodyInferior.bounds.x);*/
 			if (tocaPlataformaIzq) {
-				FlxG.log.add("Izquierda: " + tocaPlataformaIzq);
+				// FlxG.log.add("Izquierda: " + tocaPlataformaIzq);
 				// plataforma a la IZQUIERDA
 				if (bodyInferior.bounds.x+bodyInferior.bounds.width < topeX) {
-					FlxG.log.add("suma impulso");
+					// FlxG.log.add("suma impulso");
 					bodyInferior.applyImpulse(new Vec2(vel, 0));
 				}else {
-					FlxG.log.add("llega a tope x");
+					// FlxG.log.add("llega a tope x");
 					subiendoPlataforma = false;
 					agarre = trepar = false;
 					bodyInferior.velocity.x = bodyInferior.velocity.x * .05;
@@ -916,7 +970,7 @@ class PlayerNape extends FlxObject
 					tierraFirme = true;
 				}
 			}else {
-				FlxG.log.add("Izquierda: " + tocaPlataformaIzq);
+				// FlxG.log.add("Izquierda: " + tocaPlataformaIzq);
 				// plataforma a la DERECHA
 				if (bodyInferior.bounds.x > topeX) {
 					bodyInferior.applyImpulse(new Vec2(-vel, 0));
@@ -996,8 +1050,8 @@ class PlayerNape extends FlxObject
 	}
 
 	function checkInWorld():Void {
-		//FlxG.log.add("Body y: "+ (bodyInferior.position.y - bodyInferior.bounds.height * 0.5) );
-		//FlxG.log.add("Camera heigth: " +  FlxG.camera.setScrollBounds);
+		//// FlxG.log.add("Body y: "+ (bodyInferior.position.y - bodyInferior.bounds.height * 0.5) );
+		//// FlxG.log.add("Camera heigth: " +  FlxG.camera.setScrollBounds);
 		if (bodyInferior.position.y - bodyInferior.bounds.height*0.5 > FlxG.camera.maxScrollY) {
 			playerDead("caida");
 		}		
@@ -1042,7 +1096,7 @@ class PlayerNape extends FlxObject
 	}
 	
 	public function playerPesoNormal():Void {
-		FlxG.log.add("cambiaPesoANormal");
+		// FlxG.log.add("cambiaPesoANormal");
 		bodyInferior.shapes.at(0).material = new Material(0, 0.57, 0.74, 7.5, 0.001);//Material.steel();
 	}
 	

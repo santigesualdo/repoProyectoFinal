@@ -1,10 +1,14 @@
 package states;
 
+import flixel.addons.text.FlxTextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.group.FlxGroup;
 import flixel.input.mouse.FlxMouseEventManager;
+import flixel.text.FlxText;
+import flixel.text.FlxText.FlxTextAlign;
+import flixel.util.FlxColor;
 import utils.AssetPaths;
 import utils.ButtonLevel;
 import utils.Globales;
@@ -28,14 +32,18 @@ class MenuState extends FlxState
 	{
 		super.create();
 						
-		var background:FlxSprite = new FlxSprite(0, 0, AssetPaths.MENU_BACK_PATH);
-		add(background);
+		/*var background:FlxSprite = new FlxSprite(0, 0, AssetPaths.MENU_BACK_PATH);
+		add(background);*/
 		
 		botones = new FlxGroup();
 		add(botones);
 		
 		var centroX = FlxG.width * 0.5; 
 		var centroY = FlxG.height * 0.5;
+		
+		var textField:FlxText = new FlxText(0, 100, FlxG.width, "Menu State", 0, false);
+		textField.setFormat( AssetPaths.font_kreon, 50, FlxColor.WHITE, FlxTextAlign.CENTER);
+		add(textField);
 		
 		butL1 = new ButtonLevel(centroX, centroY-50, "level1");
 		butL2 = new ButtonLevel(centroX, centroY + 50, "level2");

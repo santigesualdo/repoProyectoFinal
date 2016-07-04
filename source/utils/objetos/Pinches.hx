@@ -53,6 +53,8 @@ class Pinches extends ObjetoBase
 		tipo = "Pinches";
 		setNormalText(25);
 		
+		set_visible(false);
+		
 	}
 	
 }

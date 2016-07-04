@@ -129,10 +129,11 @@ class PlayState extends FlxState
 		FlxNapeSpace.space.gravity.setxy(Globales.gravityX, Globales.gravityY);
 		FlxNapeSpace.shapeDebug.thickness = 2.5;
 		FlxNapeSpace.shapeDebug.drawConstraints = true;
+		FlxNapeSpace.drawDebug = Globales.verNape;
 		
 		levelObj = loadLevel(Globales.currentLevel);
 
-		FlxG.addChildBelowMouse(new FPS(FlxG.width - 60, 0, FlxColor.WHITE));
+		
 	
 		playerMultiBody = new PlayerNape(Globales.currentCheckPoint.x, Globales.currentCheckPoint.y, FlxNapeSpace.space);
 		Globales.globalPlayer = playerMultiBody;
@@ -141,6 +142,7 @@ class PlayState extends FlxState
 		FlxG.camera.follow(playerMultiBody);
 		FlxG.camera.flash(FlxColor.BLACK, 2, null, true);
 		
+		FlxG.addChildBelowMouse(new FPS(FlxG.width - 60, 0, FlxColor.WHITE));
 	}
 	
 	function loadLevel(currentLevel:String):Level 
@@ -194,6 +196,11 @@ class PlayState extends FlxState
 			reiniciar(); 
 		}
 		
+		if (FlxG.keys.justPressed.N) {
+			Globales.verNape = !Globales.verNape;
+			FlxNapeSpace.drawDebug = Globales.verNape;
+		}
+		
 		if (FlxG.keys.justPressed.L) {
 			LimpiarLog();
 		}
@@ -236,7 +243,7 @@ class PlayState extends FlxState
 		if (clearTraceAcum < clearTraceMax) {
 			clearTraceAcum += FlxG.elapsed;
 		}else {
-			//FlxG.log.add("limpiar");
+			//// FlxG.log.add("limpiar");
 			clearTraceAcum = 0;
 			FlxG.log.clear();
 		}

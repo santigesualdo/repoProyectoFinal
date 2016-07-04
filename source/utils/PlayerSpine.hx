@@ -193,7 +193,7 @@ class PlayerSpine extends FlxSprite
 		renderer.visible = true;	
 		
 		/*
-		FlxG.log.add("\nX: " + renderer.x + "\n - Y: " + renderer.y + "\n - ancho : " + renderer.width + "\n alto: " + renderer.height + "\n alto fijo : " + altoFijo) ;
+		// FlxG.log.add("\nX: " + renderer.x + "\n - Y: " + renderer.y + "\n - ancho : " + renderer.width + "\n alto: " + renderer.height + "\n alto fijo : " + altoFijo) ;
 		*/
 	
 		

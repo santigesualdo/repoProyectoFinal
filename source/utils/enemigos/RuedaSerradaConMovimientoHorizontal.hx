@@ -32,6 +32,9 @@ class RuedaSerradaConMovimientoHorizontal extends RuedaSerrada
 			else if(sentidoInicial == 1){b.velocity.x = -velocidad;}//Der a Izq
 		}
 		
+		this.loadGraphic(AssetPaths.ruedaSerrada__png, false, 128, 127, true);
+		rotar = true;
+		
 		this.activar();
 	}
 	
