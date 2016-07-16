@@ -31,6 +31,7 @@ class SpinePlayer extends FlxSpine
 		stateData.setMixByName("corriendo", "jump", 0.2);
 		stateData.setMixByName("jump", "corriendo", 0.4);
 		stateData.setMixByName("jump", "jump", 0.2);
+		stateData.setMixByName("corriendo", "falling", 0.25);
 		
 		setAnimation("estadoSALTANDO", true);
 		

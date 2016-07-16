@@ -21,22 +21,38 @@ class PlataformaDiagonal extends ObjetoBase
 		super(x, y);
 				
 		this.b = _b;
+		this.b.space = FlxNapeSpace.space;	
 			
 		this.b.cbTypes.add( Callbacks.plataformaCallback);	
+		rotar = true;
 		
-		if (b.userData.rotation != null) {			
-			var centerOfRotation:Vec2 = b.shapes.at(0).localCOM;			
+		this.loadGraphic(AssetPaths.platDiagonal, false, 1024, 64);	
 		
-			angleInRadians= Std.parseFloat(b.userData.rotation) * Math.PI / 180;
-			b.rotate(centerOfRotation, angleInRadians);
+		if (this.b.userData.rotation != null) {			
+			var centerOfRotation:Vec2 = this.b.shapes.at(0).localCOM;			
+		
+			angleInRadians= Std.parseFloat(this.b.userData.rotation) * Math.PI / 180;
+			this.b.rotate(centerOfRotation, angleInRadians);
 		}	
+
+		//this.setPosition(x - this.width , y + this.height*0.5);
+		this.set_angle((b.rotation * 180 / Math.PI) % 360);
 		
-		b.position.set(new Vec2(x, y));
+		this.b.position.set(new Vec2(x, y));		
 		
-		this.b.space = FlxNapeSpace.space;	
+		this.x = b.position.x ;
+		this.y = b.position.y;		
+		
+    	
+		// this.centerOrigin();		
 		
 		tipo = "PlataformaDiagonal";
 		setNormalText(25);
+		
+		noActualizar = true;
+		
+		/*this.x = b.position.x - this.width *0.9 ;
+		this.y = b.position.y + this.height *2.5;*/
 	}
 
 	

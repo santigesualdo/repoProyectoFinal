@@ -77,6 +77,10 @@ class AssetPaths {
 	 static public var plataforma_horizontal_path:String = "assets/levels/plataforma_horizontal.png";
 	 static public var anim_item_eated:String = "assets/levels/animation_start_eated.png";
 	 static public var estrella_spritesheet:String = "assets/levels/estrella_spritesheet.png";
+	 static public var estrella_hud: String = "assets/levels/estrella_hud.png";
+	 static public var platDiagonal: String = "assets/levels/platDiagonal.png";
+	 
+	 
 	 
 	
 }

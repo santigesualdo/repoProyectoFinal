@@ -61,23 +61,11 @@ class Level extends FlxSprite
 		}		
 		
 		var backdrop:FlxBackdrop = new FlxBackdrop(tl.backDropPath);
-		
 		state.add(tl.backgroundLayer);
 		state.add(backdrop);
-		// Add static images
-		/*state.add(tl.imagesLayer);*/
-		// Load player objects
-		// Add foreground tiles after adding level objects, so these tiles render on top of player
 		state.add(tl.foregroundTiles);
 		state.add(tl.objectsLayer);
-		//backgroundPath = AssetPaths.LEVEL1_BACKGROUND_PATH;
-		
-		/*tiledmap = new TiledMap(AssetPaths.LEVEL1_TMX_PATH);
-		backgroundPath = AssetPaths.LEVEL1_BACKGROUND_PATH;
-		terrainPath = AssetPaths.LEVEL1_TERRAIN_PATH;
-		tilesetPath = AssetPaths.LEVEL1_TILESET;
-		gravityX = Globales.gravityX;
-		gravityY = Globales.gravityY;*/
+		state.add(tl.estrellasGroup);
 	}
 	
 	public function getFullWidth():Float {
@@ -129,4 +117,11 @@ class Level extends FlxSprite
 		return tiledmap = value;
 	}
 	
+	override public function destroy():Void {
+	
+		tl.destroy();
+		
+		super.destroy();
+		
+	}
 }

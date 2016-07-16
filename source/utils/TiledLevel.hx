@@ -47,29 +47,28 @@ import utils.objetos.TextoTutorial;
 
 class TiledLevel extends TiledMap
 {
-	// For each "Tile Layer" in the map, you must define a "tileset" property which contains the name of a tile sheet image 
-	// used to draw tiles in that layer (without file extension). The image file must be located in the directory specified bellow.
 	private inline static var c_PATH_LEVEL_TILESHEETS = "assets/levels/";
 	
 	var actualBodyType:BodyType;
 	
-	// Array of tilemaps used for collision
 	public var foregroundTiles:FlxGroup;
 	public var objectsLayer:FlxGroup;
 	public var backgroundLayer:FlxGroup;
+	public var estrellasGroup:FlxGroup;
 	public var backDropPath:String;
 	private var collidableTileLayers:Array<FlxTilemap>;	
 	
-	// Sprites of images layers
+	private static var estrellasCargadas:Bool = false;
+	
 	public var imagesLayer:FlxGroup;
 	
-	public function new(tiledLevel:Dynamic, state:PlayState)
-	{
+	public function new(tiledLevel:Dynamic, state:PlayState):Void	{
 		super(tiledLevel);
 		imagesLayer = new FlxGroup();
 		foregroundTiles = new FlxGroup();
 		objectsLayer = new FlxGroup();
 		backgroundLayer = new FlxGroup();
+		estrellasGroup = new FlxGroup();
 		
 		FlxG.worldBounds.set(0, 0, fullWidth, fullHeight);
 		FlxG.camera.setScrollBoundsRect(0, 0, fullWidth, fullHeight, true);
@@ -114,7 +113,8 @@ class TiledLevel extends TiledMap
             // Note: the StartingIndex is based on the tilesheet's
             // startingGID rather than the default 1.
             level.loadMapFromArray(tileLayer.tileArray, mapW, mapH, tilesheetPath, tileSize, tileSize, null, tileGID);
-            //add(level);
+            level.alpha = 1;
+			//add(level);
 			
 			loadObjects(state);
 			
@@ -124,8 +124,7 @@ class TiledLevel extends TiledMap
 		}
 	}
 	
-	public function loadObjects(state:PlayState)
-	{
+	public function loadObjects(state:PlayState){
 		var layer:TiledObjectLayer;
 		for (layer in layers)
 		{
@@ -149,13 +148,20 @@ class TiledLevel extends TiledMap
 				{
 					loadObject(state, o, objectLayer, objectsLayer);
 				}
+				//cargarEstrellas();
 				cargarCheckPoints();	
 			}
 		}
 	}
 	
-	private function loadImageObject(object:TiledObject)
-	{
+	function cargarEstrellas():Void	{
+		if (!estrellasCargadas) {
+			estrellasCargadas = true;			
+		}
+		
+	}
+	
+	private function loadImageObject(object:TiledObject){
 		var tilesImageCollection:TiledTileSet = this.getTileSet("imageCollection");
 		var tileImagesSource:TiledImageTile = tilesImageCollection.getImageSourceByGid(object.gid);
 		
@@ -177,18 +183,25 @@ class TiledLevel extends TiledMap
 			decoSprite.antialiasing = true;
 		}
 		
-		//Custom Properties
-		if (object.properties.contains("depth"))
+		var depthX:Float = 0;
+		var depthY:Float = 0;
+	
+		if (object.properties.contains("depthX"))
 		{
-			var depth = Std.parseFloat( object.properties.get("depth"));
-			decoSprite.scrollFactor.set(depth,depth);
+			depthX = Std.parseFloat( object.properties.get("depthX"));
 		}
+
+		if (object.properties.contains("depthY"))
+		{
+			depthY = Std.parseFloat( object.properties.get("depthY"));
+		}		
+		
+		decoSprite.scrollFactor.set(depthX,depthY);
 
 		backgroundLayer.add(decoSprite);
 	}
 	
-	private function loadObject(state:PlayState, o:TiledObject, g:TiledObjectLayer, group:FlxGroup)
-	{
+	private function loadObject(state:PlayState, o:TiledObject, g:TiledObjectLayer, group:FlxGroup)	{
 		var x:Int = o.x;
 		var y:Int = o.y;
 		
@@ -252,8 +265,7 @@ class TiledLevel extends TiledMap
 		}*/
 	}
 
-	public function loadImages():Void
-	{
+	public function loadImages():Void{
 		for (layer in layers)
 		{
 			if (layer.type != TiledLayerType.IMAGE)
@@ -462,7 +474,11 @@ class TiledLevel extends TiledMap
 			}
 			group.add(new Plataforma(o.x, o.y, rectangularBody, o.type)); 
 			
-		}else if (o.name == "plataformaConMovimientoVertical") {
+		}else if (o.name == "plataformaDiagonal") {
+			
+			group.add(new PlataformaDiagonal(o.x,o.y,rectangularBody)); 
+		}
+		else if (o.name == "plataformaConMovimientoVertical") {
 			var sube:String = o.properties.get("subeYBaja");
 			var velocityY:String = o.properties.get("velocityY");
 			rectangularBody.userData.velocityY = velocityY;
@@ -495,6 +511,12 @@ class TiledLevel extends TiledMap
 			if (o.properties.contains("sentidoBombas")) {
 				sentidoBombas= Std.parseInt(cast(o.properties.get("sentidoBombas"),String));
 			}
+			if (o.properties.contains("delayTimer")) {
+				rectangularBody.userData.delayTimer = Std.parseInt(o.properties.get("delayTimer"));
+			}		
+			if (o.properties.contains("bombaDestroy")) {
+				rectangularBody.userData.bombaDestroy = Std.parseInt(o.properties.get("bombaDestroy"));
+			}			
 			group.add(new TiraBomba(o.x, o.y, rectangularBody, sentidoBombas, sentidoX));
 		}else if (o.name == "rectAgarreIzq") {
 			rectangularBody.shapes.at(0).sensorEnabled = true;
@@ -549,9 +571,18 @@ class TiledLevel extends TiledMap
 		}else if (o.name == "switchOnOff") {
 			group.add(new SwitchOnOff(o.x, o.y, rectangularBody));
 		}else if (o.name == "estrella") {
-			var _x : Int = Std.int(o.x - rectangularBody.bounds.width * 0.5);
-			var _y : Int = Std.int(o.y - rectangularBody.bounds.height * 0.5);
-			group.add(new Estrella(_x,_y, rectangularBody));
+			rectangularShape.localCOM.set( new Vec2(0, 0)	);
+			rectangularBody.position.set(new Vec2(o.x, o.y));
+			/*var _x : Int = Std.int(o.x - rectangularBody.bounds.width * 0.5);
+			var _y : Int = Std.int(o.y - rectangularBody.bounds.height * 0.5);*/
+			
+			for ( id in Globales.estrellasAgarradasID) {
+				if (id == Std.parseInt(rectangularBody.userData.id) ) {
+					return;
+				}
+			}
+			
+			estrellasGroup.add(new Estrella(o.x,o.y, rectangularBody));								
 		}
 		
 		if (o.name == "rectAgarreIzq" || o.name == "rectAgarreDer") {
@@ -559,16 +590,7 @@ class TiledLevel extends TiledMap
 		}	
 		
 		rectangularBody.cbTypes.add(Callbacks.escenarioCallback);
-		
-		
-		
-		/*if (o.properties.contains("image")) {
-			AsignarImagen(o, rectangularBody);
-		}
-		else {
-			
-		}*/
-		
+
 	}
 	
 	function crearObjetoPoligonal(state:PlayState, o:TiledObject, g:TiledObjectLayer, group:FlxGroup):Void {
@@ -680,4 +702,13 @@ class TiledLevel extends TiledMap
 		
 	}
 
+	public function destroy():Void {
+		estrellasGroup.clear();
+		backgroundLayer.clear();
+		foregroundTiles.clear();
+		objectsLayer.clear();
+		estrellasGroup.clear();	
+	}
+	
+	
 }

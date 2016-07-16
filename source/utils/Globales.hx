@@ -31,11 +31,14 @@ class Globales
 	public static var verNape:Bool = false;
 	public static var verTexto:Bool = false;
 	
+	/* Estos tres grupos se declaran globalmente por que no se actualizan en cada recarga, sino cuando termina el level se limpian */
 	public static var checkPointGroup:FlxGroup = new FlxGroup();
 	public static var checkPointSensorGroup:FlxGroup = new FlxGroup();
+	public static var estrellasAgarradasID:Array<Int>= new Array<Int>();
 	 
 	public static var currentCheckPoint:CheckPoint = null;
 	public static var checkPointCargados:Bool = false;
+	static public var estrellasCargadas:Bool = false; 
 	
 	public static var bodyList_typeMagnet:BodyList = null;
 	public static var bodyList_toMagnetize:BodyList = null;
@@ -43,6 +46,8 @@ class Globales
 	static public var currentLevel:String = "";
 	
 	public static var spinePlayer:SpinePlayer=null;
+	static public var starsCollected:Int = 0;
+	
 	
 	public static inline function clear(arr:Array<Dynamic>){
         #if (cpp||php)

@@ -24,8 +24,8 @@ import utils.objetos.ObjetoBase;
  * @author s
  */
 
-@:bitmap("assets/levels/magnet1.png") class BMD_MAGNET_UP extends BitmapData { } 
-@:bitmap("assets/levels/magnet2.png") class BMD_MAGNET_DOWN extends BitmapData {} 
+/*@:bitmap("assets/levels/magnet1.png") class BMD_MAGNET_UP extends BitmapData { } 
+@:bitmap("assets/levels/magnet2.png") class BMD_MAGNET_RIGHT extends BitmapData {} */
  
 class MagnetOnOff extends ObjetoBase
 {	
@@ -34,37 +34,53 @@ class MagnetOnOff extends ObjetoBase
 	var magnet_type:Int = 0;
 	var borderMagnetSprite:FlxSprite = null;
 	
+	var pathOn:String; 
+	var pathOff:String; 
+	var pathSprite:String;
+	
 	
 	/* La parte superior del magnet toca plataforma */
-	public static var tipo_magnet_up:Int = 1;
-	/* La parte inferior del magnet toca plataforma */
-	public static var tipo_magnet_down:Int = 2;
-	/* La parte izquierda del magnet toca plataforma */
-	public static var tipo_magnet_left:Int = 3;
+	static inline var tipo_magnet_up:Int = 1;
 	/* La parte derecha del magnet toca plataforma */
-	public static var tipo_magnet_right:Int = 4;
+	static inline var tipo_magnet_right:Int = 2;
+	/* La parte inferior del magnet toca plataforma */
+	static inline var tipo_magnet_down:Int = 3;
+	/* La parte izquierda del magnet toca plataforma */
+	static inline var tipo_magnet_left:Int = 4;
+
 
 	public function new(x:Int, y:Int, body:Body) 
 	{
 		super(x, y);
 
-		magnet_type = body.userData.type;
-		
-		body.allowMovement = false;
-		
-		
-		tipo = "magnetOnOff";
-		//setNormalText(15);	
+ 		magnet_type = body.userData.type;
 		
 		var centerX:Float = body.bounds.x + body.bounds.width * 0.5;
 		var centerY:Float = body.bounds.y + body.bounds.height * 0.5;
-				
 		var _width:Int = cast(body.bounds.width,Int);
 		var _height:Int = cast(body.bounds.height,Int);
 		
-		var bitmapdata = new BMD_MAGNET_UP(_width,_height,false,FlxColor.WHITE);
-		var cogIso:BitmapDataIso = new BitmapDataIso( bitmapdata );
-		napeSprite = new NapeSpr_Body(centerX, centerY, cogIso, "assets/levels/magnet1.png", BodyType.KINEMATIC, Material.wood(), "asd", false);
+		switch(magnet_type) {
+			case tipo_magnet_up:
+				pathSprite = "assets/levels/magnet1.png";
+				pathOff = "assets/levels/magnet1_off.png";
+				pathOn = "assets/levels/magnet1_on.png";
+				loadGraphic(pathSprite);
+			case tipo_magnet_right: 
+				pathSprite = "assets/levels/magnet2.png";
+				pathOff = "assets/levels/magnet2_off.png";
+				pathOn = "assets/levels/magnet2_on.png";
+				loadGraphic(pathSprite);
+			default: return;
+		}
+		
+		body.allowMovement = false;
+	
+		tipo = "magnetOnOff";
+		//setNormalText(15);	
+
+		var cogIso:BitmapDataIso = new BitmapDataIso( this.framePixels );
+		napeSprite = new NapeSpr_Body(centerX, centerY, cogIso, pathSprite, BodyType.KINEMATIC, Material.wood(), "asd", false);
 		napeSprite.body.allowMovement = false;
 		napeSprite.body.userData.id = body.userData.id;
 		b = napeSprite.body;	
@@ -73,30 +89,37 @@ class MagnetOnOff extends ObjetoBase
 		
 		b.userData.object = this;
 		
-		/* Ajuste a pata */
+		/* Ajuste a pata para magnet up */
 		if (magnet_type == tipo_magnet_up) {
 			this.setPosition(centerX - this._halfSize.x - 2, centerY - this._halfSize.y + 10);
-			borderMagnetSprite = new FlxSprite(centerX - this._halfSize.x - 2, centerY - this._halfSize.y + 10, "assets/levels/magnet1_off.png");
+			borderMagnetSprite = new FlxSprite(centerX - this._halfSize.x - 2, centerY - this._halfSize.y + 10, pathOff);
 		}
-			
+		
+		/* Ajuste a pata para magnet right */
+		if (magnet_type == tipo_magnet_right) {
+			this.setPosition(centerX - this._halfSize.x-10 , centerY - this._halfSize.y );
+			borderMagnetSprite = new FlxSprite(centerX - this._halfSize.x -10, centerY - this._halfSize.y , pathOff);
+		}
 	}
 	
 	override public function activar():Void {
 		super.activar();
 		
-		borderMagnetSprite.loadGraphic("assets/levels/magnet1_on.png");
+		borderMagnetSprite.loadGraphic(pathOn);
+
 	}
 	
 	override public function desactivar():Void {
 		super.desactivar();
 		
-		borderMagnetSprite.loadGraphic("assets/levels/magnet1_off.png");
+		borderMagnetSprite.loadGraphic(pathOff);
 	}
 	
 	override public function comportamiento():Void {
 	
 		for ( bo in Globales.bodyList_typeMagnet ) {
 			var _bo:Body = cast(bo, Body);
+			
 			singleMagnet(b, _bo, FlxG.elapsed);
 		}
 	}
@@ -114,15 +137,13 @@ class MagnetOnOff extends ObjetoBase
 		
 		gravityPoint.position.set(body.position);
 		var distance = Geom.distanceBody(planet, gravityPoint, closestA, closestB);
-		
-		
-		
+
+		body.allowMovement = true;
+				
 /*		// Cut gravity off, well before distance threshold.
 		if (distance > 150) {
 			return;
 		}*/
-		
-		////FlxG.log.add("distance : " + cast(distance, Int));
 		
 		/*var agarre:Float = 2000;
 		
@@ -137,6 +158,7 @@ class MagnetOnOff extends ObjetoBase
 		force.length = body.mass * 2000 ;
 
 		////FlxG.log.add("force : " + cast(force.length,Int));
+		
 		
 		// Impulse to be applied = force * deltaTime
 		body.applyImpulse(

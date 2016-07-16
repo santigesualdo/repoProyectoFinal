@@ -23,6 +23,7 @@ class PlaySubState extends FlxSubState
 
 	var checkCargados:Bool = false;
 	var text:String;
+	var allowEsc:Bool;
 	
 	/* Estructura de menu PAUSA */	
 	
@@ -110,10 +111,18 @@ class PlaySubState extends FlxSubState
 		
 		super.update(elapsed);
 		
-		if (FlxG.keys.justPressed.ESCAPE || FlxG.keys.justPressed.P ) {
-			close();
-		}	
+		if (allowEsc) {
+			if (FlxG.keys.justPressed.ESCAPE || FlxG.keys.justPressed.P ) {
+				close();
+			}				
+		}
+
 		
+	}
+	
+	public function setAllowEsc(bool:Bool) 
+	{
+		allowEsc = bool;
 	}
 	
 }

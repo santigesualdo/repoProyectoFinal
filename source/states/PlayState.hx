@@ -92,8 +92,8 @@ class PlayState extends FlxState
 	 var level:TiledMap;
 	 
 	 /* Sensores para checkpoint y posiciones */
-	 var checkPointGroup:FlxGroup = new FlxGroup();
-	 var checkPointSensorGroup:FlxGroup = new FlxGroup();
+	 /*var checkPointGroup:FlxGroup = new FlxGroup();
+	 var checkPointSensorGroup:FlxGroup = new FlxGroup();*/
 	 
 	 var currentCheckPoint:CheckPoint = null;
 	 
@@ -106,6 +106,7 @@ class PlayState extends FlxState
 	/* assets */
 	
 	var levelObj: Level;
+	var _hud:HUD = null;	 
 		 
 	public var paused = false;
 	
@@ -132,9 +133,7 @@ class PlayState extends FlxState
 		FlxNapeSpace.drawDebug = Globales.verNape;
 		
 		levelObj = loadLevel(Globales.currentLevel);
-
-		
-	
+			
 		playerMultiBody = new PlayerNape(Globales.currentCheckPoint.x, Globales.currentCheckPoint.y, FlxNapeSpace.space);
 		Globales.globalPlayer = playerMultiBody;
 			
@@ -143,6 +142,11 @@ class PlayState extends FlxState
 		FlxG.camera.flash(FlxColor.BLACK, 2, null, true);
 		
 		FlxG.addChildBelowMouse(new FPS(FlxG.width - 60, 0, FlxColor.WHITE));
+	
+		_hud = new HUD();
+		_hud.updateHUD(Globales.estrellasAgarradasID.length);
+		add(_hud);
+		
 	}
 	
 	function loadLevel(currentLevel:String):Level 
@@ -151,13 +155,9 @@ class PlayState extends FlxState
 		return level;
 	}
 	
-	public function setDibujarMagnetos(b:Bool):Void {
-		dibujarMagnet = b;
-		
-		if (!b) {
-			FlxSpriteUtil.fill(Globales.canvas, FlxColor.TRANSPARENT);	
-		}
-	}
+	public function updateHud(starsColected:Int):Void {
+		_hud.updateHUD(starsColected);		
+	}	
 	
 	override public function update(elapsed:Float):Void	{
 		
@@ -203,7 +203,7 @@ class PlayState extends FlxState
 		
 		if (FlxG.keys.justPressed.L) {
 			LimpiarLog();
-		}
+		}	
 		
 	}
 	
@@ -221,9 +221,11 @@ class PlayState extends FlxState
 		Globales.currentState = null;
 		Globales.globalPlayer = null;
 
+		levelObj.destroy();
 		
-		checkPointGroup.clear();
-		checkPointSensorGroup.clear();	 
+		//this.remove(Globales.estrellasGroup);
+		/*checkPointGroup.clear();
+		checkPointSensorGroup.clear();	 */
 		currentCheckPoint = null;
 		
 		
@@ -253,6 +255,7 @@ class PlayState extends FlxState
 		//restartCheckPoints();
 		Globales.checkPointGroup.clear();
 		Globales.checkPointCargados = false;
+		Globales.estrellasCargadas = false;
 		FlxG.switchState(new MenuState());
 	}	
 

@@ -23,7 +23,7 @@ import spinehaxe.SkeletonJson;
 import utils.AnimationSpine;
 import utils.Callbacks;
 import utils.Globales;
-import utils.PlayerSpine;
+
 import utils.SpinePlayer;
 
 /**

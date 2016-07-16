@@ -12,6 +12,7 @@ import flixel.util.FlxColor;
 import utils.AssetPaths;
 import utils.ButtonLevel;
 import utils.Globales;
+using flixel.util.FlxSpriteUtil;
 
 /**
  * ...
@@ -32,6 +33,10 @@ class MenuState extends FlxState
 	{
 		super.create();
 						
+		 var _sprBack = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY);
+         _sprBack.drawRect(0, 0, FlxG.width, FlxG.height, FlxColor.GRAY);
+		 add(_sprBack);
+		
 		/*var background:FlxSprite = new FlxSprite(0, 0, AssetPaths.MENU_BACK_PATH);
 		add(background);*/
 		
@@ -77,6 +82,30 @@ class MenuState extends FlxState
 				}
 				
 			}			
+		}
+		
+		if (FlxG.keys.justPressed.DOWN) {
+			FlxG.camera.zoom = FlxG.camera.zoom - 0.1;
+			FlxG.log.add("Zoom: " + FlxG.camera.zoom);
+			return;
+		}
+		
+		if (FlxG.keys.justPressed.UP) {
+			FlxG.camera.zoom = FlxG.camera.zoom + 0.1;
+			FlxG.log.add("Zoom: " + FlxG.camera.zoom);
+			return;
+		}
+		
+		if (FlxG.keys.pressed.DOWN) {
+			FlxG.camera.zoom = FlxG.camera.zoom - 0.1;
+			FlxG.log.add("Zoom: " + FlxG.camera.zoom);
+			return;
+		}
+		
+		if (FlxG.keys.pressed.UP) {
+			FlxG.camera.zoom = FlxG.camera.zoom + 0.1;
+			FlxG.log.add("Zoom: " + FlxG.camera.zoom);
+			return;
 		}
 		
 	}

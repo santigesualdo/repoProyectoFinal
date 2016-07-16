@@ -29,6 +29,8 @@ class TiraBomba extends ObjetoBase
 	var sentidoBombas:Int = 1;
 	var sentidoX:Int = 0;
 	
+	var bombaDestroy:Int = 1;
+	
 	/* Por defecto el sentido que tira bombas es vertical */
 	/* Solo se usa sentidoX si se dispara Horizontal */
 	public function new(x:Float, y:Float, rectangularBody:Body, ?_sentidoBombas:Int=1, ?_sentidoX=0) 
@@ -45,6 +47,11 @@ class TiraBomba extends ObjetoBase
 		if (b.userData.delayTimer != null) {
 			delayMax = b.userData.delayTimer;
 		}
+		
+		if (b.userData.bombaDestroy != null) {
+			this.bombaDestroy = b.userData.bombaDestroy;
+		}		
+		
 		
 		Globales.bodyList_typeObjectos.add(b);
 		
@@ -121,7 +128,7 @@ class TiraBomba extends ObjetoBase
 		bodyBomba.userData.nombre = "bola";
 		bodyBomba.userData.sentidoX = sentidoX;
 		bodyBomba.userData.fuerzaX = BombaMagnet.FUERA_BAJA;
-		bodyBomba.userData.destroyOnTouch = "1";
+		bodyBomba.userData.destroyOnTouch = Std.string(this.bombaDestroy);
 		bodyBomba.userData.radius = cast(15, Float);
 		bodyBomba.userData.sentidoFuerza = BombaMagnet.BOMBA_GOHORIZONTAL;
 		group.add(new BombaMagnet( posx  , randomY, bodyBomba ));	
@@ -136,7 +143,7 @@ class TiraBomba extends ObjetoBase
 		var circle:Circle = new Circle(15);
 		bodyBomba.shapes.add(circle);
 		bodyBomba.userData.nombre = "bola";
-		bodyBomba.userData.destroyOnTouch = "1";
+		bodyBomba.userData.destroyOnTouch = Std.string(this.bombaDestroy);
 		bodyBomba.userData.fuerzaY = BombaMagnet.FUERA_ALTA;
 		bodyBomba.userData.radius = cast(15, Float);
 		bodyBomba.userData.sentidoFuerza = BombaMagnet.BOMBA_GOVERTICAL;
