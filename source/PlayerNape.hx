@@ -379,6 +379,9 @@ class PlayerNape extends FlxObject
 			function OnPersonajeConPlataformaCollision(e:InteractionCallback):Void {
 			
 				if (!agarre && !trepar){
+					
+					normalColision = new Vec2(0, 0);
+					normalColision2 = new Vec2(0, 0);
 
 					//normal de la interaccion actual del jugador
 					if (bodyInferior.arbiters.length >= 1){
@@ -463,6 +466,16 @@ class PlayerNape extends FlxObject
 					if(bodyPlataforma.id == idPlataformaPiso){
 						tierraFirme = false;
 					}
+					else{
+						if(Math.abs(normalColision.x) == 1){
+							normalColision = new Vec2(0, 0);
+						}
+						else if(Math.abs(normalColision2.x) == 1){
+							normalColision2 = new Vec2(0, 0);
+						}
+					}
+					
+					colisionaParedIzquierda = colisionaParedDerecha = false;
 
 					/*var bodys:BodyList = new BodyList();
 					bodyInferior.interactingBodies(InteractionType.COLLISION, 2, bodys);
@@ -473,9 +486,7 @@ class PlayerNape extends FlxObject
 					else if ((bodys.length == 2) && ((normalColision.y != -1) || (normalColision2.y != -1))){//Si el jugador colisionaba con dos plataformas, y ninguna era el piso
 						tierraFirme = false;
 					}*/		
-				}		
-				
-				colisionaParedIzquierda = colisionaParedDerecha = false;
+				}			
 			}
 		);
 		
@@ -605,6 +616,7 @@ class PlayerNape extends FlxObject
 	}
 		
 	override public function update(elapsed:Float):Void {
+		
 		super.update(elapsed);
 		
 		actualizarEstados();
@@ -635,8 +647,6 @@ class PlayerNape extends FlxObject
 				animationItemEated = null;
 			}
 		}*/
-		
-
 		
 		eventos();
 		
@@ -862,7 +872,7 @@ class PlayerNape extends FlxObject
 						else{bodyInferior.velocity.x = 0; }
 					}
 					
-			/*case estadoSALTANDOYCORRIENDO: 
+			/*case estadoSALTANDOYCORRIENDO:
 					if (tierraFirme) {
 						ChangeAnimation("estadoQUIETO", false);
 						CambiarEstado(estadoQUIETO);

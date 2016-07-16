@@ -118,9 +118,7 @@ class TiledLevel extends TiledMap
 			
 			loadObjects(state);
 			
-			foregroundTiles.add(level);
-			
-			
+			foregroundTiles.add(level);	
 		}
 	}
 	
