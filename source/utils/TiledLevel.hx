@@ -40,7 +40,6 @@ import utils.objetos.Pinches;
 import utils.objetos.Plataforma;
 import utils.objetos.PlataformaConMovientoVertical;
 import utils.objetos.PlataformaConMovimientoHorizontal;
-import utils.objetos.PlataformaDiagonal;
 import utils.objetos.SwitchOnOff;
 import utils.objetos.TextoTutorial;
 
@@ -476,7 +475,7 @@ class TiledLevel extends TiledMap
 			
 		}else if (o.name == "plataformaDiagonal") {
 			
-			group.add(new PlataformaDiagonal(o.x,o.y,rectangularBody)); 
+			//group.add(new PlataformaDiagonal(o.x,o.y,rectangularBody)); 
 		}
 		else if (o.name == "plataformaConMovimientoVertical") {
 			var sube:String = o.properties.get("subeYBaja");

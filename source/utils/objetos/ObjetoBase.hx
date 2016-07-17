@@ -47,15 +47,12 @@ class ObjetoBase extends FlxSprite
 	var tallignment: String = "center";
 	
 	var rotar:Bool;
-	
-	var noActualizar:Bool;
-	
+		
 	public function new(x:Float, y:Float) :Void
 	{
 		super(x, y, null);
 		activo = false;		
 		rotar = false;
-		noActualizar = false;
 	}
 	
 	public function activar():Void 
@@ -78,13 +75,11 @@ class ObjetoBase extends FlxSprite
 			super.update(elapsed);
 			
 			if (b != null) {
-				if (noActualizar) {
-					this.x = b.position.x - this._halfSize.x ;
-					this.y = b.position.y - this._halfSize.y;
-					if (rotar) {
-						this.set_angle((b.rotation * 180 / Math.PI) % 360);
-					}										
-				}
+				this.x = b.position.x - this._halfSize.x ;
+				this.y = b.position.y - this._halfSize.y;
+				if (rotar) {
+					this.set_angle((b.rotation * 180 / Math.PI) % 360);
+				}										
 			}
 			
 			if (activo) {
