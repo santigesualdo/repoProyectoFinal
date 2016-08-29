@@ -30,7 +30,7 @@ import utils.enemigos.RuedaSerradaConMovimientoVertical;
 import utils.enemigos.TiraBomba;
 import utils.objetos.CheckPoint;
 import utils.objetos.CheckPointSensor;
-import utils.objetos.Escombro;
+import utils.objetos.PincheViejo;
 import utils.objetos.Estrella;
 import utils.objetos.FinLevel;
 import utils.objetos.MagnetOnOff;
@@ -225,43 +225,6 @@ class TiledLevel extends TiledMap
 				case TiledObject.ELLIPSE:
 					crearObjetoElipse(state,o,g,objectsLayer);
 			}
-			
-		
-		
-			
-			
-		/*switch (o.type.toLowerCase())
-		{
-
-			
-			case "player_start":
-				var player = new FlxSprite(x, y);
-				player.makeGraphic(32, 32, 0xffaa1111);
-				player.maxVelocity.x = 160;
-				player.maxVelocity.y = 400;
-				player.acceleration.y = 400;
-				player.drag.x = player.maxVelocity.x * 4;
-				FlxG.camera.follow(player);
-				state.player = player;
-				group.add(player);
-				
-			case "floor":
-				var floor = new FlxObject(x, y, o.width, o.height);
-				state.floor = floor;
-				
-			case "coin":
-				var tileset = g.map.getGidOwner(o.gid);
-				var coin = new FlxSprite(x, y, c_PATH_LEVEL_TILESHEETS + tileset.imageSource);
-				state.coins.add(coin);
-				
-			case "exit":
-				// Create the level exit
-				var exit = new FlxSprite(x, y);
-				exit.makeGraphic(32, 32, 0xff3f3f3f);
-				exit.exists = false;
-				state.exit = exit;
-				group.add(exit);
-		}*/
 	}
 
 	public function loadImages():Void{
@@ -293,7 +256,13 @@ class TiledLevel extends TiledMap
 		}
 		
 		if (o.name == "finLevel") {
-			group.add(new FinLevel(new FlxPoint(o.x, o.y)));			
+			
+			var activo:Bool = true;
+			if (o.properties.contains("activo")) {
+				activo = o.properties.get("activo") == "1";
+			}
+			var id:String = o.xmlData.att.resolve("id");
+			group.add(new FinLevel(new FlxPoint(o.x, o.y), activo, id));			
 		}
 	}
 	
@@ -466,7 +435,7 @@ class TiledLevel extends TiledMap
 			group.add(new TextoTutorial(o.x, o.y, rectangularBody));
 		}
 		if (o.name == "plataforma" ) {
-			
+			rectangularBody.userData.nombre = "plataforma";
 			if (o.properties.contains("velocidad")) {
 				var velocidad:Float = Std.parseFloat(cast(o.properties.get("velocidad"), String));
 				if (rectangularBody.isKinematic()){rectangularBody.surfaceVel.x = velocidad; }
@@ -502,7 +471,12 @@ class TiledLevel extends TiledMap
 			}			
 			group.add(new Palanca(o.x, o.y, rectangularBody));
 		}else if (o.name == "tiraBomba") {
+			
+			rectangularShape.localCOM.set(new Vec2(0, 0));
+			//rectangularBody.position.set(new Vec2(o.x, o.y));
+			
 			var sentidoX:Int = 0;
+			
 			if (o.properties.contains("sentidoX")) {
 				sentidoX = Std.parseInt(cast(o.properties.get("sentidoX"), String));
 			}
@@ -513,9 +487,18 @@ class TiledLevel extends TiledMap
 			if (o.properties.contains("delayTimer")) {
 				rectangularBody.userData.delayTimer = Std.parseInt(o.properties.get("delayTimer"));
 			}		
+			if (o.properties.contains("timeBombAlive")) {
+				rectangularBody.userData.timeBombAlive = Std.parseInt(o.properties.get("timeBombAlive"));
+			}			
 			if (o.properties.contains("bombaDestroy")) {
 				rectangularBody.userData.bombaDestroy = Std.parseInt(o.properties.get("bombaDestroy"));
+			}	
+			if (o.properties.contains("canMove")) {
+				rectangularBody.userData.canMove =  Std.parseInt(cast(o.properties.get("canMove"),String));
 			}			
+			if (o.properties.contains("maxDistance")) {
+				rectangularBody.userData.maxDistance =  Std.parseInt(cast(o.properties.get("maxDistance"),String));
+			}					
 			group.add(new TiraBomba(o.x, o.y, rectangularBody, sentidoBombas, sentidoX));
 		}else if (o.name == "rectAgarreIzq") {
 			rectangularBody.shapes.at(0).sensorEnabled = true;
@@ -540,8 +523,8 @@ class TiledLevel extends TiledMap
 			Globales.bodyList_typeMagnet.add(rectangularBody);
 		}else if (o.name == "pinches") {
 			group.add(new Pinches(o.x, o.y, rectangularBody));
-		}else if (o.name == "escombro") {
-			group.add(new Escombro(o.x, o.y, rectangularBody));
+		}else if (o.name == "pincheViejo") {
+			group.add(new PincheViejo(o.x, o.y, rectangularBody));
 		}else if (o.name == "linea") {
 			/* Declaramos la linea, que va a tener colgando al objeto linkeado */
 			if (o.properties.contains("linked_id")) {

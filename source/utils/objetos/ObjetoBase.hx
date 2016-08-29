@@ -1,6 +1,7 @@
 package utils.objetos;
 
 import flixel.addons.nape.FlxNapeSpace;
+import flixel.addons.tile.FlxTileSpecial.AnimParams;
 import flixel.FlxSprite;
 import flixel.FlxG;
 
@@ -78,7 +79,7 @@ class ObjetoBase extends FlxSprite
 				this.x = b.position.x - this._halfSize.x ;
 				this.y = b.position.y - this._halfSize.y;
 				if (rotar) {
-					this.set_angle((b.rotation * 180 / Math.PI) % 360);
+					this.angle = (b.rotation * 180 / Math.PI) % 360;		
 				}										
 			}
 			
@@ -165,6 +166,31 @@ class ObjetoBase extends FlxSprite
 		if (!b.allowMovement) {
 			b.allowMovement = true;
 		}
+	}
+	
+	public function parseLinkedID(cadena:String):Array<String> {
+		var resultado:Array<String> = new Array<String>();
+		/* Si en el user data tiene Linked ID significa que activa comportamiento de otro ObjetoBase */
+		if (cadena != "") {
+			resultado = cadena.split(" ");					
+			FlxG.log.add("Linked id: " + resultado );
+		}
+		return resultado;
+	}
+	
+	public function activarObjetoBase(linked_id:Array<String>):Void {
+	
+		for (body in Globales.bodyList_typeObjectos) {
+			if (body.userData.id != null) {
+				for (str in linked_id) {
+					if (body.userData.id == str) {
+						FlxG.log.add("Body id: " + str);
+						var o:ObjetoBase = cast(body.userData.object, ObjetoBase);
+						o.activar();
+					}						
+				}	
+			}
+		}	
 	}
 	
 	public static function buscarBody(id:Int):Body {

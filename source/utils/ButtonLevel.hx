@@ -54,14 +54,9 @@ class ButtonLevel extends FlxSprite
 	public function addMouseEvents():Void{
 		FlxMouseEventManager.add(cast(this,FlxSprite), onClick, onClickUp, onMouseOver, onMouseOut);
 	}
-	
-	public function removeMouseEvents():Void{
-		FlxMouseEventManager.remove(cast(this,FlxSprite));
-	}
-		
+			
 	function onClickUp(sprite:FlxSprite):Void {	
 		clicked = true;
-		removeMouseEvents();
 	}
 	
 	function onClick(sprite:FlxSprite):Void	{ 
@@ -80,9 +75,13 @@ class ButtonLevel extends FlxSprite
 	
 	override public function update(elapsed:Float):Void {
 		super.update(elapsed);
-		
 		text.update(elapsed);
 		
+	}
+	
+	override public function destroy():Void {
+		FlxMouseEventManager.remove(cast(this, FlxSprite));
+		super.destroy();
 	}
 	
 	override public function draw():Void {

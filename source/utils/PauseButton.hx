@@ -39,10 +39,6 @@ class PauseButton extends FlxSprite
 	public function addMouseEvents():Void{
 		FlxMouseEventManager.add(this, onClick, onClickUp, onMouseOver, onMouseOut);
 	}
-	
-	public function removeMouseEvents():Void{
-		FlxMouseEventManager.remove(this);
-	}	
 
 	function onClickUp(sprite:FlxSprite):Void {
 		accion();
@@ -64,7 +60,7 @@ class PauseButton extends FlxSprite
 	
 	override public function destroy():Void {
 		
-		removeMouseEvents();
+		FlxMouseEventManager.remove(this);
 		super.destroy();
 		
 	}

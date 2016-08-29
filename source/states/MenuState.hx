@@ -29,6 +29,8 @@ class MenuState extends FlxState
 	
 	var botones:FlxGroup;
 	
+	var limpiarGrupo:Bool;
+	
 	override public function create()
 	{
 		super.create();
@@ -39,6 +41,8 @@ class MenuState extends FlxState
 		
 		/*var background:FlxSprite = new FlxSprite(0, 0, AssetPaths.MENU_BACK_PATH);
 		add(background);*/
+		
+		limpiarGrupo = false;
 		
 		botones = new FlxGroup();
 		add(botones);
@@ -78,36 +82,20 @@ class MenuState extends FlxState
 				if (boton.getLevelName() == "testPlayerSpine") {
 					FlxG.switchState(new PlayerDesignState());
 				}else {
+					limpiarGrupo = true;
 					changeLevel(boton.getLevelName());	
 				}
 				
 			}			
 		}
-		
-		if (FlxG.keys.justPressed.DOWN) {
-			FlxG.camera.zoom = FlxG.camera.zoom - 0.1;
-			FlxG.log.add("Zoom: " + FlxG.camera.zoom);
-			return;
+
+		if (limpiarGrupo) {
+			for ( b in botones.members ) {
+				var boton: ButtonLevel = cast(b, ButtonLevel);
+				botones.remove(boton);
+				boton.destroy();
+			}	
 		}
-		
-		if (FlxG.keys.justPressed.UP) {
-			FlxG.camera.zoom = FlxG.camera.zoom + 0.1;
-			FlxG.log.add("Zoom: " + FlxG.camera.zoom);
-			return;
-		}
-		
-		if (FlxG.keys.pressed.DOWN) {
-			FlxG.camera.zoom = FlxG.camera.zoom - 0.1;
-			FlxG.log.add("Zoom: " + FlxG.camera.zoom);
-			return;
-		}
-		
-		if (FlxG.keys.pressed.UP) {
-			FlxG.camera.zoom = FlxG.camera.zoom + 0.1;
-			FlxG.log.add("Zoom: " + FlxG.camera.zoom);
-			return;
-		}
-		
 	}
 	
 		

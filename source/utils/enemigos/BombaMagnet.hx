@@ -43,11 +43,11 @@ class BombaMagnet extends ObjetoBase
 	public static inline var BOMBA_GOHORIZONTAL:Int = 2;
 	
 	/** 250 */
-	public static inline var FUERA_BAJA:Int = 250;
+	public static inline var FUERA_BAJA:Int = 150;
 	/** 500 */
-	public static inline var FUERA_MEDIA:Int = 500;
+	public static inline var FUERA_MEDIA:Int = 250;
 	/** 750 */
-	public static inline var FUERA_ALTA:Int = 750;
+	public static inline var FUERA_ALTA:Int = 300;
 	
 	var fuerzaX : Int;
 	var fuerzaY: Int;
@@ -56,6 +56,15 @@ class BombaMagnet extends ObjetoBase
 	
 	/* Puede ser vertical o horizontal */
 	var direccion:Int = BOMBA_GONONE;
+	
+	var delayTime:Float = 0;
+	var acumTime:Float = 0;
+	
+	var destroyOnTime:Bool = false;
+	
+	var explosionSprite:FlxSprite = null;
+	
+	var readyToDestroy : Bool ;
 	
 	/* TAREA: Cerrar tema de gravedad, asi podemos parametrizar las velocidades y hacer todo mas facil. */
 	
@@ -74,11 +83,17 @@ class BombaMagnet extends ObjetoBase
 		YInicial = y;
 		bodyInicial = bodyCircular.copy();
 		
-		b.setShapeMaterials(Material.steel());
-		
 		b.userData.magnet = true;
 		
+		if (b.userData.timeBombAlive != null ) {
+			destroyOnTime = true;
+			delayTime = b.userData.timeBombAlive;
+		}
+		
 		direccion = bodyCircular.userData.sentidoFuerza;
+		
+		b.allowRotation = true;
+		this.rotar = true;
 		
 		if (bodyCircular.userData.fuerzaX != null) {
 			fuerzaX = bodyCircular.userData.fuerzaX;
@@ -139,18 +154,9 @@ class BombaMagnet extends ObjetoBase
 		
 		super(b.position.x - radius * 0.5, b.position.y - radius * 0.5);	
 		
-		this.loadGraphic(AssetPaths.bomba_magnet, false, 20, 20);
+		this.loadGraphic(AssetPaths.bomba_magnet, false, 20, 20,false);
 		
 		var sentidoY:Int=1 ;
-		/*
-		if (gravedad < 0) {
-			sentidoY = -1 ;
-		}
-		*/
-		/* Siempre actua segun la gravedad en Eje X*/
-		
-		/* Para que sea liviano */
-		b.shapes.at(0).material = Material.sand();
 		
 		switch(direccion) {
 			case BOMBA_GONONE: 
@@ -163,6 +169,8 @@ class BombaMagnet extends ObjetoBase
 		Globales.bodyList_typeMagnet.add(b);
 		tipo = "Bomba";
 		setNormalText(15);
+		
+		readyToDestroy = false;
 
 	}
 	
@@ -171,34 +179,79 @@ class BombaMagnet extends ObjetoBase
 		var cb:CbType = new CbType();
 		b.cbTypes.add(cb);
 		return ot = new InteractionListener( CbEvent.BEGIN, InteractionType.COLLISION, CbType.ANY_BODY, cb,
-		function bolaMagnetConCualquierBody(e:InteractionCallback):Void {
-			destroy();
+		function bolaMagnetConCualquierBody(e:InteractionCallback):Void {			
+			predestroy();
 		});		
 	}
 	
+	function predestroy() :Void
+	{
+		b.space = null;
+		readyToDestroy = true;
+		explosionSprite = new FlxSprite(this.x, this.y);
+		Globales.currentState.add(explosionSprite);
+		explosionSprite.loadGraphic( AssetPaths.explosion_bombaMagnet, true, 30, 30, true);
+		explosionSprite.animation.add("explode", [0, 1, 2, 3, 4, 5, 6, 7], 30, false);
+		explosionSprite.animation.play("explode", false, false);
+	}
+	
+	
 	override public function update(elapsed:Float):Void {
+		
+		if (readyToDestroy) {
+			if (explosionSprite.animation.finished) {
+				this.destroy();
+			}		
+			this.b.allowMovement = false;
+			return;
+		}
+		
 		super.update(elapsed);
-		updateTextPos();
+		
+		this.angle = (b.rotation * 180 / Math.PI) % 360;		
+		
+		if (destroyOnTime) {
+			if (acumTime < delayTime) {
+				acumTime+= elapsed;
+			}else {
+				predestroy();		
+				destroyOnTime = false;
+			}
+		}
+		
+		if (this.y > FlxG.worldBounds.height) {
+			predestroy();
+		}		
 	}
 	
 	public function setInfinita(flag:Bool):Void {
 		esInfinita = flag;
 	}
 	
+	override public function draw():Void {
+	
+		if (!readyToDestroy) {
+			super.draw();
+		}
+		
+	}
+	
 	override public function destroy():Void {
+		
+		if (!readyToDestroy) {
+			predestroy();
+			return;
+		}
+		
+		explosionSprite.destroy();
 		
 		if (ot != null && FlxNapeSpace.space!= null) {FlxNapeSpace.space.listeners.remove(ot);}
 		if (ic != null && FlxNapeSpace.space!=null) FlxNapeSpace.space.listeners.remove(ic);
-
-		//FlxG.camera.shake(0.01);
+	
+		FlxG.log.add("Bomba destroyed");
 		
 		super.destroy();
 		
 	}
 	
-	/*function preDestroy():Void {
-
-		this.destroy();
-	}*/
-		
 }

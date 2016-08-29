@@ -659,9 +659,11 @@
     <property name="bodyType" value="static"/>
    </properties>
   </object>
-  <object id="430" name="tiraBomba" type="enemigoTiraBomba" x="4224" y="696.848" width="384" height="20">
+  <object id="430" name="tiraBomba" type="enemigoTiraBomba" x="4240" y="734.848" width="64" height="64">
    <properties>
-    <property name="bodyType" value="static"/>
+    <property name="bodyType" value="kinematic"/>
+    <property name="canMove" value="1"/>
+    <property name="maxDistance" value="256"/>
     <property name="sentidoBombas" value="1"/>
     <property name="userDataBody" value="tiraBomba"/>
    </properties>
@@ -1038,7 +1040,7 @@
     <property name="bodyType" value="static"/>
    </properties>
   </object>
-  <object id="562" name="estrella" type="item" x="4554" y="1123" width="32" height="32">
+  <object id="562" name="estrella" type="item" x="4556" y="1159" width="32" height="32">
    <properties>
     <property name="bodyType" value="static"/>
    </properties>
