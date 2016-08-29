@@ -1,42 +1,20 @@
 package ;
-import flash.events.KeyboardEvent;
-import flixel.addons.nape.FlxNapeSpace;
-import flixel.animation.FlxAnimation;
-import flixel.effects.particles.FlxEmitter;
-import flixel.FlxG;
-import flixel.FlxObject;
-import flixel.FlxSprite;
-import flixel.math.FlxPoint;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-import lime.Assets;
-import nape.callbacks.CbEvent;
-import nape.callbacks.CbType;
-import nape.callbacks.InteractionCallback;
-import nape.callbacks.InteractionListener;
-import nape.callbacks.InteractionType;
-import nape.callbacks.PreCallback;
-import nape.callbacks.PreFlag;
-import nape.callbacks.PreListener;
-import nape.dynamics.Arbiter;
-import nape.dynamics.CollisionArbiter;
-import nape.geom.Vec2;
-import nape.phys.Body;
-import nape.phys.BodyList;
-import nape.phys.BodyType;
-import nape.phys.Material;
-import nape.shape.Circle;
-import nape.shape.Polygon;
-import nape.shape.Shape;
-import nape.space.Space;
+import flixel.*;
+import flixel.addons.nape.*;
+import flixel.effects.particles.*;
+import flixel.math.*;
+import flixel.text.*;
+import flixel.util.*;
+import nape.callbacks.*;
+import nape.dynamics.*;
+import nape.geom.*;
+import nape.phys.*;
+import nape.shape.*;
+import nape.space.*;
+import states.*;
+import utils.*;
+import utils.objetos.*;
 
-import states.PlayState;
-import states.PlaySubState;
-import utils.AssetPaths;
-import utils.Callbacks;
-import utils.Globales;
-import utils.objetos.ObjetoBase;
-import utils.SpinePlayer;
 
 
 class PlayerNape extends FlxObject
@@ -134,6 +112,8 @@ class PlayerNape extends FlxObject
 		text.setFormat(AssetPaths.font_kreon, 18, FlxColor.YELLOW, "left");
 		Globales.currentState.add(text);	
 		text.visible = Globales.verTexto;
+
+		
 				
 		textoColisionAcum = 0;
 		textoColisionOn = false;
@@ -179,6 +159,8 @@ class PlayerNape extends FlxObject
 	}
 	
 	function crearParticleEmitter():Void {
+		
+		
 		_emitter= new FlxEmitter(this.x,this.y, 5);
 		
 		// All we need to do to start using it is give it some particles. makeParticles() makes this easy!
@@ -334,12 +316,6 @@ class PlayerNape extends FlxObject
 			
 				var b:Body = e.int2.castBody;
 				
-				if (b.userData.nombre == "plataformaDiagonal") {
-					tierraFirme = true;
-					idPlataformaPiso = b.id;
-					return;
-				}
-				
 				if (!agarre && !trepar){
 
 					//normal de la interaccion actual del jugador
@@ -358,7 +334,16 @@ class PlayerNape extends FlxObject
 					}
 
 					var bodys:BodyList = new BodyList();
-					bodyInferior.interactingBodies(InteractionType.COLLISION, 2, bodys);
+					bodyInferior.interactingBodies(InteractionType.COLLISION, -1, bodys);
+					
+					for ( b in bodys ) {
+						var nombre:String = b.userData.nombre;
+						FlxG.log.add("Nombre: " + nombre);
+						if (nombre != "plataforma"){
+							FlxG.log.add("Removido de colision " + nombre);
+							bodys.remove(b);
+						}
+					}
 					
 					if(bodys.length == 1){//Si el jugador colisiona con una plataforma que es el piso
 						if (normalColision.y == -1){
@@ -487,12 +472,7 @@ class PlayerNape extends FlxObject
 		});	
 				
 		
-		FlxNapeSpace.space.listeners.add(PersonajePrePiso);
-		FlxNapeSpace.space.listeners.add(PersonajeConObjetoInteractivoEnd);
-		FlxNapeSpace.space.listeners.add(PersonajeConObjetoInteractivo);
-		FlxNapeSpace.space.listeners.add(PersonajeConPlataforma);		
-		FlxNapeSpace.space.listeners.add(PersonajeConPlataformaEnd);	
-		FlxNapeSpace.space.listeners.add(PersonajeConAgarre);
+		activarListeners();
 		
 	}
 	
@@ -601,7 +581,7 @@ class PlayerNape extends FlxObject
 		var ps:PlayState = cast(Globales.currentState, PlayState);
 		var ss:PlaySubState = ps.getSubPlayState(FlxColor.RED);
 		ss.setAllowEsc(false);
-			
+		this.desactivarListeners();	
 		ps.openSubState( ss );
 		ss.setPos(new FlxPoint(FlxG.camera.scroll.x + 300, FlxG.camera.scroll.y + 300));
 	}
@@ -618,7 +598,6 @@ class PlayerNape extends FlxObject
 			case estadoAGARRADO: estado = "estadoAGARRADO";
 			case estadoFRENANDO: estado = "estadoFRENANDO";
 			case estadoONPLATAFORMAVERTICAL: estado = "estadoONPLATAFORMAVERTICAL";
-			default: estado = "estadoDESCONOCIDO - error"; return;
 		}
 	
 	}
@@ -832,6 +811,26 @@ class PlayerNape extends FlxObject
 		if (bodyInferior.position.y - bodyInferior.bounds.height*0.5 > FlxG.camera.maxScrollY) {
 			playerDead("caida");
 		}		
+	}
+	
+	function activarListeners():Void 
+	{
+		FlxNapeSpace.space.listeners.add(PersonajePrePiso);
+		FlxNapeSpace.space.listeners.add(PersonajeConObjetoInteractivoEnd);
+		FlxNapeSpace.space.listeners.add(PersonajeConObjetoInteractivo);
+		FlxNapeSpace.space.listeners.add(PersonajeConPlataforma);		
+		FlxNapeSpace.space.listeners.add(PersonajeConPlataformaEnd);	
+		FlxNapeSpace.space.listeners.add(PersonajeConAgarre);
+	}
+	
+	function desactivarListeners():Void 
+	{
+		FlxNapeSpace.space.listeners.remove(PersonajePrePiso);
+		FlxNapeSpace.space.listeners.remove(PersonajeConObjetoInteractivoEnd);
+		FlxNapeSpace.space.listeners.remove(PersonajeConObjetoInteractivo);
+		FlxNapeSpace.space.listeners.remove(PersonajeConPlataforma);		
+		FlxNapeSpace.space.listeners.remove(PersonajeConPlataformaEnd);	
+		FlxNapeSpace.space.listeners.remove(PersonajeConAgarre);
 	}
 	
 	override public function draw():Void {

@@ -21,8 +21,9 @@ import states.PlayState;
 class FinLevel extends ObjetoBase
 {
 
+	var interactionListener: InteractionListener;
 	
-	public function new(flxPoint:FlxPoint) 
+	public function new(flxPoint:FlxPoint, _activo:Bool, id:String) 
 	{
 		super(flxPoint.x, flxPoint.y);
 		
@@ -30,13 +31,15 @@ class FinLevel extends ObjetoBase
 		var rectangularShape:Polygon = new Polygon(Polygon.rect(0, 0, 10, 10));
 		rectangularShape.sensorEnabled = true;
 		b.shapes.add(rectangularShape);
-		
+			
 		b.space = FlxNapeSpace.space;
 		
 		var cb:CbType = new CbType();
 		b.cbTypes.add(cb);
 		
-		var ic:InteractionListener = new InteractionListener(
+		Globales.bodyList_typeObjectos.add(b);
+		
+		interactionListener = new InteractionListener(
 			CbEvent.BEGIN,
 			InteractionType.SENSOR, 
 			Callbacks.bodyInferiorCallback,
@@ -48,7 +51,17 @@ class FinLevel extends ObjetoBase
 			}		
 		);
 		
-		FlxNapeSpace.space.listeners.add(ic);		
+		if (_activo) activar();
+		
+		b.userData.id = id;
+		b.userData.object = this;
 	}
 	
+	override public function activar():Void {
+		FlxNapeSpace.space.listeners.add(interactionListener);		
+	}
+	
+	override public function desactivar():Void {
+		FlxNapeSpace.space.listeners.remove(interactionListener);		
+	}	
 }

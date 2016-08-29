@@ -2,6 +2,7 @@ package states;
 
 import flixel.addons.editors.tiled.TiledTileLayer;
 import flixel.addons.nape.FlxNapeSpace;
+import flixel.input.mouse.FlxMouseEventManager;
 
 import flixel.addons.display.FlxBackdrop;
 import flixel.addons.editors.tiled.TiledLayer;
@@ -43,17 +44,15 @@ import utils.enemigos.TiraBomba;
 import utils.enemigos.RuedaSerrada;
 import utils.objetos.CheckPoint;
 import utils.objetos.CheckPointSensor;
-import utils.objetos.Escombro;
+import utils.objetos.PincheViejo;
 import utils.objetos.FinLevel;
 import utils.objetos.ObjetoBase;
 import utils.objetos.Palanca;
 import utils.objetos.Pinches;
 import utils.objetos.PlataformaConMovientoVertical;
 import utils.objetos.PlataformaConMovimientoHorizontal;
-//import utils.objetos.PlataformaDiagonal;
 import utils.objetos.Plataforma;
 import utils.objetos.TextoTutorial;
-
 import nape.phys.Body;
 import nape.phys.BodyType;
 import nape.shape.Shape;
@@ -98,6 +97,8 @@ class PlayState extends FlxState
 	 var currentCheckPoint:CheckPoint = null;
 	 
 	 var playSubState:PlaySubState;
+	 
+	 var eliminarEventosMouse:Bool;
 	 
 	 /*
 	  * En el repositorio, en la carpeta principal de 'source' dejo un zip, con el archivo 'FlxTilemap.hx'. Lo tuve que modificar para que funcionen los tiles.
@@ -147,6 +148,8 @@ class PlayState extends FlxState
 		_hud.updateHUD(Globales.estrellasAgarradasID.length);
 		add(_hud);
 		
+		eliminarEventosMouse = true;
+		
 	}
 	
 	function loadLevel(currentLevel:String):Level 
@@ -170,8 +173,18 @@ class PlayState extends FlxState
 		if (FlxG.keys.justPressed.P) {
 			paused = !paused;		
 		}
+		
+		if (eliminarEventosMouse) {
+			checkMouseEventManager();
+		}
 
 	}	
+	
+	function checkMouseEventManager():Void
+	{
+		FlxMouseEventManager.removeAll();
+		eliminarEventosMouse = false;
+	}
 	
 	public function checkPointSensorTouched(id:Int):Void {
 		for (ch in Globales.checkPointGroup.members) {

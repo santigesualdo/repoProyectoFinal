@@ -69,6 +69,7 @@ class CheckPointButton extends FlxSprite
 	}
 	
 	override public function destroy():Void {
+		FlxMouseEventManager.remove(this);
 		FlxMouseEventManager.remove(sprite);
 		sprite.destroy();
 		text.destroy();
