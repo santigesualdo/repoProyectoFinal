@@ -8,7 +8,7 @@
    <image width="498" height="457" source="decoEspacial.png"/>
   </tile>
  </tileset>
- <imagelayer name="backdrop" x="-2" visible="0" offsetx="-2" offsety="0">
+ <imagelayer name="backdrop" x="68" y="75" visible="0" offsetx="-2" offsety="0">
   <image source="level0_background.png"/>
  </imagelayer>
  <layer name="tilesheet" width="20" height="31">
