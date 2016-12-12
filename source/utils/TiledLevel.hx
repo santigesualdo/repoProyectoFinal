@@ -125,6 +125,9 @@ class TiledLevel extends TiledMap
 	
 	public function loadObjects(state:PlayState){
 		var layer:TiledObjectLayer;
+		
+		var layersPermitted : Array<String> = ["fondoBottom", "fondoMiddle", "fondoTop", "fondoDeco3","fondoDeco2","fondoDeco1"];
+		
 		for (layer in layers)
 		{
 			if (layer.type != TiledLayerType.OBJECT)
@@ -132,11 +135,13 @@ class TiledLevel extends TiledMap
 			var objectLayer:TiledObjectLayer = cast layer;
 
 			//collection of images layer
-			if (layer.name == "images")
-			{
-				for (o in objectLayer.objects)
-				{
-					loadImageObject(o);
+			for ( l in layersPermitted ){
+				if (l == layer.name){
+					for (o in objectLayer.objects)
+					{
+						FlxG.log.add("layer name: " + layer.name);
+						loadImageObject(o);
+					}
 				}
 			}
 			
@@ -195,7 +200,8 @@ class TiledLevel extends TiledMap
 			depthY = Std.parseFloat( object.properties.get("depthY"));
 		}		
 		
-		decoSprite.scrollFactor.set(depthX,depthY);
+		if (depthX != 0 && depthY != 0)
+			decoSprite.scrollFactor.set(depthX,depthY);
 
 		backgroundLayer.add(decoSprite);
 	}

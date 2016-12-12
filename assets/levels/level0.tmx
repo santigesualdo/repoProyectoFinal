@@ -1,90 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="75" height="20" tilewidth="64" tileheight="64" backgroundcolor="#ffffff" nextobjectid="564">
- <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64" tilecount="49">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="75" height="20" tilewidth="64" tileheight="64" backgroundcolor="#ffffff" nextobjectid="584">
+ <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64" tilecount="49" columns="7">
   <image source="tileset.png" width="448" height="448"/>
  </tileset>
- <tileset firstgid="50" name="imageCollection" tilewidth="500" tileheight="467" tilecount="1">
+ <tileset firstgid="50" name="imageCollection" tilewidth="2480" tileheight="2284" tilecount="5" columns="0">
   <tile id="0">
-   <image width="498" height="457" source="decoEspacial.png"/>
+   <image width="2480" height="475" source="elements game space-05.png"/>
+  </tile>
+  <tile id="1">
+   <image width="2480" height="475" source="elements game space-01.png"/>
+  </tile>
+  <tile id="2">
+   <image width="463" height="1280" source="elements game space-03.png"/>
+  </tile>
+  <tile id="3">
+   <image width="473" height="578" source="elements game space-02.png"/>
+  </tile>
+  <tile id="4">
+   <image width="362" height="578" source="elements game space-04.png"/>
   </tile>
  </tileset>
- <objectgroup name="images" opacity="0.5">
-  <object id="504" gid="50" x="230" y="1057" width="500" height="467">
-   <properties>
-    <property name="depthX" value="0.5"/>
-    <property name="depthY" value="0"/>
-    <property name="opacity" value="0.3"/>
-   </properties>
-  </object>
-  <object id="508" gid="50" x="662" y="672" width="500" height="457">
-   <properties>
-    <property name="depthX" value="0.8"/>
-    <property name="depthY" value="0"/>
-    <property name="opacity" value="0.3"/>
-   </properties>
-  </object>
-  <object id="509" gid="50" x="1126" y="956" width="500" height="457">
-   <properties>
-    <property name="depthX" value="0.2"/>
-    <property name="depthY" value="0"/>
-    <property name="opacity" value="0.3"/>
-   </properties>
-  </object>
-  <object id="511" gid="50" x="1722" y="436" width="500" height="457">
-   <properties>
-    <property name="depthX" value="0.8"/>
-    <property name="depthY" value="0"/>
-    <property name="opacity" value="0.3"/>
-   </properties>
-  </object>
-  <object id="513" gid="50" x="1922" y="1452" width="500" height="457">
-   <properties>
-    <property name="depthX" value="0.8"/>
-    <property name="depthY" value="0"/>
-    <property name="opacity" value="0.3"/>
-   </properties>
-  </object>
-  <object id="514" gid="50" x="2942" y="448" width="500" height="457">
-   <properties>
-    <property name="depthX" value="0.8"/>
-    <property name="depthY" value="0"/>
-    <property name="opacity" value="0.3"/>
-   </properties>
-  </object>
-  <object id="515" gid="50" x="2560" y="1024" width="500" height="457">
-   <properties>
-    <property name="depthX" value="0.8"/>
-    <property name="depthY" value="0"/>
-    <property name="opacity" value="0.3"/>
-   </properties>
-  </object>
-  <object id="516" gid="50" x="3926" y="1172" width="500" height="457">
-   <properties>
-    <property name="depthX" value="0.8"/>
-    <property name="depthY" value="0"/>
-    <property name="opacity" value="0.3"/>
-   </properties>
-  </object>
-  <object id="549" gid="50" x="-36" y="790" width="500" height="457">
-   <properties>
-    <property name="depthX" value="0.8"/>
-    <property name="depthY" value="0"/>
-    <property name="opacity" value="0.3"/>
-   </properties>
-  </object>
+ <objectgroup name="fondoDeco1"/>
+ <objectgroup name="fondoDeco2">
+  <object id="582" gid="54" x="2560" y="384" width="362" height="578"/>
+  <object id="583" gid="54" x="1088" y="384" width="362" height="578"/>
  </objectgroup>
- <imagelayer name="backdrop" x="128" y="64">
-  <image source="level0_background.png"/>
+ <objectgroup name="fondoDeco3">
+  <object id="576" gid="53" x="1600" y="1408" width="473" height="578"/>
+  <object id="577" gid="53" x="-64" y="1344" width="473" height="578"/>
+  <object id="578" gid="53" x="4032" y="1408" width="473" height="578"/>
+ </objectgroup>
+ <objectgroup name="fondoMiddle">
+  <object id="575" gid="52" x="1536" y="1280" width="463" height="1280"/>
+ </objectgroup>
+ <objectgroup name="fondoTop">
+  <object id="572" gid="51" x="0" y="475" width="2480" height="475"/>
+  <object id="573" gid="51" x="2307" y="475" width="2493" height="475"/>
+ </objectgroup>
+ <objectgroup name="fondoBottom">
+  <object id="569" gid="50" x="0" y="1280" width="2480" height="475"/>
+  <object id="570" gid="50" x="2368" y="1280" width="2480" height="475"/>
+ </objectgroup>
+ <imagelayer name="backdrop" x="128" y="64" visible="0">
+  <image source="level0_background.png" width="2400" height="1280"/>
  </imagelayer>
  <layer name="tilesheet" width="75" height="20">
   <properties>
    <property name="tilesheet" value="tileset.png"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmN1ugzAMhdk6af2Rtk5r1bs2u4L3f8I6Epa8I7txwKUgcaSjIEog+XDs0KZZZelI/hZeZWtl5deSWb2R38mJ/Nc7GW2tN+QPeN6SWW3JO3JL7nq3RlvrPfkAz1sSK44j7Z1PoTmw8jLgONLeecTzU8GfzbSsNC4WA77Wyh9Rkms5+ySOWzjvZYW51NPiHGtiI1/biTHeyBfF0To+OO9lhbnU00asFx7juX8+OlpeVqn5XzsTtK/IqzzGn4B7ybVhzcXLCmssxoqMkyF1SetTus9QVhoXuTasmI9YgyjMPThnbx4v3cdiVYoRDxdNz2CF2vZj4nENrfHYT7KSfLCGW7m/1ldjXHPYX1liLswks5Ictboe4c4Yz5xY4drjOOU9Q0RuHyvJdCrV7EnH1EFP3Zta1j6Vj7M9XDQxqy9xXznnRzxK+R2/b2p4JnDpfw4+xjxr+dc5Dinev8t8coDfh9Q77Fvb3zPfMZ5DzqmV9m2d4+MOBSwmKQ==
+   eJztmN1OwzAMhcPPxGASbALEHYSrlvd/QRwpFt6Rvdg0lFbqkY7StWmTfE3sdCltsnQkPwlvsrWx8mvNrK7I1+RM/qzORhn1DfkW2lszqz35njyQx+rBKKN+IB+gvTWx4nmkvfM5tARWXgY8j7R33qP93PBdmpeVxsViwHWt+NFLci0Xv4jjAc57WWEs9ZQ4xsjcKHVH0ccP8pvi3jpeOO9lhbHUU/ZYL9zH19o+ure8rHI6z50Zyv+Iq9zHU4dnybVhjcXLCnMszhU5T6J5Cevv6vkd2OpjlJXGRa4Na873WIMojD3IAn9b9bW6kp3FqjVHPFw0/QUr1L72ifvViuN8Het+pR+GyErywRxuxf6o343xLWF/hWJuzIyZnNI5Uy2v9/Bo9GtJrLQ1W5jwnqFHbJ8qyXQuRfakU/KgJ+/NLWufysfFHi6amNWjeK4c8yUerfiO3zcRnhnc+p+DjzHOWn529kOK9+8ynhzg+m/yHd4bvd8z3ileQsyJSvu2LvPjG5bRJqY=
   </data>
  </layer>
- <objectgroup name="entities">
+ <objectgroup name="entities" opacity="0.39">
   <object id="1" name="checkPoint" type="checkPoint" x="71.03" y="1154.18" rotation="-302.71">
    <properties>
     <property name="checkPoint" value="0"/>
@@ -268,7 +236,7 @@
     <property name="checkPointSensor" value="3"/>
    </properties>
   </object>
-  <object id="355" name="rectAgarreDer" type="agarre" x="2304" y="832" width="2" height="2">
+  <object id="355" name="rectAgarreDer" type="agarre" x="2240" y="896" width="1.02204" height="1.02204">
    <properties>
     <property name="bodyType" value="static"/>
     <property name="esRompible" value="0"/>
@@ -279,12 +247,12 @@
     <property name="userDataShape" value="shape_rectAgarreDer"/>
    </properties>
   </object>
-  <object id="356" name="plataforma" type="plataformaHorizontal" x="2176" y="832" width="128" height="2">
+  <object id="356" name="plataforma" type="plataformaHorizontal" x="2176" y="896" width="64" height="1.02204">
    <properties>
     <property name="bodyType" value="static"/>
    </properties>
   </object>
-  <object id="357" name="rectAgarreIzq" type="agarre" x="2174" y="832" width="2" height="2">
+  <object id="357" name="rectAgarreIzq" type="agarre" x="2174" y="896" width="1.02204" height="1.02204">
    <properties>
     <property name="bodyType" value="static"/>
     <property name="esRompible" value="0"/>
@@ -594,7 +562,7 @@
     <property name="bodyType" value="static"/>
    </properties>
   </object>
-  <object id="412" name="rectAgarreIzq" type="agarre" x="1598" y="768" width="2" height="2">
+  <object id="412" name="rectAgarreIzq" type="agarre" x="1534" y="768" width="2" height="2">
    <properties>
     <property name="bodyType" value="static"/>
     <property name="esRompible" value="0"/>
@@ -605,7 +573,7 @@
     <property name="userDataShape" value="shape_rectAgarreIzq"/>
    </properties>
   </object>
-  <object id="413" name="rectAgarreDer" type="agarre" x="1728" y="768" width="2" height="2">
+  <object id="413" name="rectAgarreDer" type="agarre" x="1664" y="768" width="2" height="2">
    <properties>
     <property name="bodyType" value="static"/>
     <property name="esRompible" value="0"/>
@@ -616,7 +584,7 @@
     <property name="userDataShape" value="shape_rectAgarreDer"/>
    </properties>
   </object>
-  <object id="414" name="plataforma" type="plataformaHorizontal" x="1600" y="768" width="128" height="2">
+  <object id="414" name="plataforma" type="plataformaHorizontal" x="1536" y="768" width="128" height="2">
    <properties>
     <property name="bodyType" value="static"/>
    </properties>
@@ -696,12 +664,12 @@
     <property name="tiempoEnSec" value="3"/>
    </properties>
   </object>
-  <object id="443" name="plataforma" type="plataformaHorizontal" x="1920" y="768" width="128" height="2">
+  <object id="443" name="plataforma" type="plataformaHorizontal" x="1984" y="832" width="128" height="2">
    <properties>
     <property name="bodyType" value="static"/>
    </properties>
   </object>
-  <object id="444" name="rectAgarreDer" type="agarre" x="2048" y="768" width="2" height="2">
+  <object id="444" name="rectAgarreDer" type="agarre" x="2112" y="832" width="2" height="2">
    <properties>
     <property name="bodyType" value="static"/>
     <property name="esRompible" value="0"/>
@@ -712,7 +680,7 @@
     <property name="userDataShape" value="shape_rectAgarreDer"/>
    </properties>
   </object>
-  <object id="445" name="rectAgarreIzq" type="agarre" x="1918" y="768" width="2" height="2">
+  <object id="445" name="rectAgarreIzq" type="agarre" x="1981" y="832" width="2" height="2">
    <properties>
     <property name="bodyType" value="static"/>
     <property name="esRompible" value="0"/>
@@ -1043,6 +1011,33 @@
   <object id="562" name="estrella" type="item" x="4556" y="1159" width="32" height="32">
    <properties>
     <property name="bodyType" value="static"/>
+   </properties>
+  </object>
+  <object id="564" name="plataforma" type="plataformaHorizontal" x="1792" y="832.03" width="64" height="1.93939">
+   <properties>
+    <property name="bodyType" value="static"/>
+   </properties>
+  </object>
+  <object id="565" name="rectAgarreIzq" type="agarre" x="1790" y="832.03" width="1.93939" height="1.93939">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="rectAgarreIzq"/>
+    <property name="userDataShape" value="shape_rectAgarreIzq"/>
+   </properties>
+  </object>
+  <object id="566" name="rectAgarreDer" type="agarre" x="1856" y="832" width="1.93939" height="1.93939">
+   <properties>
+    <property name="bodyType" value="static"/>
+    <property name="esRompible" value="0"/>
+    <property name="esSensor" value="0"/>
+    <property name="material" value="acero"/>
+    <property name="puedeRotar" value="0"/>
+    <property name="userDataBody" value="rectAgarreDer"/>
+    <property name="userDataShape" value="shape_rectAgarreDer"/>
    </properties>
   </object>
  </objectgroup>

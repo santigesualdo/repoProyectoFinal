@@ -61,8 +61,8 @@ class Level extends FlxSprite
 		}		
 		
 		var backdrop:FlxBackdrop = new FlxBackdrop(tl.backDropPath);
-		state.add(tl.backgroundLayer);
 		state.add(backdrop);
+		state.add(tl.backgroundLayer);
 		state.add(tl.foregroundTiles);
 		state.add(tl.objectsLayer);
 		state.add(tl.estrellasGroup);
