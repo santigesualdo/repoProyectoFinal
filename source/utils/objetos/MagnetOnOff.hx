@@ -91,14 +91,14 @@ class MagnetOnOff extends ObjetoBase
 		
 		/* Ajuste a pata para magnet up */
 		if (magnet_type == tipo_magnet_up) {
-			this.setPosition(centerX - this._halfSize.x - 2, centerY - this._halfSize.y + 10);
-			borderMagnetSprite = new FlxSprite(centerX - this._halfSize.x - 2, centerY - this._halfSize.y + 10, pathOff);
+			this.setPosition(centerX - this._halfSize.x, centerY - this._halfSize.y );
+			borderMagnetSprite = new FlxSprite(centerX - this._halfSize.x , centerY - this._halfSize.y , pathOff);
 		}
 		
 		/* Ajuste a pata para magnet right */
 		if (magnet_type == tipo_magnet_right) {
-			this.setPosition(centerX - this._halfSize.x-10 , centerY - this._halfSize.y );
-			borderMagnetSprite = new FlxSprite(centerX - this._halfSize.x -10, centerY - this._halfSize.y , pathOff);
+			this.setPosition(centerX - this._halfSize.x , centerY - this._halfSize.y );
+			borderMagnetSprite = new FlxSprite(centerX - this._halfSize.x , centerY - this._halfSize.y , pathOff);
 		}
 	}
 	
@@ -173,8 +173,9 @@ class MagnetOnOff extends ObjetoBase
 	}
 	
 	override public function draw():Void {
-		super.draw();
 		borderMagnetSprite.draw();
+		super.draw();
+		
 	}
 	
 }

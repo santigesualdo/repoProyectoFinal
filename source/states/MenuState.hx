@@ -57,6 +57,7 @@ class MenuState extends FlxState
 		butL1 = new ButtonLevel(centroX, centroY-50, "level1");
 		butL2 = new ButtonLevel(centroX, centroY + 50, "level2");
 		butL3 = new ButtonLevel(centroX, centroY + 150, "level3");
+		butL3 = new ButtonLevel(centroX, centroY + 200, "level");
 		butL4 = new ButtonLevel(centroX + 200, centroY-50, "testPlayerSpine");
 		
 		botones.add(butL1);

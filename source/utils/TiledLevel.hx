@@ -41,6 +41,9 @@ import utils.objetos.Plataforma;
 import utils.objetos.PlataformaConMovientoVertical;
 import utils.objetos.PlataformaConMovimientoHorizontal;
 import utils.objetos.SwitchOnOff;
+import utils.objetos.SwitchOnOffByInterruptor;
+import utils.objetos.SwitchOnOffByTime;
+import utils.objetos.SwitchOnOffByTouch;
 import utils.objetos.TextoTutorial;
 
 
@@ -557,7 +560,23 @@ class TiledLevel extends TiledMap
 			}
 			group.add(new MagnetOnOff(o.x, o.y, rectangularBody));
 		}else if (o.name == "switchOnOff") {
-			group.add(new SwitchOnOff(o.x, o.y, rectangularBody));
+			if (o.properties.contains("type")) {
+				var type : Int = Std.parseInt(o.properties.get("type"));
+				switch(type)
+				{	
+					case SwitchOnOff.TYPE_BYTOUCH:
+						group.add(new SwitchOnOffByTouch(o.x, o.y, rectangularBody));
+					case SwitchOnOff.TYPE_BYTIME:
+						if (o.properties.contains("time")) {
+							rectangularBody.userData.time = Std.parseFloat(o.properties.get("time"));
+						}
+						group.add(new SwitchOnOffByTime(o.x, o.y, rectangularBody));							
+					case SwitchOnOff.TYPE_BYINTERRPUTOR:
+						group.add(new SwitchOnOffByInterruptor(o.x, o.y, rectangularBody));
+					default:
+						FlxG.log.add("Switch on off no encontro tipo");
+				}
+			}
 		}else if (o.name == "estrella") {
 			rectangularShape.localCOM.set( new Vec2(0, 0)	);
 			rectangularBody.position.set(new Vec2(o.x, o.y));

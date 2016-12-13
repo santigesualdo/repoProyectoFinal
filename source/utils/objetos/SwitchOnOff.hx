@@ -17,12 +17,22 @@ import utils.objetos.ObjetoBase;
 class SwitchOnOff extends ObjetoBase
 {
 
+	/* Por sensor, cuando toca se prende, se va y se apaga*/
+	public static inline var TYPE_BYTOUCH : Int = 1;
+	
+	public static inline var TYPE_BYTIME : Int = 2;
+	public static inline var TYPE_BYINTERRPUTOR : Int = 3;
+	
+	// tipos de switch
+	// 1 byTouch .. cuando 
+	
 	var linkedID: Array<String>;
 	var borderSprite:FlxSprite = null;
 	
 	public function new(x:Int, y:Int, rectangularBody:Body) 
 	{
 		super(x, y);
+		
 		b = rectangularBody;
 		tipo = "SwitchOnOff";
 		
@@ -35,42 +45,8 @@ class SwitchOnOff extends ObjetoBase
 			}
 		}	
 		
-		var cb:CbType = new CbType();
-		b.cbTypes.add(cb);
-		
 		b.shapes.at(0).sensorEnabled = true;
-		
-		var icB:InteractionListener = new InteractionListener( CbEvent.BEGIN, InteractionType.SENSOR, cb, Callbacks.bodyInferiorCallback,
-		function onPlayerSwitch(e:InteractionCallback) {
-			
-			for (str in linkedID) {
-				var linked_id:Int = Std.parseInt(str);	
-				var bo:Body = ObjetoBase.buscarBody(linked_id);
-				if (bo != null) {
-					var ob:ObjetoBase = cast(bo.userData.object, ObjetoBase);
-					ob.activar();	
-					borderSprite.loadGraphic("assets/levels/switch_on.png");
-				}
-			}
-		});		
-		
-		var icE:InteractionListener = new InteractionListener( CbEvent.END, InteractionType.SENSOR, cb, Callbacks.bodyInferiorCallback,
-		function onPlayerSwitch(e:InteractionCallback) {
-			
-			for (str in linkedID) {
-				var linked_id:Int = Std.parseInt(str);	
-				var bo:Body = ObjetoBase.buscarBody(linked_id);
-				if (bo != null) {
-					var ob:ObjetoBase = cast(bo.userData.object, ObjetoBase);
-					ob.desactivar();		
-					borderSprite.loadGraphic("assets/levels/switch_off.png");
-				}
-			}
-		});		
-		
-		this.b.space = FlxNapeSpace.space;
-		FlxNapeSpace.space.listeners.add(icB);
-		FlxNapeSpace.space.listeners.add(icE);
+		b.space = FlxNapeSpace.space;
 		
 		this.loadGraphic("assets/levels/switch.png", false, 32, 10, true);
 		borderSprite = new FlxSprite(this.x, this.y, "assets/levels/switch_off.png");
@@ -89,5 +65,27 @@ class SwitchOnOff extends ObjetoBase
 		
 		this.x = b.position.x ;
 		this.y = b.position.y ;
+	}
+	
+	public function activarObjetos():Void{
+		for (str in linkedID) {
+			var linked_id:Int = Std.parseInt(str);	
+			var bo:Body = ObjetoBase.buscarBody(linked_id);
+			if (bo != null) {
+				var ob:ObjetoBase = cast(bo.userData.object, ObjetoBase);
+				ob.activar();	
+			}
+		}	
+	}
+	
+	public function desactivarObjetos():Void{
+		for (str in linkedID) {
+			var linked_id:Int = Std.parseInt(str);	
+			var bo:Body = ObjetoBase.buscarBody(linked_id);
+			if (bo != null) {
+				var ob:ObjetoBase = cast(bo.userData.object, ObjetoBase);
+				ob.desactivar();		
+			}
+		}			
 	}
 }
