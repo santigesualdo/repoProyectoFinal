@@ -37,7 +37,7 @@ class SwitchOnOffByTime extends SwitchOnOff
 			if (!timeRunning){
 				activarObjetos();
 				timeRunning = true;
-				borderSprite.loadGraphic("assets/levels/switch_on.png");
+				borderSprite.loadGraphic(AssetPaths.switchType2On);
 			}
 		});		
 		
@@ -65,7 +65,7 @@ class SwitchOnOffByTime extends SwitchOnOff
 	{
 		super.desactivarObjetos();
 
-		borderSprite.loadGraphic("assets/levels/switch_off.png");
+		borderSprite.loadGraphic(AssetPaths.switchType2Off);
 	}
 	
 }

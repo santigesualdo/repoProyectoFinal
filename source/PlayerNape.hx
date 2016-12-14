@@ -54,6 +54,9 @@ class PlayerNape extends FlxObject
 		var _emitter:FlxEmitter = null;		
 		var animationItemEated:FlxSprite = null;
 		
+		var startAnimation:FlxSprite = null;
+		var startAnimationFinished:Bool;
+		
 		var bodyInferiorCallback:CbType = new CbType();
 		var subiendoPlataforma:Bool ;
 		
@@ -149,7 +152,15 @@ class PlayerNape extends FlxObject
 		
 		crearParticleEmitter();
 		
+
+		
 		crearAnimacionSpine();
+		
+		startAnimation = new FlxSprite(0 , 0);
+		startAnimation.loadGraphic(AssetPaths.PLAYER_STARTANIM, true, 150, 150, false);
+		startAnimation.setPosition(bodyInferior.bounds.x - 200 + 75 , bodyInferior.bounds.y -75);
+		startAnimation.animation.add("startAnimation", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 , 11 , 12 , 13 , 14] , 30, false);
+		Globales.currentState.add(startAnimation);
 		//crearAnimacion();
 		
 	}
@@ -615,6 +626,11 @@ class PlayerNape extends FlxObject
 			ss.setPos(new FlxPoint(FlxG.camera.scroll.x + 300, FlxG.camera.scroll.y + 300));
 			//Globales.currentState.openSubState(new PlaySubState("Pausa", new FlxPoint(getMidpoint().x - width * 0.5, getMidpoint().y - height)));
 		}
+		
+		if (FlxG.keys.justPressed.U) {
+			startAnimation.setPosition(bodyInferior.bounds.x + 75, bodyInferior.bounds.y -75);
+			startAnimation.animation.play("startAnimation",  false );
+		}
 				
 		if (FlxG.keys.justReleased.H) {
 			spinePlayer.visible = !spinePlayer.visible;
@@ -813,8 +829,7 @@ class PlayerNape extends FlxObject
 		}		
 	}
 	
-	function activarListeners():Void 
-	{
+	function activarListeners():Void 	{
 		FlxNapeSpace.space.listeners.add(PersonajePrePiso);
 		FlxNapeSpace.space.listeners.add(PersonajeConObjetoInteractivoEnd);
 		FlxNapeSpace.space.listeners.add(PersonajeConObjetoInteractivo);
@@ -823,8 +838,7 @@ class PlayerNape extends FlxObject
 		FlxNapeSpace.space.listeners.add(PersonajeConAgarre);
 	}
 	
-	function desactivarListeners():Void 
-	{
+	function desactivarListeners():Void {
 		FlxNapeSpace.space.listeners.remove(PersonajePrePiso);
 		FlxNapeSpace.space.listeners.remove(PersonajeConObjetoInteractivoEnd);
 		FlxNapeSpace.space.listeners.remove(PersonajeConObjetoInteractivo);
@@ -836,6 +850,14 @@ class PlayerNape extends FlxObject
 	override public function draw():Void {
 		
 		super.draw();
+		
+		/*if (spinePlayer != null) {	
+			spinePlayer.draw();
+		}
+		
+		if (startAnimation != null && startAnimation.animation != null && !startAnimation.animation.finished) {
+			startAnimation.draw();
+		}*/
 		
 		if (colisionaConObjetoInteractivo) {
 			textObjInteractivo.draw();
@@ -868,8 +890,7 @@ class PlayerNape extends FlxObject
 		
 	}
 	
-	public function starCollected() 
-	{
+	public function starCollected() {
 		starsCollected++;
 	}
 	

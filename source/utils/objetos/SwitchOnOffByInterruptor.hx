@@ -30,11 +30,11 @@ class SwitchOnOffByInterruptor extends SwitchOnOff
 				if (!this.activo){
 					activar();
 					activarObjetos();
-					borderSprite.loadGraphic("assets/levels/switch_on.png");
+					borderSprite.loadGraphic(AssetPaths.switchType3On);
 				}else{
 					desactivar();
 					desactivarObjetos();
-					borderSprite.loadGraphic("assets/levels/switch_off.png");
+					borderSprite.loadGraphic(AssetPaths.switchType3Off);
 				}
 			}
 		});		

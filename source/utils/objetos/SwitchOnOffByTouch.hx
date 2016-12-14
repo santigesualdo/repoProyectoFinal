@@ -26,14 +26,14 @@ class SwitchOnOffByTouch extends SwitchOnOff
 		function onPlayerSwitch(e:InteractionCallback) {
 			
 			activarObjetos();
-			borderSprite.loadGraphic("assets/levels/switch_on.png");
+			borderSprite.loadGraphic(AssetPaths.switchType1On);
 		});		
 		
 		var icE:InteractionListener = new InteractionListener( CbEvent.END, InteractionType.SENSOR, cb, Callbacks.bodyInferiorCallback,
 		function onPlayerSwitch(e:InteractionCallback) {
 			
 			desactivarObjetos();	
-			borderSprite.loadGraphic("assets/levels/switch_off.png");
+			borderSprite.loadGraphic(AssetPaths.switchType1Off);
 		});		
 		
 		

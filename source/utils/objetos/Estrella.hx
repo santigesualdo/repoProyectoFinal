@@ -27,8 +27,12 @@ class Estrella extends ObjetoBase
 		b.userData.object = this;
 		
 		
-		this.loadGraphic(AssetPaths.estrella_spritesheet,  true, 96, 96, true);
+		/*this.loadGraphic(AssetPaths.estrella_spritesheet,  true, 96, 96, true);
 		this.animation.add("anim", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24], 30, true);
+		this.animation.play("anim");*/
+		
+		this.loadGraphic(AssetPaths.estrella_spritesheet,  true, 64, 64, true);
+		this.animation.add("anim", [ 1, 2, 3, 4, 5, 4 , 3, 2 ], 15, true);
 		this.animation.play("anim");
 		
 		var cb:CbType = new CbType();

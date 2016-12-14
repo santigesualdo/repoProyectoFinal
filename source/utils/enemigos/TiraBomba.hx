@@ -130,8 +130,8 @@ class TiraBomba extends ObjetoBase
 		
 		Globales.bodyList_typeObjectos.add(b);
 		
-		this.loadGraphic(AssetPaths.tiraBomba_spritesheet,  true, 64, 64, true);
-		this.animation.add("anim", [0, 1, 2, 3, 4, 5], 20 ,  true);
+		this.loadGraphic(AssetPaths.tiraBomba_spritesheet,  true, 128, 128, true);
+		this.animation.add("anim", [0, 1, 2, 3, 4, 5, 4, 3, 2, 1], 10 ,  true);
 		this.animation.play("anim");
 		
 		trail = new FlxTrail(this, AssetPaths.trail_tiraBomba,10,3,0.2,0.01);		
@@ -315,9 +315,9 @@ class TiraBomba extends ObjetoBase
 	
 		super.draw();
 
-		if (trail != null) {
+		/*if (trail != null) {
 			trail.draw();		
-		}
+		}*/
 		
 		for ( bo in group.members) {
 			var bomba: BombaMagnet = cast(bo, BombaMagnet);

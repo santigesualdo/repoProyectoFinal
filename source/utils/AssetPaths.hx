@@ -15,6 +15,7 @@ class AssetPaths {
 	 public static var butLevelOver:String = "assets/images/Botones/menuButtonOver.png";
 	 
 	 public static var PLAYER_ANIM:String =  "assets/images/playerSpriteSheet.png";
+	 public static var PLAYER_STARTANIM:String =  "assets/images/playerStartSpriteSheet.png";
 	 
 	// Magnet arma 1
 	 public static var bomba_magnet:String = "assets/levels/bombaMagnet.png";
@@ -53,6 +54,13 @@ class AssetPaths {
 	 static public var trail_tiraBomba:String = "assets/levels/trail.png";
 	 static public var pincheViejo: String = "assets/levels/pincheViejo.png";
 	 
+	 // Switchs
+	 static public var switchType1On: String = "assets/levels/switchType1On.png";
+	 static public var switchType1Off: String = "assets/levels/switchType1Off.png";
+	 static public var switchType2On: String = "assets/levels/switchType2On.png";
+	 static public var switchType2Off: String = "assets/levels/switchType2Off.png";
+	 static public var switchType3On: String = "assets/levels/switchType3On.png";
+	 static public var switchType3Off: String = "assets/levels/switchType3Off.png";
 	 
 	
 }
