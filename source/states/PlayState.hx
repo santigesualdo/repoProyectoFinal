@@ -77,7 +77,7 @@ class PlayState extends FlxState
 	 var terreno: FlxNapeSprite;
 	 var polygonBody :Body;
 	 var offsetNapeBody:Int = 80;
-	 var playerMultiBody:PlayerNape;
+	 var playerNape:PlayerNape;
 	
 	 var tocaPiso:Bool = false;
 	
@@ -135,11 +135,11 @@ class PlayState extends FlxState
 		
 		levelObj = loadLevel(Globales.currentLevel);
 			
-		playerMultiBody = new PlayerNape(Globales.currentCheckPoint.x, Globales.currentCheckPoint.y, FlxNapeSpace.space);
-		Globales.globalPlayer = playerMultiBody;
-			
-		add(playerMultiBody);		
-		FlxG.camera.follow(playerMultiBody);
+		playerNape = new PlayerNape(Globales.currentCheckPoint.x, Globales.currentCheckPoint.y, FlxNapeSpace.space);
+		Globales.globalPlayer = playerNape;
+		add(playerNape);		
+		
+		FlxG.camera.follow(playerNape);
 		FlxG.camera.flash(FlxColor.BLACK, 2, null, true);
 		
 		FlxG.addChildBelowMouse(new FPS(FlxG.width - 60, 0, FlxColor.WHITE));
@@ -228,13 +228,17 @@ class PlayState extends FlxState
 	
 	function limpiarCosas():Void{
 		
+		FlxG.log.add("Limpiando PlayState");
 		
-		this.clear();
-		playerMultiBody.destroy();		
+		
+		playerNape.destroy();
+		
 		Globales.currentState = null;
 		Globales.globalPlayer = null;
 
 		levelObj.destroy();
+		
+		this.clear();
 		
 		//this.remove(Globales.estrellasGroup);
 		/*checkPointGroup.clear();
@@ -250,7 +254,9 @@ class PlayState extends FlxState
 			Globales.bodyList_typeObjectos.clear();			
 
 		if (Globales.bodyList_toMagnetize!= null)
-			Globales.bodyList_toMagnetize.clear();						
+			Globales.bodyList_toMagnetize.clear();		
+			
+			
 		
 	}
 	
