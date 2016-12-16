@@ -20,13 +20,13 @@ class ButtonLevel extends FlxSprite
 	var outPath:String;
 	var overPath:String;
 	
-	var levelName:String;
+	var stateName:String;
 	
 	var clicked: Bool;
 	
-	public function new(X:Float = 0, Y:Float = 0, _levelName:String)	{
+	public function new(X:Float = 0, Y:Float = 0, _stateName:String)	{
 
-		levelName = _levelName;
+		stateName = _stateName;
 		
 		outPath = AssetPaths.butLevelOut;
 		overPath = AssetPaths.butLevelOver;
@@ -36,8 +36,8 @@ class ButtonLevel extends FlxSprite
 		super(X, Y, outPath);
 		setPosition(this.x - this.width * 0.5, this.y - this.height * 0.5);
 		
-		text = new FlxText(this.x, this.y, this.width, levelName);
-		text.setFormat(AssetPaths.font_kreon, 28, FlxColor.BLACK, "center");		
+		text = new FlxText(this.x, this.y+this.height * 0.25, this.width, stateName);
+		text.setFormat(AssetPaths.font_gilsans, 24, FlxColor.WHITE, "center");		
 		
 		addMouseEvents();
 		
@@ -47,8 +47,8 @@ class ButtonLevel extends FlxSprite
 		return clicked;
 	}
 	
-	public function getLevelName():String {
-		return levelName;
+	public function getStateName():String {
+		return stateName;
 	}
 	
 	public function addMouseEvents():Void{

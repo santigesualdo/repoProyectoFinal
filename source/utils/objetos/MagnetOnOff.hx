@@ -32,7 +32,7 @@ class MagnetOnOff extends ObjetoBase
 	
 	var napeSprite:NapeSpr_Body;
 	var magnet_type:Int = 0;
-	var borderMagnetSprite:FlxSprite = null;
+	var magnetSprite:FlxSprite = null;
 	
 	var pathOn:String; 
 	var pathOff:String; 
@@ -40,13 +40,11 @@ class MagnetOnOff extends ObjetoBase
 	
 	
 	/* La parte superior del magnet toca plataforma */
-	static inline var tipo_magnet_up:Int = 1;
+	static inline var tipo_magnet_violeta:Int = 1;
 	/* La parte derecha del magnet toca plataforma */
-	static inline var tipo_magnet_right:Int = 2;
+	static inline var tipo_magnet_naranja:Int = 2;
 	/* La parte inferior del magnet toca plataforma */
-	static inline var tipo_magnet_down:Int = 3;
-	/* La parte izquierda del magnet toca plataforma */
-	static inline var tipo_magnet_left:Int = 4;
+	static inline var tipo_magnet_azul:Int = 3;
 
 
 	public function new(x:Int, y:Int, body:Body) 
@@ -61,16 +59,21 @@ class MagnetOnOff extends ObjetoBase
 		var _height:Int = cast(body.bounds.height,Int);
 		
 		switch(magnet_type) {
-			case tipo_magnet_up:
-				pathSprite = "assets/levels/magnet1.png";
+			case tipo_magnet_violeta:
+				//pathSprite = "assets/levels/magnet1.png";
 				pathOff = "assets/levels/magnet1_off.png";
 				pathOn = "assets/levels/magnet1_on.png";
-				loadGraphic(pathSprite);
-			case tipo_magnet_right: 
-				pathSprite = "assets/levels/magnet2.png";
+				loadGraphic(pathOff);
+			case tipo_magnet_naranja: 
+				//pathSprite = "assets/levels/magnet2.png";
 				pathOff = "assets/levels/magnet2_off.png";
 				pathOn = "assets/levels/magnet2_on.png";
-				loadGraphic(pathSprite);
+				loadGraphic(pathOff);
+			case tipo_magnet_azul: 
+				//pathSprite = "assets/levels/magnet2.png";
+				pathOff = "assets/levels/magnet3_off.png";
+				pathOn = "assets/levels/magnet3_on.png";
+				loadGraphic(pathOff);				
 			default: return;
 		}
 		
@@ -80,7 +83,7 @@ class MagnetOnOff extends ObjetoBase
 		//setNormalText(15);	
 
 		var cogIso:BitmapDataIso = new BitmapDataIso( this.framePixels );
-		napeSprite = new NapeSpr_Body(centerX, centerY, cogIso, pathSprite, BodyType.KINEMATIC, Material.wood(), "asd", false);
+		napeSprite = new NapeSpr_Body(centerX, centerY, cogIso, pathOff, BodyType.KINEMATIC, Material.wood(), "asd", false);
 		napeSprite.body.allowMovement = false;
 		napeSprite.body.userData.id = body.userData.id;
 		b = napeSprite.body;	
@@ -89,30 +92,33 @@ class MagnetOnOff extends ObjetoBase
 		
 		b.userData.object = this;
 		
-		/* Ajuste a pata para magnet up */
-		if (magnet_type == tipo_magnet_up) {
-			this.setPosition(centerX - this._halfSize.x, centerY - this._halfSize.y );
-			borderMagnetSprite = new FlxSprite(centerX - this._halfSize.x , centerY - this._halfSize.y , pathOff);
-		}
+		this.setPosition(centerX - this._halfSize.x , centerY - this._halfSize.y );
+		magnetSprite = new FlxSprite(centerX - this._halfSize.x , centerY - this._halfSize.y , pathOff);		
 		
-		/* Ajuste a pata para magnet right */
-		if (magnet_type == tipo_magnet_right) {
-			this.setPosition(centerX - this._halfSize.x , centerY - this._halfSize.y );
-			borderMagnetSprite = new FlxSprite(centerX - this._halfSize.x , centerY - this._halfSize.y , pathOff);
-		}
+		 //Ajuste a pata para magnet up 
+		//if (magnet_type == tipo_magnet_up) {
+			//this.setPosition(centerX - this._halfSize.x, centerY - this._halfSize.y );
+			//borderMagnetSprite = new FlxSprite(centerX - this._halfSize.x , centerY - this._halfSize.y , pathOff);
+		//}
+		//
+		 //Ajuste a pata para magnnet right 
+		//if (magnet_type == tipo_magnet_right) {
+			//this.setPosition(centerX - this._halfSize.x , centerY - this._halfSize.y );
+			//borderMagnetSprite = new FlxSprite(centerX - this._halfSize.x , centerY - this._halfSize.y , pathOff);
+		//}
 	}
 	
 	override public function activar():Void {
+		FlxG.log.add("Activa magnet:: " + magnet_type);
 		super.activar();
-		
-		borderMagnetSprite.loadGraphic(pathOn);
+		magnetSprite.loadGraphic(pathOn);
 
 	}
 	
 	override public function desactivar():Void {
+		FlxG.log.add("Desactiva magnet:: " + magnet_type);
 		super.desactivar();
-		
-		borderMagnetSprite.loadGraphic(pathOff);
+		magnetSprite.loadGraphic(pathOff);
 	}
 	
 	override public function comportamiento():Void {
@@ -126,8 +132,7 @@ class MagnetOnOff extends ObjetoBase
 	
 	/* SingleMagnet ejerce la fuerza del magnet posicionado sobre el body seleccionado */
 	function singleMagnet(planet:Body, body:Body,  dt:Float) 	{	
-		
-			
+	
 		var closestA = Vec2.get();
 		var closestB = Vec2.get();
 		
@@ -173,8 +178,9 @@ class MagnetOnOff extends ObjetoBase
 	}
 	
 	override public function draw():Void {
-		borderMagnetSprite.draw();
+		
 		super.draw();
+		magnetSprite.draw();
 		
 	}
 	

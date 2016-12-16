@@ -567,8 +567,9 @@ class TiledLevel extends TiledMap
 					case SwitchOnOff.TYPE_BYTOUCH:
 						group.add(new SwitchOnOffByTouch(o.x, o.y, rectangularBody));
 					case SwitchOnOff.TYPE_BYTIME:
-						if (o.properties.contains("time")) {
-							rectangularBody.userData.time = Std.parseFloat(o.properties.get("time"));
+						if (o.properties.contains("time")) {							
+							rectangularBody.userData.time = Std.parseInt(o.properties.get("time"));
+							FlxG.log.add("Load time data");
 						}
 						group.add(new SwitchOnOffByTime(o.x, o.y, rectangularBody));							
 					case SwitchOnOff.TYPE_BYINTERRPUTOR:

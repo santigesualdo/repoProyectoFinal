@@ -59,6 +59,8 @@ class PlayerNape extends FlxObject
 		
 		var bodyInferiorCallback:CbType = new CbType();
 		var subiendoPlataforma:Bool ;
+		var startAnimationOffset_X: Float = 70;
+		var startAnimationOffset_Y: Float = 100;		
 		
 		private static inline var maxJumpVelX:Int = 100;
 		private static inline var maxVelX:Int = 285;
@@ -106,6 +108,10 @@ class PlayerNape extends FlxObject
 		var normalColision:Vec2 = new Vec2(0, 0);
 		var normalColision2:Vec2 = new Vec2(0, 0);
 		var starsCollected: Int ;
+		
+		var timeToSpawn:Float = 2;
+		var timeToSpawnAcum : Float = 0;
+		var isTimeToSpawn: Bool;
 
 	public function new(_x:Float, _y:Float, space : Space ) {
 		
@@ -116,8 +122,6 @@ class PlayerNape extends FlxObject
 		Globales.currentState.add(text);	
 		text.visible = Globales.verTexto;
 
-		
-				
 		textoColisionAcum = 0;
 		textoColisionOn = false;
 		
@@ -149,47 +153,17 @@ class PlayerNape extends FlxObject
 		pos.dispose();
 		
 		bodyInferior.userData.object = this;
-		
-		crearParticleEmitter();
-		
 
+		isTimeToSpawn = false;
 		
 		crearAnimacionSpine();
 		
-		startAnimation = new FlxSprite(0 , 0);
-		startAnimation.loadGraphic(AssetPaths.PLAYER_STARTANIM, true, 150, 150, false);
-		startAnimation.setPosition(bodyInferior.bounds.x - 200 + 75 , bodyInferior.bounds.y -75);
-		startAnimation.animation.add("startAnimation", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 , 11 , 12 , 13 , 14] , 30, false);
-		Globales.currentState.add(startAnimation);
-		//crearAnimacion();
-		
 	}
+	
+	
 	
 	public function getStarsCollected():Int {
 		return this.starsCollected;
-	}
-	
-	function crearParticleEmitter():Void {
-		
-		
-		_emitter= new FlxEmitter(this.x,this.y, 5);
-		
-		// All we need to do to start using it is give it some particles. makeParticles() makes this easy!
-		
-		_emitter.loadParticles(AssetPaths.playerParticlesPath, 5);
-		
-		// Now let's add the emitter to the state.
-		_emitter.alpha.set(1, 1, 0, 0);
-		
-		
-		Globales.currentState.add(_emitter);
-		
-		//_emitter.scale.set(1, 1, 1, 1, 4, 4, 8, 8);
-		
-		// Now lets set our emitter free.
-		// Params: Explode, Emit rate (in seconds), Quantity (if ignored, means launch continuously)
-		
-		_emitter.start(false, 0.025);
 	}
 	
 	function crearAnimacion():Void	{
@@ -208,7 +182,14 @@ class PlayerNape extends FlxObject
 	
 	function crearAnimacionSpine():Void {
 		spinePlayer = new SpinePlayer(bodyInferior.bounds.x, bodyInferior.bounds.y, "playerMagnet", "assets/playerMagnet/");
+		spinePlayer.visible = false;
 		Globales.currentState.add(spinePlayer);		
+	}
+	
+	function crearAnimacionStartPlayer() : Void {
+		startAnimation = new FlxSprite(spinePlayer.x -startAnimationOffset_X, spinePlayer.y-startAnimationOffset_Y);
+		startAnimation.loadGraphic(AssetPaths.PLAYER_STARTANIM, true, 150, 150, false);
+		startAnimation.animation.add("startAnimation", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 , 11 , 12 , 13 , 14] , 30, false);
 	}
 	
 	function ChangeAnimation(name:String, ?flipX:Bool):Void {
@@ -505,34 +486,59 @@ class PlayerNape extends FlxObject
 	}
 		
 	override public function update(elapsed:Float):Void {
+		
 		super.update(elapsed);
 		
-		actualizarEstados();
-	
-		textosEnPantalla();
-		
-		this.x = bodyInferior.position.x;
-		this.y = bodyInferior.position.y;
-		
-		if (spinePlayer != null) {
-			spinePlayer.x = this.x +bodyInferior.bounds.width*0.5; 
-			spinePlayer.y = this.y + bodyInferior.bounds.height;			
-		}
-		
-		if (sprite!= null) {
-			sprite.x = this.x ; 
-			sprite.y = this.y +bodyInferior.bounds.height *0.5;			
-		}
-		
-		if (_emitter!= null) {
-			_emitter.x = this.x+bodyInferior.bounds.width*0.5 ; 
-			_emitter.y = this.y + bodyInferior.bounds.height * 0.5 ;
+		if (isTimeToSpawn){
 			
-		}	
+			actualizarEstados();
+	
+			textosEnPantalla();
+			
+			this.x = bodyInferior.position.x;
+			this.y = bodyInferior.position.y;
+			
+			if (spinePlayer != null) {
+				spinePlayer.x = this.x +bodyInferior.bounds.width*0.5; 
+				spinePlayer.y = this.y + bodyInferior.bounds.height;
+				startAnimation.setPosition(spinePlayer.x -startAnimationOffset_X, spinePlayer.y - startAnimationOffset_Y);
+			}
+			
+			if (sprite!= null) {
+				sprite.x = this.x ; 
+				sprite.y = this.y +bodyInferior.bounds.height *0.5;			
+			}
+			
+			eventos();
+			
+			checkInWorld();		
+			
+		}else{
+			if (timeToSpawnAcum < timeToSpawn){
+				timeToSpawnAcum += elapsed;
+			}else{
+				isTimeToSpawn = true;
+				timeToSpawnAcum = 0;
+				
+				crearAnimacionStartPlayer();
+				Globales.currentState.add(startAnimation);
+				
+				this.x = bodyInferior.position.x;
+				this.y = bodyInferior.position.y;
+				
+				spinePlayer.visible = true;
+				
+				if (spinePlayer != null) {
+					spinePlayer.x = this.x +bodyInferior.bounds.width*0.5; 
+					spinePlayer.y = this.y + bodyInferior.bounds.height;
+					startAnimation.setPosition(spinePlayer.x -startAnimationOffset_X, spinePlayer.y - startAnimationOffset_Y);
+				}
+				
+				startAnimation.animation.play("startAnimation");
+			}
+		}
 		
-		eventos();
 		
-		checkInWorld();
 	}	
 	
 	function textosEnPantalla() :Void	{
@@ -628,7 +634,7 @@ class PlayerNape extends FlxObject
 		}
 		
 		if (FlxG.keys.justPressed.U) {
-			startAnimation.setPosition(bodyInferior.bounds.x + 75, bodyInferior.bounds.y -75);
+			startAnimation.setPosition(spinePlayer.x -startAnimationOffset_X, spinePlayer.y-startAnimationOffset_Y);
 			startAnimation.animation.play("startAnimation",  false );
 		}
 				
@@ -850,7 +856,7 @@ class PlayerNape extends FlxObject
 	override public function draw():Void {
 		
 		super.draw();
-		
+			
 		/*if (spinePlayer != null) {	
 			spinePlayer.draw();
 		}

@@ -35,12 +35,12 @@ class MenuState extends FlxState
 	{
 		super.create();
 						
-		 var _sprBack = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY);
-         _sprBack.drawRect(0, 0, FlxG.width, FlxG.height, FlxColor.GRAY);
-		 add(_sprBack);
+		 //var _sprBack = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY);
+         //_sprBack.drawRect(0, 0, FlxG.width, FlxG.height, FlxColor.GRAY);
+		 //add(_sprBack);
 		
-		/*var background:FlxSprite = new FlxSprite(0, 0, AssetPaths.MENU_BACK_PATH);
-		add(background);*/
+		var background:FlxSprite = new FlxSprite(0, 0, AssetPaths.MENU_BACK_PATH);
+		add(background);
 		
 		limpiarGrupo = false;
 		
@@ -50,28 +50,33 @@ class MenuState extends FlxState
 		var centroX = FlxG.width * 0.5; 
 		var centroY = FlxG.height * 0.5;
 		
-		var textField:FlxText = new FlxText(0, 100, FlxG.width, "Menu State", 0, false);
-		textField.setFormat( AssetPaths.font_kreon, 50, FlxColor.WHITE, FlxTextAlign.CENTER);
-		add(textField);
+		//var textField:FlxText = new FlxText(0, 100, FlxG.width, "Menu State", 0, false);
+		//textField.setFormat( AssetPaths.font_kreon, 50, FlxColor.WHITE, FlxTextAlign.CENTER);
+		//add(textField);
 		
-		butL1 = new ButtonLevel(centroX, centroY-50, "level1");
-		butL2 = new ButtonLevel(centroX, centroY + 50, "level2");
-		butL3 = new ButtonLevel(centroX, centroY + 150, "level3");
-		butL3 = new ButtonLevel(centroX, centroY + 200, "level");
-		butL4 = new ButtonLevel(centroX + 200, centroY-50, "testPlayerSpine");
+		butL1 = new ButtonLevel(centroX, centroY + 50, "JUGAR");
+		butL2 = new ButtonLevel(centroX, centroY + 125, "OPCIONES");
+		butL3 = new ButtonLevel(centroX, centroY + 200, "SALIR");
 		
 		botones.add(butL1);
 		botones.add(butL2);
 		botones.add(butL3);
-		botones.add(butL4);
 		
 	}
 	
-	public function changeLevel(name:String ) {
+	public function changeState(name:String ) {
 		
-		Globales.currentLevel = name;
-		var ps: PlayState = new PlayState();
-		FlxG.switchState(ps);
+		switch(name){
+			case "JUGAR": 
+				Globales.currentLevel = "level1";
+				var ps: PlayState = new PlayState();
+				FlxG.switchState(ps);
+			case "OPCIONES": 
+				FlxG.switchState(this);
+			case "SALIR": 
+				FlxG.switchState(this);
+		}
+
 	}
 	
 	override public function update(elapsed:Float):Void {
@@ -79,15 +84,10 @@ class MenuState extends FlxState
 		
 		for ( b in botones.members ) {
 			var boton: ButtonLevel = cast(b, ButtonLevel);
-			if (boton.getClicked()) {
-				if (boton.getLevelName() == "testPlayerSpine") {
-					FlxG.switchState(new PlayerDesignState());
-				}else {
+				if (boton.getClicked()) {
 					limpiarGrupo = true;
-					changeLevel(boton.getLevelName());	
-				}
-				
-			}			
+					changeState(boton.getStateName());	
+				}		
 		}
 
 		if (limpiarGrupo) {

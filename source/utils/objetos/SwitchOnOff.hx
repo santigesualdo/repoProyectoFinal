@@ -19,7 +19,6 @@ class SwitchOnOff extends ObjetoBase
 
 	/* Por sensor, cuando toca se prende, se va y se apaga*/
 	public static inline var TYPE_BYTOUCH : Int = 1;
-	
 	public static inline var TYPE_BYTIME : Int = 2;
 	public static inline var TYPE_BYINTERRPUTOR : Int = 3;
 	
@@ -48,8 +47,8 @@ class SwitchOnOff extends ObjetoBase
 		b.shapes.at(0).sensorEnabled = true;
 		b.space = FlxNapeSpace.space;
 		
-		this.loadGraphic("assets/levels/switch.png", false, 32, 10, true);
-		borderSprite = new FlxSprite(this.x, this.y, "assets/levels/switch_off.png");
+		desactivar();
+
 		
 	}
 	

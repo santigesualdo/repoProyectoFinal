@@ -1,5 +1,6 @@
 package utils.objetos;
 
+import flixel.FlxSprite;
 import flixel.addons.nape.FlxNapeSpace;
 import nape.callbacks.CbEvent;
 import nape.callbacks.CbType;
@@ -18,6 +19,9 @@ class SwitchOnOffByTouch extends SwitchOnOff
 	public function new(x:Int, y:Int, rectangularBody:Body) 
 	{
 		super(x, y, rectangularBody);
+		
+		this.loadGraphic("assets/levels/switchType1Off.png", false, 32, 10, true);
+		borderSprite = new FlxSprite(this.x, this.y, "assets/levels/switchType1On.png");
 		
 		var cb:CbType = new CbType();
 		b.cbTypes.add(cb);

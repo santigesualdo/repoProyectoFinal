@@ -3,7 +3,7 @@ package utils ;
 @:build(flixel.system.FlxAssets.buildFileReferences("assets", true))
 class AssetPaths {
 	
-	 public static var MENU_BACK_PATH:String = "assets/images/menuBackground.png";
+	 public static var MENU_BACK_PATH:String = "assets/images/menuBackground.jpg";
 	
 	 public static var LEVEL1_TMX_PATH:String = "assets/levels/level0.tmx";
 	 
@@ -40,6 +40,9 @@ class AssetPaths {
 	 
 	 // Fuentes
 	 public static var font_kreon:String = "assets/fonts/Kreon.ttf";
+	 public static var font_gilsans:String  = "assets/fonts/GillSansMTPro-Bold.otf";
+	 
+	 
 	 static public var playerParticlesPath:String = "assets/levels/particle_base.png";
 	 static public var palanca_path:String = "assets/levels/palanca.png";
 	 static public var plataforma_vertical_path:String = "assets/levels/plataforma_vertical.png";
