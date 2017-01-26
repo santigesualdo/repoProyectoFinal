@@ -491,7 +491,7 @@ class PlayerNape extends FlxObject
 		
 		if (isTimeToSpawn){
 			
-			actualizarEstados();
+			actualizarEstados(currentState);
 	
 			textosEnPantalla();
 			
@@ -599,13 +599,14 @@ class PlayerNape extends FlxObject
 		var ss:PlaySubState = ps.getSubPlayState(FlxColor.RED);
 		ss.setAllowEsc(false);
 		this.desactivarListeners();	
+		bodyInferior.allowMovement =false,
 		ps.openSubState( ss );
 		ss.setPos(new FlxPoint(FlxG.camera.scroll.x + 300, FlxG.camera.scroll.y + 300));
 	}
 	
-	function actualizarEstados():Void 	{
+	function actualizarEstados(state:Int):Void 	{
 		
-		switch(currentState) {
+		switch(state) {
 		
 			case estadoQUIETO: estado = "estadoQUIETO";
 			case estadoCORRIENDO: estado = "estadoCORRIENDO";
